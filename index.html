@@ -6,108 +6,193 @@
   <title>Ouffstore | Boutique tendance à Abidjan</title>
   <style>
     body {
-      font-family: 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
       margin: 0;
-      background: #fafafa;
+      background: #f5f7fa;
       color: #222;
       line-height: 1.6;
     }
+
+    /* --- HEADER --- */
     header {
       text-align: center;
-      background: linear-gradient(135deg, #111, #444);
+      background: linear-gradient(135deg, #002147, #003366);
       color: white;
       padding: 60px 20px;
+      position: relative;
     }
+
+    header img {
+      width: 90px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
     header h1 {
       margin: 0;
-      font-size: 2.2em;
+      font-size: 2.3em;
       letter-spacing: 1px;
+      color: #ffb300;
     }
+
     header p {
       margin-top: 10px;
       font-size: 1.1em;
-      color: #ccc;
+      color: #d8e0ff;
     }
+
     .button {
       display: inline-block;
-      background: #ffae00;
-      color: black;
+      background: #ff9500;
+      color: white;
       padding: 12px 25px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
       margin-top: 20px;
-      transition: background 0.3s;
+      transition: 0.3s;
     }
+
     .button:hover {
-      background: #ffc94d;
+      background: #e07d00;
+      transform: scale(1.05);
     }
+
+    /* --- SECTIONS --- */
     section {
-      max-width: 900px;
-      margin: 50px auto;
+      max-width: 1100px;
+      margin: 60px auto;
       padding: 0 20px;
     }
+
     h2 {
       text-align: center;
-      color: #111;
-      margin-bottom: 20px;
+      color: #002147;
+      margin-bottom: 25px;
+      font-size: 1.8em;
     }
+
+    /* --- CATALOGUES --- */
+    .categorie {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 40px;
+    }
+
+    .produits {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      overflow-x: auto;
+    }
+
+    .produit {
+      flex: 0 0 auto;
+      text-align: center;
+      width: 230px;
+    }
+
+    .produit img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .produit h3 {
+      margin-top: 10px;
+      font-size: 1.1em;
+      color: #002147;
+    }
+
+    .produit p {
+      font-weight: bold;
+      color: #ff9500;
+    }
+
+    .categorie .button {
+      display: block;
+      width: max-content;
+      margin: 20px auto 0 auto;
+    }
+
+    /* --- PRODUITS POPULAIRES --- */
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
     }
+
     .card {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       padding: 15px;
       text-align: center;
       transition: transform 0.2s;
     }
+
     .card:hover {
       transform: translateY(-5px);
     }
+
     .card img {
       width: 100%;
       border-radius: 12px;
       margin-bottom: 10px;
     }
+
+    .price {
+      font-weight: bold;
+      color: #ff9500;
+      margin: 10px 0;
+    }
+
+    /* --- FOOTER --- */
     footer {
       text-align: center;
       padding: 30px 10px;
-      background: #111;
-      color: #ccc;
+      background: #002147;
+      color: #d8e0ff;
       font-size: 0.9em;
       margin-top: 50px;
     }
+
     footer a {
-      color: #ffae00;
+      color: #ffb300;
       text-decoration: none;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
   <header>
+    <img src="logo.png" alt="Logo Ouffstore">
     <h1>Ouffstore</h1>
     <p>Boutique urbaine et tendance à Abidjan</p>
     <a href="https://wa.me/2250703791959" class="button">Nous contacter sur WhatsApp</a>
   </header>
 
-   <section>
+  <section>
     <!-- Catégorie 1 : Vêtements -->
     <div class="categorie">
-      <h2>Vêtements</h2>
+      <h2>👕 Vêtements</h2>
       <div class="produits">
         <div class="produit">
-          <img src="images/AB 1.jpg" alt="Veste homme">
+          <img src="images/veste1.jpg" alt="Veste homme">
           <h3>Veste homme</h3>
-          <p>Prix : 25 000 FCFA</p>
+          <p>25 000 FCFA</p>
         </div>
         <div class="produit">
-          <img src="images/AB 1.jpg" alt="Pantalon cargo">
+          <img src="images/cargo.jpg" alt="Pantalon cargo">
           <h3>Pantalon cargo</h3>
-          <p>Prix : 18 000 FCFA</p>
+          <p>18 000 FCFA</p>
+        </div>
+        <div class="produit">
+          <img src="images/jogging.jpg" alt="Jogging street">
+          <h3>Jogging street</h3>
+          <p>22 000 FCFA</p>
         </div>
       </div>
       <a href="vetements.html" class="button">Voir plus</a>
@@ -115,17 +200,22 @@
 
     <!-- Catégorie 2 : Accessoires -->
     <div class="categorie">
-      <h2>Accessoires</h2>
+      <h2>🕶️ Accessoires</h2>
       <div class="produits">
         <div class="produit">
-          <img src="images/AB 1.jpg" alt="Montre stylée">
+          <img src="images/montre.jpg" alt="Montre stylée">
           <h3>Montre stylée</h3>
-          <p>Prix : 15 000 FCFA</p>
+          <p>15 000 FCFA</p>
         </div>
         <div class="produit">
-          <img src="images/AB 1.jpg" alt="Sac élégant">
+          <img src="images/sac.jpg" alt="Sac élégant">
           <h3>Sac élégant</h3>
-          <p>Prix : 22 000 FCFA</p>
+          <p>22 000 FCFA</p>
+        </div>
+        <div class="produit">
+          <img src="images/lunettes.jpg" alt="Lunettes de soleil">
+          <h3>Lunettes de soleil</h3>
+          <p>12 000 FCFA</p>
         </div>
       </div>
       <a href="accessoires.html" class="button">Voir plus</a>
@@ -133,48 +223,56 @@
 
     <!-- Catégorie 3 : Sport -->
     <div class="categorie">
-      <h2>Appareils de sport</h2>
+      <h2>🏋️ Appareils de sport</h2>
       <div class="produits">
         <div class="produit">
-          <img src="images/AB 1.jpg" alt="AB TOMIC">
+          <img src="images/AB1.jpg" alt="AB TOMIC">
           <h3>AB TOMIC</h3>
-          <p>Prix : 40 000 FCFA</p>
+          <p>40 000 FCFA</p>
         </div>
         <div class="produit">
-          <img src="images/AB 1.jpg" alt="Corde à sauter">
+          <img src="images/corde.jpg" alt="Corde à sauter">
           <h3>Corde à sauter</h3>
-          <p>Prix : 5 000 FCFA</p>
+          <p>5 000 FCFA</p>
+        </div>
+        <div class="produit">
+          <img src="images/tapis.jpg" alt="Tapis de sport">
+          <h3>Tapis de sport</h3>
+          <p>12 000 FCFA</p>
         </div>
       </div>
       <a href="sport.html" class="button">Voir plus</a>
     </div>
   </section>
-  
+
   <section>
-    <h2>Nos produits populaires</h2>
+    <h2>🔥 Produits populaires</h2>
     <div class="products">
       <div class="card">
-       <img src="AB 1.jpg" alt="AB TOMIC">
-       <h3>AB TOMIC</h3>
-       <div class="price">40 000 FCFA</div>
-       <a href="abtomic.html" class="button">Voir produit</a>
-    </div>
+        <img src="AB 1.jpg" alt="AB TOMIC">
+        <h3>AB TOMIC</h3>
+        <div class="price">40 000 FCFA</div>
+        <a href="abtomic.html" class="button">Voir produit</a>
+      </div>
 
       <div class="card">
-        <img src="AB 1.jpg" alt="Jogging tendance">
+        <img src="images/jogging.jpg" alt="Jogging tendance">
         <h3>Jogging tendance</h3>
-        <p>Des modèles décontractés et stylés pour tous les jours.</p>
+        <div class="price">22 000 FCFA</div>
+        <a href="jogging.html" class="button">Voir produit</a>
       </div>
+
       <div class="card">
-        <img src="Ouuffstore-Igtm/accessoires.jpg" alt="Accessoires mode">
-        <h3>Accessoires mode</h3>
-        <p>Ajoutez la touche finale parfaite à votre look.</p>
+        <img src="images/sac.jpg" alt="Sac élégant">
+        <h3>Sac élégant</h3>
+        <div class="price">22 000 FCFA</div>
+        <a href="sac.html" class="button">Voir produit</a>
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Nos réseaux</h2>
+    <h2>📱 Nos réseaux</h2>
     <p style="text-align:center;">
       Suivez-nous pour découvrir nos nouveautés et promotions 🔥<br><br>
       <a href="https://www.instagram.com/ouffstore" class="button">Instagram</a>
@@ -182,7 +280,7 @@
   </section>
 
   <footer>
-    © 2025 Ouffstore — Tous droits réservés<br>
+    © 2025 <strong>Ouffstore</strong> — Tous droits réservés<br>
     Abidjan, Côte d’Ivoire
   </footer>
 </body>

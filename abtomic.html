@@ -5,48 +5,93 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>AB TOMIC | Ouffstore</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f8fa; color: #222; }
-    header { background: #0070f3; color: white; padding: 20px; text-align: center; }
-    header img { height: 60px; vertical-align: middle; margin-right: 10px; }
-    header h1 { display: inline-block; margin: 0; font-size: 2em; vertical-align: middle; }
-    .product { max-width: 700px; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
-    .product img { width: 100%; border-radius: 10px; margin-bottom: 10px; }
-    .product h2 { color: #0070f3; margin-top: 0; }
-    .price { font-size: 1.5em; color: #ff4d00; margin: 15px 0; font-weight: bold; }
-    .whatsapp-button { display: inline-block; background: #25D366; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: background 0.3s; }
-    .whatsapp-button:hover { background: #1ebe5d; }
-    .back { display: inline-block; margin-top: 15px; text-decoration: none; color: #0070f3; }
+    body { margin:0; font-family:'Poppins',sans-serif; background:#f7f8fa; color:#222; }
+    header {
+      background:#002c5f;
+      color:white;
+      text-align:center;
+      padding:20px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+    header img { height:60px; vertical-align:middle; margin-right:10px; }
+    header h1 { display:inline-block; margin:0; vertical-align:middle; font-size:1.8em; }
+
+    .container {
+      max-width:800px;
+      margin:25px auto;
+      background:white;
+      border-radius:12px;
+      box-shadow:0 3px 10px rgba(0,0,0,0.15);
+      padding:20px;
+    }
+    .container h2 { color:#002c5f; margin-top:0; }
+
+    .gallery { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+    .gallery img {
+      width:48%;
+      border-radius:10px;
+      object-fit:cover;
+    }
+    p { line-height:1.6; }
+    .price {
+      font-size:1.5em;
+      color:#ff7a00;
+      font-weight:bold;
+      margin:15px 0;
+    }
+    .whatsapp-button {
+      display:inline-block;
+      background:#25D366;
+      color:white;
+      padding:12px 18px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:background 0.3s;
+    }
+    .whatsapp-button:hover { background:#1ebe5d; }
+    .back {
+      display:inline-block;
+      margin-top:15px;
+      text-decoration:none;
+      color:#002c5f;
+      font-weight:600;
+    }
+    .back:hover { text-decoration:underline; }
   </style>
 </head>
 <body>
   <header>
-    <img src="Image ChatGPT 3 juil. 2025, 14_43_14.png" alt="Ouffstore Logo">
+    <img src="logo.png" alt="Ouffstore Logo">
     <h1>Ouffstore</h1>
   </header>
 
-  <div class="product">
+  <div class="container">
     <h2>AB TOMIC</h2>
 
-    <!-- Galerie d'images -->
-    <img src="AB 1.jpg" alt="AB TOMIC vue 1">
-    <img src="AB 2.webp" alt="AB TOMIC vue 2">
-    <img src="AB 3.webp" alt="AB TOMIC vue 3">
-    <img src="AB 4.webp" alt="AB TOMIC vue 4">
+    <div class="gallery">
+      <img src="AB 1.jpg" alt="AB TOMIC vue 1">
+      <img src="AB 2.webp" alt="AB TOMIC vue 2">
+      <img src="AB 3.webp" alt="AB TOMIC vue 3">
+      <img src="AB 4.webp" alt="AB TOMIC vue 4">
+    </div>
 
-    <!-- Description -->
-    <p>L’Ab Tomic est un appareil révolutionnaire conçu pour sculpter efficacement vos abdominaux supérieurs, moyens et obliques. Grâce à son système de rebond assisté, il permet de réaliser 8 types d’exercices tout en maximisant votre effort en deux fois moins de temps. Idéal pour les utilisateurs de tous niveaux, cet appareil compact et robuste permet de travailler de manière ciblée et efficace, avec un mouvement à 180° qui optimise vos entraînements.</p>
+    <p>
+      L’AB TOMIC est un appareil de fitness innovant conçu pour sculpter les abdominaux
+      supérieurs, inférieurs et obliques. Son système de rebond assisté permet de doubler
+      l’efficacité de chaque mouvement tout en réduisant la fatigue. Compact, robuste et
+      facile à utiliser, il convient à tous les niveaux d’utilisateurs.
+    </p>
 
-    <!-- Prix -->
     <div class="price">Prix : 40 000 FCFA</div>
 
-    <!-- WhatsApp -->
-    <a href="https://wa.me/2250703791959?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20produit%20AB%20TOMIC%20au%20prix%20de%2040000%20FCFA" class="whatsapp-button" target="_blank">
-      Contacter sur WhatsApp
+    <a href="https://wa.me/2250703791959?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20produit%20AB%20TOMIC%20au%20prix%20de%2040000%20FCFA" 
+       class="whatsapp-button" target="_blank">
+       💬 Commander via WhatsApp
     </a>
 
-    <!-- Retour -->
     <div>
-      <a href="index.html" class="back">⬅ Retour à l’accueil</a>
+      <a href="index.html" class="back">⬅ Retour à la boutique</a>
     </div>
   </div>
 </body>

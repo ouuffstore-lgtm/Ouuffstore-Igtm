@@ -17,6 +17,7 @@
       text-align: center;
       padding: 20px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
     }
     header img {
       height: 60px;
@@ -136,7 +137,7 @@
   </style>
 </head>
 <body>
-  <header>
+  <header id="headerLink">
     <img src="LOGO1.jpg" alt="Logo Ouffstore">
     <h1>Ouffstore</h1>
   </header>
@@ -234,13 +235,20 @@
       })
       .then(response => response.ok ? response.json() : Promise.reject(response))
       .then(data => {
-        form.style.display = 'none'; // cache le formulaire
-        thankYouMessage.style.display = 'block'; // affiche le message
+        // Affiche le message de remerciement sans cacher le formulaire
+        thankYouMessage.style.display = 'block';
+        thankYouMessage.scrollIntoView({ behavior: 'smooth' });
+        form.reset(); // Réinitialise le formulaire
       })
       .catch(err => {
         alert("Une erreur est survenue, veuillez réessayer.");
         console.error(err);
       });
+    });
+
+    // Redirection vers la page principale si clic sur le header
+    document.getElementById('headerLink').addEventListener('click', function() {
+      window.location.href = 'index.html';
     });
   </script>
 </body>

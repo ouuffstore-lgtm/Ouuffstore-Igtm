@@ -121,6 +121,18 @@
       transition: background 0.3s;
     }
     .whatsapp-button:hover { background: #1ebe5d; }
+
+    .thank-you {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -148,12 +160,11 @@
     <div class="price">Prix : <span id="prix-produit">40000</span> FCFA</div>
 
     <!-- Formulaire de commande -->
-    <form id="commandeForm" action="https://formsubmit.co/ouff300@gmail.com" method="POST">
+    <form id="commandeForm">
       <input type="hidden" name="_subject" value="Nouvelle commande Ouffstore">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
       
-      <!-- Produit dynamique -->
       <input type="hidden" id="produitNom" name="Produit_Commandé" value="AB TOMIC">
 
       <label>Nom complet :</label>
@@ -179,6 +190,10 @@
       <button type="submit">📦 Valider la commande</button>
     </form>
 
+    <div class="thank-you" id="thankYouMessage">
+      ✅ Merci, votre commande a bien été envoyée !
+    </div>
+
     <!-- Bouton WhatsApp -->
     <a id="whatsappLink" href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
 
@@ -203,6 +218,30 @@
     const numero = "2250703791959";
     const message = `Je suis intéressé par le produit ${produitNom} au prix de ${prixProduit} FCFA (+${fraisLivraison} FCFA de livraison).`;
     whatsappLink.href = `https://wa.me/${numero}?text=${encodeURIComponent(message)}`;
+
+    // Soumission du formulaire sans rechargement
+    const form = document.getElementById('commandeForm');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Empêche le rechargement de page
+
+      const formData = new FormData(form);
+
+      fetch('https://formsubmit.co/ajax/ouff300@gmail.com', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.ok ? response.json() : Promise.reject(response))
+      .then(data => {
+        form.style.display = 'none'; // cache le formulaire
+        thankYouMessage.style.display = 'block'; // affiche le message
+      })
+      .catch(err => {
+        alert("Une erreur est survenue, veuillez réessayer.");
+        console.error(err);
+      });
+    });
   </script>
 </body>
 </html>

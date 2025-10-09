@@ -13,49 +13,54 @@
       line-height: 1.6;
     }
 
-    /* --- HEADER --- */
+    /* --- HEADER REFAIT --- */
     header {
-      text-align: center;
-      background: linear-gradient(135deg, #002147, #003366);
-      color: white;
-      padding: 60px 20px;
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #002147;
+      padding: 10px 20px;
+      height: 70px;
     }
-
     header img {
-      width: 90px;
-      height: auto;
-      margin-bottom: 10px;
+      height: 50px;
     }
-
     header h1 {
       margin: 0;
-      font-size: 2.3em;
-      letter-spacing: 1px;
       color: #ffb300;
+      text-align: center;
+      flex-grow: 1;
+      font-size: 1.8em;
     }
-
-    header p {
-      margin-top: 10px;
-      font-size: 1.1em;
-      color: #d8e0ff;
-    }
-
-    .button {
-      display: inline-block;
+    header a.whatsapp-button {
       background: #ff9500;
       color: white;
-      padding: 12px 25px;
+      padding: 10px 20px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
-      margin-top: 20px;
-      transition: 0.3s;
+      white-space: nowrap;
     }
 
-    .button:hover {
-      background: #e07d00;
-      transform: scale(1.05);
+    /* Responsive header pour mobile */
+    @media screen and (max-width: 600px) {
+      header {
+        flex-direction: column;
+        height: auto;
+        gap: 8px;
+      }
+      header h1 {
+        order: 2;
+        font-size: 1.5em;
+      }
+      header img {
+        order: 1;
+      }
+      header a.whatsapp-button {
+        order: 3;
+        padding: 8px 15px;
+        font-size: 0.9em;
+      }
     }
 
     /* --- SECTIONS --- */
@@ -106,7 +111,7 @@
       color: #002147;
     }
 
-    .produit p {
+    .produit p, .produit .price {
       font-weight: bold;
       color: #ff9500;
     }
@@ -115,6 +120,18 @@
       display: block;
       width: max-content;
       margin: 20px auto 0 auto;
+      background: #ff9500;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .categorie .button:hover {
+      background: #e07d00;
+      transform: scale(1.05);
     }
 
     /* --- PRODUITS POPULAIRES --- */
@@ -167,11 +184,17 @@
   </style>
 </head>
 <body>
+
+  <!-- --- HEADER --- -->
   <header>
-    <img src="LOGO1.jpg" alt>
+    <!-- Logo à gauche -->
+    <a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
+
+    <!-- Nom centré -->
     <h1>Ouffstore</h1>
-    <p>Boutique urbaine et tendance à Abidjan</p>
-    <a href="https://wa.me/2250703791959" class="button">Nous contacter sur WhatsApp</a>
+
+    <!-- Bouton WhatsApp à droite -->
+    <a href="https://wa.me/2250703791959" class="whatsapp-button">WhatsApp</a>
   </header>
 
   <section>
@@ -227,13 +250,13 @@
       <div class="produits">
         <div class="produit">
           <img src="AB 1.jpg" alt="AB TOMIC">
-        <h3>AB TOMIC</h3>
-        <div class="price">40 000 FCFA</div>
-        <a href="abtomic.html" class="button">Voir produit</a>
+          <h3>AB TOMIC</h3>
+          <div class="price">40 000 FCFA</div>
+          <a href="abtomic.html" class="button">Voir produit</a>
         </div>
         <div class="produit">
-          <img src="images/Appareil de Musculation Multi-Stations1.jpg" alt="Appareil de Musculation Multi-Stations">
-          <h3>Appareil de Musculation Multi-Stations</h3>
+          <img src="images/Appareil de Musculation Multi-Stations1.jpg" alt="Appareil Multi-Stations">
+          <h3>Appareil Multi-Stations</h3>
           <p>1 000 000 FCFA</p>
           <a href="Appareil de Musculation Multi-Stations.html" class="button">Voir produit</a>
         </div>

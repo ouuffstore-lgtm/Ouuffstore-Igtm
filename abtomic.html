@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>AB TOMIC | Ouffstore</title>
   <style>
-    body { margin:0; font-family:'Poppins',sans-serif; background:#f7f8fa; color:#222; }
+    body {
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:#f7f8fa;
+      color:#222;
+    }
     header {
       background:#002c5f;
       color:white;
@@ -39,6 +44,36 @@
       font-weight:bold;
       margin:15px 0;
     }
+
+    form {
+      margin-top:20px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    label { font-weight:600; color:#002c5f; }
+    input, textarea {
+      padding:10px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      font-size:1em;
+    }
+    input[readonly] {
+      background:#f0f0f0;
+    }
+    button {
+      background:#002c5f;
+      color:white;
+      padding:12px;
+      border:none;
+      border-radius:8px;
+      font-size:1em;
+      font-weight:bold;
+      cursor:pointer;
+      transition:background 0.3s;
+    }
+    button:hover { background:#ff7a00; }
+
     .whatsapp-button {
       display:inline-block;
       background:#25D366;
@@ -48,8 +83,10 @@
       text-decoration:none;
       font-weight:bold;
       transition:background 0.3s;
+      margin-top:20px;
     }
     .whatsapp-button:hover { background:#1ebe5d; }
+
     .back {
       display:inline-block;
       margin-top:15px;
@@ -58,11 +95,21 @@
       font-weight:600;
     }
     .back:hover { text-decoration:underline; }
+
+    .message {
+      background:#e6ffed;
+      border:1px solid #00b74a;
+      padding:12px;
+      margin-top:15px;
+      border-radius:6px;
+      color:#004d1a;
+      display:none;
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="LOGO1.jpg">
+    <img src="LOGO1.jpg" alt="logo">
     <h1>Ouffstore</h1>
   </header>
 
@@ -83,9 +130,40 @@
       facile à utiliser, il convient à tous les niveaux d’utilisateurs.
     </p>
 
-    <div class="price">Prix : 40 000 FCFA</div>
+    <div class="price">Prix : <span id="prix">40000</span> FCFA</div>
 
-    <a href="https://wa.me/2250703791959?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20produit%20AB%20TOMIC%20au%20prix%20de%2040000%20FCFA" 
+    <!-- FORMULAIRE DE COMMANDE -->
+    <form id="commandeForm" action="https://formsubmit.co/ton_email@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Nouvelle commande depuis Ouffstore">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://tonsite.com/success.html">
+
+      <label>Nom complet :</label>
+      <input type="text" name="Nom" required>
+
+      <label>Email :</label>
+      <input type="email" name="Email" required>
+
+      <label>Adresse de livraison :</label>
+      <textarea name="Adresse" rows="3" placeholder="Ex: Cocody, Abidjan" required></textarea>
+
+      <label>Coût du produit :</label>
+      <input type="number" id="produit" name="Produit" value="40000" readonly>
+
+      <label>Frais de livraison :</label>
+      <input type="number" id="livraison" name="Livraison" value="2000" readonly>
+
+      <label>Total :</label>
+      <input type="number" id="total" name="Total" readonly>
+
+      <button type="submit">📦 Valider la commande</button>
+    </form>
+
+    <div id="message" class="message">
+      ✅ Merci, votre commande a bien été envoyée ! Nous vous contacterons pour confirmer la livraison.
+    </div>
+
+    <a href="https://wa.me/2250703791959?text=Je%20souhaite%20commander%20le%20produit%20AB%20TOMIC"
        class="whatsapp-button" target="_blank">
        💬 Commander via WhatsApp
     </a>
@@ -94,5 +172,31 @@
       <a href="index.html" class="back">⬅ Retour à la boutique</a>
     </div>
   </div>
+
+  <script>
+    // Calcul automatique du total
+    const produit = document.getElementById('produit');
+    const livraison = document.getElementById('livraison');
+    const total = document.getElementById('total');
+    total.value = parseInt(produit.value) + parseInt(livraison.value);
+
+    // Message de confirmation après envoi du formulaire
+    const form = document.getElementById('commandeForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // empêche le rechargement
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+      }).then(response => {
+        form.reset();
+        total.value = parseInt(produit.value) + parseInt(livraison.value);
+        message.style.display = 'block';
+        window.scrollTo({ top: message.offsetTop, behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>

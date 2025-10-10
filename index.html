@@ -4,276 +4,441 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Ouffstore | Boutique tendance à Abidjan</title>
+
   <style>
+    :root{
+      --bg:#f5f7fa;
+      --blue:#002147;
+      --accent:#ff9500;
+      --accent-dark:#e07d00;
+      --card:#ffffff;
+      --muted:#d8e0ff;
+      --text:#222;
+    }
+
+    /* reset simple */
+    *{box-sizing:border-box}
     body {
       font-family: 'Poppins', 'Segoe UI', sans-serif;
       margin: 0;
-      background: #f5f7fa;
-      color: #222;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    /* --- HEADER REFAIT --- */
+    /* --- HEADER --- */
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #002147;
+      background: var(--blue);
       padding: 10px 20px;
       height: 70px;
+      position: relative;
+      transition: background .25s ease;
     }
-    header img {
-      height: 50px;
-    }
+    header .logo img { height: 50px; display:block; }
+
     header h1 {
       margin: 0;
-      color: #ffb300;
+      color: var(--accent);
       text-align: center;
       flex-grow: 1;
       font-size: 1.8em;
+      transition: transform .35s ease, opacity .35s ease;
     }
-    header a.whatsapp-button {
-      background: #ff9500;
+    header h1:hover { transform: scale(1.02); opacity: .95; }
+
+    /* header actions */
+    .header-actions {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+
+    .whatsapp-button, .button, .cart-icon {
+      position: relative; /* required for ripple */
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .whatsapp-button {
+      background: var(--accent);
       color: white;
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
       white-space: nowrap;
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+      display: inline-block;
+    }
+    .whatsapp-button:hover {
+      transform: translateY(-3px);
+      background: var(--accent-dark);
+      box-shadow: 0 8px 18px rgba(0,0,0,.08);
     }
 
-    /* Responsive header pour mobile */
-    @media screen and (max-width: 600px) {
-      header {
-        flex-direction: column;
-        height: auto;
-        gap: 8px;
-      }
-      header h1 {
-        order: 2;
-        font-size: 1.5em;
-      }
-      header img {
-        order: 1;
-      }
-      header a.whatsapp-button {
-        order: 3;
-        padding: 8px 15px;
-        font-size: 0.9em;
-      }
-    }
-
-    /* --- SECTIONS --- */
-    section {
-      max-width: 1100px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
-
-    h2 {
-      text-align: center;
-      color: #002147;
-      margin-bottom: 25px;
-      font-size: 1.8em;
-    }
-
-    /* --- CATALOGUES --- */
-    .categorie {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      padding: 20px;
-      margin-bottom: 40px;
-    }
-
-    .produits {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      overflow-x: auto;
-    }
-
-    .produit {
-      flex: 0 0 auto;
-      text-align: center;
-      width: 230px;
-    }
-
-    .produit img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .produit h3 {
-      margin-top: 10px;
-      font-size: 1.1em;
-      color: #002147;
-    }
-
-    .produit p, .produit .price {
-      font-weight: bold;
-      color: #ff9500;
-    }
-
-    .categorie .button {
-      display: block;
-      width: max-content;
-      margin: 20px auto 0 auto;
-      background: #ff9500;
-      color: white;
-      padding: 10px 20px;
+    /* --- PANIER --- */
+    .cart-icon {
+      font-size: 22px;
+      color: var(--accent);
+      padding: 6px 8px;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition: transform .25s ease, color .25s ease, background .25s ease;
+    }
+    .cart-icon:hover { transform: scale(1.12); color: var(--accent-dark); background: rgba(255,255,255,0.03); }
+
+    #cart-count {
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      position: relative;
+      font-weight:700;
+      line-height:1;
     }
 
-    .categorie .button:hover {
-      background: #e07d00;
-      transform: scale(1.05);
-    }
+    /* bounce animation (applied by JS) */
+    @keyframes bounce { 0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}60%{transform:translateY(-3px)} }
+    .cart-bounce { animation: bounce .6s; }
 
-    /* --- PRODUITS POPULAIRES --- */
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
-    }
+    /* --- SECTIONS --- */
+    section { max-width: 1100px; margin: 60px auto; padding: 0 20px; }
+    h2 { text-align:center; color:var(--blue); margin-bottom:18px; font-size:1.8em; }
 
+    /* --- CATALOGUES (horizontal scroller) --- */
+    .categorie {
+      background: var(--card);
+      border-radius: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+      padding: 18px;
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .categorie.is-visible { opacity:1; transform:none; }
+
+    .produits {
+      display:flex;
+      gap:18px;
+      overflow-x:auto;
+      padding-bottom:8px;
+      -webkit-overflow-scrolling:touch;
+    }
+    .produit {
+      flex: 0 0 auto;
+      width: 230px;
+      text-align:center;
+      transition: transform .28s ease, box-shadow .28s ease;
+      border-radius:12px;
+      background:transparent;
+      opacity:0;
+      transform: translateY(8px);
+    }
+    .produit.is-visible { opacity:1; transform:none; }
+    .produit:hover { transform: translateY(-6px); }
+
+    .produit img {
+      width:100%;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+    }
+    .produit h3 { margin-top:10px; font-size:1.05em; color:var(--blue); }
+    .produit p, .produit .price { font-weight:700; color:var(--accent); margin:6px 0; }
+
+    .categorie .button {
+      display:block;
+      width:max-content;
+      margin:14px auto 0;
+      padding:10px 18px;
+      border-radius:10px;
+      background:var(--accent);
+      color:white;
+      text-decoration:none;
+      font-weight:600;
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+    .categorie .button:hover { transform: translateY(-4px); background:var(--accent-dark); box-shadow:0 8px 20px rgba(0,0,0,.06); }
+
+    /* --- PRODUITS POPULAIRES GRID --- */
+    .products { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:20px; margin-top:12px; }
     .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      padding: 15px;
-      text-align: center;
-      transition: transform 0.2s;
+      background:var(--card);
+      border-radius:12px;
+      padding:14px;
+      text-align:center;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+      transition: transform .25s ease, box-shadow .25s ease, opacity .35s ease;
+      opacity:0;
+      transform: translateY(8px);
+    }
+    .card.is-visible { opacity:1; transform:none; }
+    .card:hover { transform: translateY(-8px); box-shadow:0 14px 30px rgba(0,0,0,0.09); }
+
+    .card img { width:100%; border-radius:10px; margin-bottom:10px; }
+    .price { font-weight:700; color:var(--accent); margin:8px 0; }
+
+    /* --- BUTTON variants and ripple --- */
+    .button, .btn-inline { position: relative; overflow: hidden; border: none; cursor: pointer; display:inline-block; }
+    .btn-inline { padding:8px 12px; border-radius:8px; background:var(--accent); color:white; font-weight:600; text-decoration:none; }
+    .btn-inline.secondary { background:transparent; color:var(--blue); border:1px solid rgba(0,0,0,0.06); }
+
+    .ripple {
+      position:absolute;
+      border-radius:50%;
+      transform: scale(0);
+      animation: ripple .6s linear;
+      background: rgba(255,255,255,0.7);
+      pointer-events:none;
+    }
+    @keyframes ripple {
+      to { transform: scale(6); opacity: 0; }
     }
 
-    .card:hover {
-      transform: translateY(-5px);
+    /* --- TOOLS & RESPONSIVE --- */
+    @media screen and (max-width: 900px) {
+      .produit { width: 200px; }
+      section { margin: 30px auto; }
+    }
+    @media screen and (max-width: 600px) {
+      header { flex-direction: column; height:auto; gap:10px; padding:12px; }
+      header h1 { order:2; font-size:1.45em; }
+      .produit { width: 46%; }
+      .produits { gap:12px; }
     }
 
-    .card img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 10px;
-    }
-
-    .price {
-      font-weight: bold;
-      color: #ff9500;
-      margin: 10px 0;
-    }
-
-    /* --- FOOTER --- */
+    /* footer */
     footer {
-      text-align: center;
-      padding: 30px 10px;
-      background: #002147;
-      color: #d8e0ff;
-      font-size: 0.9em;
-      margin-top: 50px;
-    }
-
-    footer a {
-      color: #ffb300;
-      text-decoration: none;
-      font-weight: 600;
+      text-align:center;
+      padding:26px 10px;
+      background:var(--blue);
+      color:var(--muted);
+      margin-top:36px;
     }
   </style>
 </head>
 <body>
 
-  <!-- --- HEADER --- -->
+  <!-- HEADER -->
   <header>
-    <!-- Logo à gauche -->
-    <a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
+    <!-- Logo -->
+    <div class="logo"><a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a></div>
 
     <!-- Nom centré -->
-    <h1>Ouffstore</h1>
+    <h1><a href="index.html" style="text-decoration:none; color:inherit;">Ouffstore</a></h1>
 
-    <a href="panier.html" class="cart-icon">
-    🛒
-      <span id="cart-count">0</span>
-    </a>
-
-    <!-- Bouton WhatsApp à droite -->
-    <a href="https://wa.me/2250703791959" class="whatsapp-button">WhatsApp</a>
+    <!-- actions: panier + whatsapp -->
+    <div class="header-actions" aria-hidden="false">
+      <a href="panier.html" class="cart-icon" title="Voir mon panier" aria-label="Panier">
+        🛒 <span id="cart-count">0</span>
+      </a>
+      <a href="https://wa.me/2250703791959" class="whatsapp-button" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
   </header>
 
+  <!-- MAIN -->
   <section>
-    <!-- Catégorie 1 : Maillot Enfant -->
-    <div class="categorie">
+    <!-- Catégorie 1 -->
+    <div class="categorie" data-animate>
       <h2>👕 Maillot Enfant</h2>
       <div class="produits">
-        <div class="produit">
+        <div class="produit" data-animate>
           <img src="images/veste1.jpg" alt="Veste homme">
           <h3>Veste homme</h3>
           <p>25 000 FCFA</p>
         </div>
-        <div class="produit">
+
+        <div class="produit" data-animate>
           <img src="images/cargo.jpg" alt="Pantalon cargo">
           <h3>Pantalon cargo</h3>
           <p>18 000 FCFA</p>
         </div>
-        <div class="produit">
+
+        <div class="produit" data-animate>
           <img src="images/jogging.jpg" alt="Jogging street">
           <h3>Jogging street</h3>
           <p>22 000 FCFA</p>
         </div>
       </div>
+
       <a href="vetements.html" class="button">Voir plus</a>
     </div>
 
-    <!-- Catégorie 2 : Sport -->
-    <div class="categorie">
+    <!-- Catégorie 2 -->
+    <div class="categorie" data-animate>
       <h2>🏋️ Appareils de sport</h2>
       <div class="produits">
-        <div class="produit">
+        <div class="produit" data-animate>
           <img src="AB 1.jpg" alt="AB TOMIC">
           <h3>AB TOMIC</h3>
           <div class="price">40 000 FCFA</div>
           <a href="abtomic.html" class="button">Voir produit</a>
         </div>
-        <div class="produit">
+
+        <div class="produit" data-animate>
           <img src="images/Appareil de Musculation Multi-Stations1.jpg" alt="Appareil Multi-Stations">
           <h3>Appareil Multi-Stations</h3>
           <p>1 000 000 FCFA</p>
           <a href="Appareil de Musculation Multi-Stations.html" class="button">Voir produit</a>
         </div>
-        <div class="produit">
-         <img src="images/VP/VP1.webp" alt="Vélo d’appartement pliable">
-         <h3>Vélo d’appartement pliable</h3>
-         <p>130 000 FCFA</p>
-         <a href="Vélo d’appartement pliable.html" class="button">Voir produit</a>
-       </div>
+
+        <div class="produit" data-animate>
+          <img src="images/VP/VP1.webp" alt="Vélo d’appartement pliable">
+          <h3>Vélo d’appartement pliable</h3>
+          <p>130 000 FCFA</p>
+          <a href="Vélo d’appartement pliable.html" class="button">Voir produit</a>
+        </div>
       </div>
+
       <a href="Appareils de sport.html" class="button">Voir plus</a>
     </div>
-  </section>
 
-  <section>
-    <h2>🔥 Produits populaires</h2>
-    <div class="products">
-      <div class="card">
-        <img src="AB 1.jpg" alt="AB TOMIC">
-        <h3>AB TOMIC</h3>
-        <div class="price">40 000 FCFA</div>
-        <a href="abtomic.html" class="button">Voir produit</a>
+    <!-- Produits populaires -->
+    <div data-animate>
+      <h2>🔥 Produits populaires</h2>
+      <div class="products">
+        <div class="card" data-animate>
+          <img src="AB 1.jpg" alt="AB TOMIC">
+          <h3>AB TOMIC</h3>
+          <div class="price">40 000 FCFA</div>
+          <a href="abtomic.html" class="btn-inline">Voir produit</a>
+        </div>
+        <!-- tu peux dupliquer d'autres cards -->
       </div>
+    </div>
 
-  <section>
-    <h2>📱 Nos réseaux</h2>
-    <p style="text-align:center;">
-      Suivez-nous pour découvrir nos nouveautés et promotions 🔥<br><br>
-      <a href="https://www.instagram.com/ouffstore" class="button">Instagram</a>
-    </p>
+    <section>
+      <h2>📱 Nos réseaux</h2>
+      <p style="text-align:center;">
+        Suivez-nous pour découvrir nos nouveautés et promotions 🔥<br><br>
+        <a href="https://www.instagram.com/ouffstore" class="button">Instagram</a>
+      </p>
+    </section>
   </section>
 
   <footer>
     © 2025 <strong>Ouffstore</strong> — Tous droits réservés<br>
     Abidjan, Côte d’Ivoire
   </footer>
+
+  <!-- SCRIPT: animations, ripple, compteur panier -->
+  <script>
+    // --- panier : mise à jour compteur depuis localStorage ---
+    let panier = JSON.parse(localStorage.getItem('panier')) || [];
+    function updateCartCount() {
+      const el = document.getElementById('cart-count');
+      if (!el) return;
+      el.textContent = panier.length || 0;
+      // add small bounce when count changes
+      el.parentElement.classList.add('cart-bounce');
+      setTimeout(()=> el.parentElement.classList.remove('cart-bounce'), 650);
+    }
+    document.addEventListener('DOMContentLoaded', updateCartCount);
+
+    // --- ripple effect for buttons ---
+    function addRippleListeners(selector) {
+      document.querySelectorAll(selector).forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height) * 1.2;
+          const ripple = document.createElement('span');
+          ripple.className = 'ripple';
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+          ripple.style.top  = (e.clientY - rect.top  - size/2) + 'px';
+          this.appendChild(ripple);
+          setTimeout(()=> ripple.remove(), 700);
+        });
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+      addRippleListeners('.button, .whatsapp-button, .btn-inline, .cart-icon');
+    });
+
+    // --- intersection observer to reveal elements with staggered delays ---
+    document.addEventListener('DOMContentLoaded', function(){
+      const animated = Array.from(document.querySelectorAll('[data-animate]'));
+      // reveal container elements immediately with small stagger
+      animated.forEach((el, idx) => {
+        el.style.transition = 'opacity .45s ease, transform .45s ease';
+        el.style.transitionDelay = (idx * 80) + 'ms';
+      });
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // reveal children with stagger
+            if (entry.target.matches('.categorie') || entry.target.matches('[data-animate]')) {
+              // reveal target
+              entry.target.classList.add('is-visible');
+              // reveal child .produit or .card with incremental delay
+              const children = entry.target.querySelectorAll('.produit, .card');
+              children.forEach((ch, i) => {
+                ch.style.transition = 'opacity .45s cubic-bezier(.2,.9,.3,1), transform .45s cubic-bezier(.2,.9,.3,1)';
+                ch.style.transitionDelay = (i * 60) + 'ms';
+                ch.classList.add('is-visible');
+              });
+            } else {
+              entry.target.classList.add('is-visible');
+            }
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+
+      animated.forEach(el => observer.observe(el));
+    });
+
+    // OPTIONAL: if you want to add-to-cart directly from an individual "Ajouter" button,
+    // use this helper; here we simply push to localStorage & update counter.
+    function ajouterAuPanier(nom, prix) {
+      prix = Number(prix) || 0;
+      panier.push({ nom, prix });
+      localStorage.setItem('panier', JSON.stringify(panier));
+      updateCartCount();
+      // small toast
+      showToast(`${nom} ajouté au panier`);
+    }
+
+    // toast helper (small notification)
+    function showToast(text){
+      // create temporary toast if none exists
+      let t = document.getElementById('ouff-toast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'ouff-toast';
+        t.style.position = 'fixed';
+        t.style.left = '50%';
+        t.style.bottom = '24px';
+        t.style.transform = 'translateX(-50%)';
+        t.style.background = 'var(--blue)';
+        t.style.color = '#fff';
+        t.style.padding = '10px 16px';
+        t.style.borderRadius = '8px';
+        t.style.boxShadow = '0 6px 20px rgba(0,0,0,0.18)';
+        t.style.zIndex = 99999;
+        t.style.opacity = '0';
+        t.style.transition = 'opacity .2s, transform .2s';
+        document.body.appendChild(t);
+      }
+      t.textContent = text;
+      t.style.opacity = '1';
+      t.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(t._t);
+      t._t = setTimeout(()=> {
+        t.style.opacity = '0';
+        t.style.transform = 'translateX(-50%) translateY(8px)';
+      }, 2000);
+    }
+  </script>
 </body>
 </html>

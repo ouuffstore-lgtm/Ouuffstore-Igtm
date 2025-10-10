@@ -20,32 +20,43 @@
       padding: 10px 20px;
       position: relative;
     }
-    header img { height: 50px; }
+    header img { height: 50px; cursor:pointer; }
     header h1 {
       margin: 0;
       color: #ffb300;
       text-align: center;
       flex-grow: 1;
       font-size: 1.8em;
+      cursor:pointer;
     }
-    header a.whatsapp-button {
-      background: #ff9500;
+    header .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .whatsapp-button {
+      background: #25D366;
       color: white;
-      padding: 10px 20px;
+      text-align: center;
+      padding: 10px 16px;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: bold;
+      transition: background 0.3s;
     }
+    .whatsapp-button:hover { background: #1ebe5d; }
 
-    /* Panier en haut droite */
     .cart-icon {
       font-size: 22px;
       color: #ff9500;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 8px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      text-decoration:none;
+      font-weight:bold;
+      cursor:pointer;
     }
     #cart-count {
       background: #ff9500;
@@ -54,6 +65,7 @@
       padding: 2px 6px;
       font-size: 12px;
       font-weight:700;
+      line-height:1;
     }
 
     .container {
@@ -106,7 +118,8 @@
       border-radius: 8px;
       font-size: 1em;
     }
-    button, .add-cart {
+
+    button, #addCartBtn {
       background: #002c5f;
       color: white;
       border: none;
@@ -118,14 +131,7 @@
       margin-top: 15px;
       width: 100%;
     }
-    button:hover, .add-cart:hover { background: #004b91; }
-
-    .total {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #ff7a00;
-      text-align: right;
-    }
+    button:hover, #addCartBtn:hover { background: #004b91; }
 
     .back {
       display: inline-block;
@@ -135,20 +141,6 @@
       font-weight: 600;
     }
     .back:hover { text-decoration: underline; }
-
-    .whatsapp-button {
-      display: block;
-      background: #25D366;
-      color: white;
-      text-align: center;
-      padding: 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 10px;
-      transition: background 0.3s;
-    }
-    .whatsapp-button:hover { background: #1ebe5d; }
 
     .thank-you {
       display: none;
@@ -166,10 +158,10 @@
 <body>
   <header>
     <a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
-    <h1>Ouffstore</h1>
-    <div style="display:flex; gap:12px; align-items:center;">
+    <h1 onclick="window.location.href='index.html'">Ouffstore</h1>
+    <div class="header-actions">
       <a href="panier.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
-      <a href="https://wa.me/2250703791959" class="whatsapp-button">WhatsApp</a>
+      <a href="https://wa.me/2250703791959" class="whatsapp-button" target="_blank">WhatsApp</a>
     </div>
   </header>
 
@@ -208,14 +200,14 @@
       <button type="submit">📦 Valider la commande</button>
     </form>
 
-    <!-- Bouton ajouter au panier -->
-    <button class="add-cart" id="addCartBtn">➕ Ajouter au panier</button>
+    <!-- Bouton Ajouter au panier -->
+    <button id="addCartBtn">🛒 Ajouter au panier</button>
+
+    <a id="whatsappLink" href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
 
     <div class="thank-you" id="thankYouMessage">
       ✅ Merci, votre commande a bien été envoyée !
     </div>
-
-    <a id="whatsappLink" href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
 
     <div>
       <a href="index.html" class="back">⬅ Retour à la boutique</a>
@@ -223,24 +215,21 @@
   </div>
 
   <script>
-    // Calcul total
-    const prix = document.getElementById('prix');
-    const livraison = document.getElementById('livraison');
-    const totalEl = document.getElementById('total');
-    const produitNom = document.getElementById('produitNom').value;
-    const prixProduit = parseInt(prix.value);
-    const fraisLivraison = parseInt(livraison.value);
-    totalEl.textContent = prixProduit + fraisLivraison;
+    // Calcul du total
+    const prix = parseInt(document.getElementById('prix').value);
+    const livraison = parseInt(document.getElementById('livraison').value);
+    document.getElementById('total').textContent = prix + livraison;
 
-    // WhatsApp
+    // Lien WhatsApp dynamique
+    const produitNom = document.getElementById('produitNom').value;
     const whatsappLink = document.getElementById('whatsappLink');
     const numero = "2250703791959";
-    const message = `Je suis intéressé par le produit ${produitNom} au prix de ${prixProduit} FCFA (+${fraisLivraison} FCFA de livraison).`;
-    whatsappLink.href = `https://wa.me/${numero}?text=${encodeURIComponent(message)}`;
+    whatsappLink.href = `https://wa.me/${numero}?text=${encodeURIComponent(`Je suis intéressé par le produit ${produitNom} au prix de ${prix} FCFA (+${livraison} FCFA de livraison).`)}`;
 
     // Formulaire
     const form = document.getElementById('commandeForm');
     const thankYouMessage = document.getElementById('thankYouMessage');
+
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       const formData = new FormData(form);
@@ -260,20 +249,23 @@
       });
     });
 
-    // --- PANIER DYNAMIQUE ---
+    // --- PANIER ---
     let panier = JSON.parse(localStorage.getItem('panier')) || [];
     const cartCount = document.getElementById('cart-count');
+
     function updateCartCount() {
-      cartCount.textContent = panier.length;
+      cartCount.textContent = panier.length || 0;
     }
-    updateCartCount();
+
+    document.addEventListener('DOMContentLoaded', updateCartCount);
 
     const addCartBtn = document.getElementById('addCartBtn');
     addCartBtn.addEventListener('click', () => {
-      panier.push({ nom: produitNom, prix: prixProduit });
+      panier.push({ nom: produitNom, prix: prix });
       localStorage.setItem('panier', JSON.stringify(panier));
       updateCartCount();
-      // toast
+
+      // Toast
       let t = document.getElementById('ouff-toast');
       if(!t){
         t = document.createElement('div');

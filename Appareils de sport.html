@@ -48,7 +48,7 @@
 
     /* --- CATÉGORIE --- */
     section {
-      max-width: 1100px;
+      max-width: 1300px;
       margin: 40px auto;
       padding: 0 20px;
     }
@@ -61,7 +61,7 @@
 
     .produits {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns: repeat(5, 1fr);
       gap: 25px;
     }
 
@@ -78,6 +78,8 @@
 
     .produit img {
       width: 100%;
+      height: 180px;
+      object-fit: cover;
       border-radius: 12px;
       margin-bottom: 10px;
     }
@@ -98,6 +100,25 @@
     }
     .produit a.button:hover { background: #e07d00; transform: scale(1.05); }
 
+    /* --- PAGINATION --- */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    .pagination a {
+      background: #002147;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .pagination a:hover {
+      background: #ff9500;
+    }
+
     /* --- FOOTER --- */
     footer {
       text-align: center;
@@ -115,7 +136,7 @@
   <!-- HEADER -->
   <header>
     <a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
-    <h1>Ouffstore</h1>
+    <h1><a href="index.html" style="color:#ffb300; text-decoration:none;">Ouffstore</a></h1>
     <a href="https://wa.me/2250703791959" class="whatsapp-button">WhatsApp</a>
   </header>
 
@@ -123,6 +144,7 @@
   <section>
     <h2>🏋️ Appareils de sport</h2>
     <div class="produits">
+      <!-- Produit 1 -->
       <div class="produit">
         <img src="AB 1.jpg" alt="AB TOMIC">
         <h3>AB TOMIC</h3>
@@ -130,6 +152,7 @@
         <a href="abtomic.html" class="button">Voir produit</a>
       </div>
 
+      <!-- Produit 2 -->
       <div class="produit">
         <img src="images/Appareil de Musculation Multi-Stations1.jpg" alt="Appareil de Musculation Multi-Stations">
         <h3>Appareil de Musculation Multi-Stations</h3>
@@ -137,19 +160,30 @@
         <a href="Appareil de Musculation Multi-Stations.html" class="button">Voir produit</a>
       </div>
 
+      <!-- Produit 3 -->
       <div class="produit">
-       <img src="images/ABD/ABD1.webp" alt="Machine Abdominale Multifonctionnelle">
-       <h3>Machine Abdominale Multifonctionnelle</h3>
-       <p class="prix">85 000 FCFA</p>
-       <a href="machine-abdominale.html" class="button">Voir produit</a>
-     </div>
+        <img src="images/ABD/ABD1.webp" alt="Machine Abdominale Multifonctionnelle">
+        <h3>Machine Abdominale Multifonctionnelle</h3>
+        <p>85 000 FCFA</p>
+        <a href="machine-abdominale.html" class="button">Voir produit</a>
+      </div>
 
+      <!-- Produit 4 -->
       <div class="produit">
-       <img src="images/ABG/ABG1.webp" alt="Entraîneur Abdominal Pliable">
-       <h3>Entraîneur Abdominal Pliable</h3>
-       <p class="prix">65 000 FCFA</p>
-       <a href="Entraîneur Abdominal Pliable.html" class="button">Voir produit</a>
-     </div>
+        <img src="images/ABG/ABG1.webp" alt="Entraîneur Abdominal Pliable">
+        <h3>Entraîneur Abdominal Pliable</h3>
+        <p>65 000 FCFA</p>
+        <a href="Entraîneur Abdominal Pliable.html" class="button">Voir produit</a>
+      </div>
+
+      <!-- Ajoute ici d'autres produits jusqu’à 15 max -->
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <a href="#">1</a>
+      <a href="categorie-page2.html">2</a>
+      <a href="categorie-page3.html">3</a>
     </div>
   </section>
 

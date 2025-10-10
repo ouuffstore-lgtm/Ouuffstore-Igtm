@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Entraîneur Abdominal Pliable | Ouffstore</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f7f8fa;
+      color: #222;
+    }
+    header {
+      background: #002c5f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+    header img {
+      height: 60px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    header h1 {
+      display: inline-block;
+      margin: 0;
+      vertical-align: middle;
+      font-size: 1.8em;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 25px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      padding: 20px;
+    }
+    .container h2 { color: #002c5f; margin-top: 0; text-align: center; }
+
+    .gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 10px 0;
+      scroll-snap-type: x mandatory;
+    }
+    .gallery img {
+      width: 45%;
+      border-radius: 10px;
+      object-fit: cover;
+      scroll-snap-align: center;
+    }
+    .price {
+      font-size: 1.5em;
+      color: #ff7a00;
+      font-weight: bold;
+      text-align: center;
+      margin: 15px 0;
+    }
+    form {
+      background: #f1f3f6;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    form label {
+      display: block;
+      font-weight: 600;
+      margin: 10px 0 5px;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+    button {
+      background: #002c5f;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 15px;
+      width: 100%;
+    }
+    button:hover { background: #004b91; }
+
+    .total {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #ff7a00;
+      text-align: right;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 15px;
+      text-decoration: none;
+      color: #002c5f;
+      font-weight: 600;
+    }
+    .back:hover { text-decoration: underline; }
+
+    .whatsapp-button {
+      display: block;
+      background: #25D366;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    .whatsapp-button:hover { background: #1ebe5d; }
+
+    .thank-you {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header id="headerLink">
+    <img src="LOGO1.jpg" alt="Logo Ouffstore">
+    <h1>Ouffstore</h1>
+  </header>
+
+  <div class="container">
+    <h2 id="nom-produit">Entraîneur Abdominal Pliable</h2>
+
+    <div class="gallery">
+      <img src="images/ABG/ABG1.webp" alt="Entraîneur Abdominal Pliable 1">
+      <img src="images/ABG/ABG2.webp" alt="Entraîneur Abdominal Pliable 2">
+      <img src="images/ABG/ABG3.webp" alt="Entraîneur Abdominal Pliable 3">
+      <img src="images/ABG/ABG4.webp" alt="Entraîneur Abdominal Pliable 4">
+      <img src="images/ABG/ABG5.webp" alt="Entraîneur Abdominal Pliable 5">
+    </div>
+
+    <p>
+      L’appareil de fitness décrit est un entraîneur abdominal doté d’un ordinateur de formation. Sa construction métallique stable comprend un rail avec un système à rouleaux à faible frottement pour des mouvements fluides.
+    </p>
+
+    <div class="price">Prix : <span id="prix-produit">65000</span> FCFA</div>
+
+    <!-- Formulaire de commande -->
+    <form id="commandeForm">
+      <input type="hidden" name="_subject" value="Nouvelle commande Ouffstore">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      
+      <input type="hidden" id="produitNom" name="Produit_Commandé" value="Entraîneur Abdominal Pliable">
+
+      <label>Nom complet :</label>
+      <input type="text" name="Nom" required>
+
+      <label>Email :</label>
+      <input type="email" name="Email" required>
+
+      <label>Numéro de téléphone :</label>
+      <input type="tel" name="Téléphone" placeholder="+2250703791959" required>
+
+      <label>Adresse de livraison :</label>
+      <textarea name="Adresse" rows="3" placeholder="Ex: Cocody, Abidjan" required></textarea>
+
+      <label>Coût du produit (FCFA) :</label>
+      <input type="number" id="prix" name="Prix_Produit" value="65000" readonly>
+
+      <label>Frais de livraison (FCFA) :</label>
+      <input type="number" id="livraison" name="Frais_Livraison" value="2000" readonly>
+
+      <div class="total">Total : <span id="total">42000</span> FCFA</div>
+
+      <button type="submit">📦 Valider la commande</button>
+    </form>
+
+    <div class="thank-you" id="thankYouMessage">
+      ✅ Merci, votre commande a bien été envoyée !
+    </div>
+
+    <!-- Bouton WhatsApp -->
+    <a id="whatsappLink" href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
+
+    <div>
+      <a href="index.html" class="back">⬅ Retour à la boutique</a>
+    </div>
+  </div>
+
+  <script>
+    // Calcul automatique du total
+    const prix = document.getElementById('prix');
+    const livraison = document.getElementById('livraison');
+    const totalEl = document.getElementById('total');
+    const whatsappLink = document.getElementById('whatsappLink');
+    const produitNom = document.getElementById('produitNom').value;
+    const prixProduit = parseInt(prix.value);
+    const fraisLivraison = parseInt(livraison.value);
+    const total = prixProduit + fraisLivraison;
+    totalEl.textContent = total;
+
+    // Génère le lien WhatsApp automatiquement
+    const numero = "2250703791959";
+    const message = `Je suis intéressé par le produit ${produitNom} au prix de ${prixProduit} FCFA (+${fraisLivraison} FCFA de livraison).`;
+    whatsappLink.href = `https://wa.me/${numero}?text=${encodeURIComponent(message)}`;
+
+    // Soumission du formulaire sans rechargement
+    const form = document.getElementById('commandeForm');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Empêche le rechargement de page
+
+      const formData = new FormData(form);
+
+      fetch('https://formsubmit.co/ajax/ouff300@gmail.com', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.ok ? response.json() : Promise.reject(response))
+      .then(data => {
+        // Affiche le message de remerciement sans cacher le formulaire
+        thankYouMessage.style.display = 'block';
+        thankYouMessage.scrollIntoView({ behavior: 'smooth' });
+        form.reset(); // Réinitialise le formulaire
+      })
+      .catch(err => {
+        alert("Une erreur est survenue, veuillez réessayer.");
+        console.error(err);
+      });
+    });
+
+    // Redirection vers la page principale si clic sur le header
+    document.getElementById('headerLink').addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

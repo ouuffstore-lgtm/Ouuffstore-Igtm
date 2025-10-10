@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mon Panier | Ouffstore</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #222;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #002147;
+      padding: 10px 20px;
+      height: 70px;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #ffb300;
+      flex-grow: 1;
+      text-align: center;
+      font-size: 1.8em;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      padding-bottom: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #002147;
+      margin-top: 30px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+      padding: 15px;
+      transition: background 0.3s;
+    }
+
+    .cart-item:hover {
+      background: #f0f6ff;
+    }
+
+    .cart-item img {
+      width: 80px;
+      border-radius: 10px;
+    }
+
+    .cart-details {
+      flex: 1;
+      margin-left: 15px;
+    }
+
+    .cart-details h3 {
+      margin: 0;
+      font-size: 1.1em;
+      color: #002147;
+    }
+
+    .cart-details p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .remove-btn {
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .remove-btn:hover {
+      background: #d60000;
+      transform: scale(1.1);
+    }
+
+    .total {
+      text-align: right;
+      font-weight: bold;
+      color: #002147;
+      font-size: 1.3em;
+      margin: 20px;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px 10px;
+      font-size: 1.1em;
+      color: #777;
+    }
+
+    .checkout {
+      display: block;
+      width: max-content;
+      margin: 20px auto;
+      background: #ff9500;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .checkout:hover {
+      background: #e07d00;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #002147;
+      color: #d8e0ff;
+      font-size: 0.9em;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: #ffb300;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html"><img src="LOGO1.jpg" alt="Ouffstore"></a>
+    <h1>Mon Panier</h1>
+    <a href="https://wa.me/2250703791959">WhatsApp</a>
+  </header>
+
+  <main>
+    <h2>🛒 Vos articles</h2>
+    <div id="cart-container"></div>
+    <div class="total" id="cart-total"></div>
+    <a href="#" id="checkout-button" class="checkout">Commander sur WhatsApp</a>
+  </main>
+
+  <footer>
+    © 2025 <strong>Ouffstore</strong> — Tous droits réservés
+  </footer>
+
+  <script>
+    // Charger le panier depuis le localStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartContainer = document.getElementById('cart-container');
+    const totalDisplay = document.getElementById('cart-total');
+    const checkoutButton = document.getElementById('checkout-button');
+
+    function renderCart() {
+      cartContainer.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = '<p class="empty">Votre panier est vide 😅</p>';
+        totalDisplay.textContent = '';
+        checkoutButton.style.display = 'none';
+        return;
+      }
+
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-details">
+            <h3>${item.name}</h3>
+            <p>${item.price.toLocaleString()} FCFA</p>
+          </div>
+          <button class="remove-btn" onclick="removeItem(${index})">🗑️</button>
+        `;
+        cartContainer.appendChild(div);
+      });
+
+      totalDisplay.textContent = 'Total : ' + total.toLocaleString() + ' FCFA';
+      checkoutButton.style.display = 'block';
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    checkoutButton.addEventListener('click', () => {
+      const message = cart.map(item => `• ${item.name} - ${item.price.toLocaleString()} FCFA`).join('%0A');
+      const total = cart.reduce((sum, i) => sum + i.price, 0);
+      const whatsappMessage = `Bonjour 👋, je souhaite commander les articles suivants :%0A${message}%0A%0ATotal : ${total.toLocaleString()} FCFA`;
+      window.open(`https://wa.me/2250703791959?text=${whatsappMessage}`, '_blank');
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>

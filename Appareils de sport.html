@@ -5,118 +5,46 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Appareils de sport | Ouffstore</title>
   <style>
-    /* Définition des variables de couleur du premier code */
-    :root{
-      --bg:#f5f7fa;
-      --blue:#002147;
-      --accent:#ff9500;
-      --accent-dark:#e07d00;
-      --card:#ffffff;
-      --muted:#d8e0ff;
-      --text:#222;
-    }
-
     body {
       font-family: 'Poppins', 'Segoe UI', sans-serif;
       margin: 0;
-      background: var(--bg); /* Utilisation de la variable */
-      color: var(--text); /* Utilisation de la variable */
+      background: #f5f7fa;
+      color: #222;
       line-height: 1.6;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
     }
 
-    /* --- HEADER du premier code --- */
+    /* --- HEADER --- */
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--blue);
+      background: #002147;
       padding: 10px 20px;
       height: 70px;
-      position: relative;
-      transition: background .25s ease;
     }
-    header .logo img { height: 50px; display:block; }
-
+    header img { height: 50px; }
     header h1 {
       margin: 0;
-      color: var(--accent);
+      color: #ffb300;
       text-align: center;
       flex-grow: 1;
       font-size: 1.8em;
-      transition: transform .35s ease, opacity .35s ease;
     }
-    header h1:hover { transform: scale(1.02); opacity: .95; }
-
-    /* header actions */
-    .header-actions {
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-
-    .whatsapp-button, .button, .cart-icon {
-      position: relative; /* required for ripple */
-      overflow: hidden;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .whatsapp-button {
-      background: var(--accent);
+    header a.whatsapp-button {
+      background: #ff9500;
       color: white;
-      padding: 10px 18px;
+      padding: 10px 20px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
       white-space: nowrap;
-      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
-      display: inline-block;
     }
-    .whatsapp-button:hover {
-      transform: translateY(-3px);
-      background: var(--accent-dark);
-      box-shadow: 0 8px 18px rgba(0,0,0,.08);
-    }
-
-    /* --- PANIER --- */
-    .cart-icon {
-      font-size: 22px;
-      color: var(--accent);
-      padding: 6px 8px;
-      border-radius: 8px;
-      text-decoration: none;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      transition: transform .25s ease, color .25s ease, background .25s ease;
-    }
-    .cart-icon:hover { transform: scale(1.12); color: var(--accent-dark); background: rgba(255,255,255,0.03); }
-
-    #cart-count {
-      background: var(--accent);
-      color: white;
-      border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 12px;
-      position: relative;
-      font-weight:700;
-      line-height:1;
-    }
-
-    /* bounce animation (applied by JS) */
-    @keyframes bounce { 0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}60%{transform:translateY(-3px)} }
-    .cart-bounce { animation: bounce .6s; }
-
-    /* Responsive pour l'entête */
     @media screen and (max-width: 600px) {
-      header { flex-direction: column; height:auto; gap:10px; padding:12px; }
-      header h1 { order:2; font-size:1.45em; }
+      header { flex-direction: column; height: auto; gap: 8px; }
+      header h1 { order: 2; font-size: 1.5em; }
+      header img { order: 1; }
+      header a.whatsapp-button { order: 3; padding: 8px 15px; font-size: 0.9em; }
     }
-    /* FIN du style HEADER du premier code */
-
-
-    /* --- Le reste des styles de la page "Appareils de sport" (ajusté pour utiliser les variables) --- */
 
     /* --- CATÉGORIE --- */
     section {
@@ -126,7 +54,7 @@
     }
     h2 {
       text-align: center;
-      color: var(--blue);
+      color: #002147;
       margin-bottom: 25px;
       font-size: 1.8em;
     }
@@ -146,7 +74,7 @@
     }
 
     .produit {
-      background: var(--card);
+      background: white;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       text-align: center;
@@ -167,12 +95,12 @@
 
     .produit h3 {
       margin: 10px 0 5px 0;
-      color: var(--blue);
+      color: #002147;
       font-size: 1em;
     }
     .produit p {
       font-weight: bold;
-      color: var(--accent);
+      color: #ff9500;
       margin: 5px 0;
       font-size: 0.95em;
     }
@@ -180,7 +108,7 @@
     .produit a.button {
       display: inline-block;
       margin-top: 5px;
-      background: var(--accent);
+      background: #ff9500;
       color: white;
       padding: 8px 15px;
       border-radius: 8px;
@@ -189,7 +117,7 @@
       font-size: 0.9em;
       transition: 0.3s;
     }
-    .produit a.button:hover { background: var(--accent-dark); transform: scale(1.05); }
+    .produit a.button:hover { background: #e07d00; transform: scale(1.05); }
 
     /* --- PAGINATION --- */
     .pagination {
@@ -200,7 +128,7 @@
       flex-wrap: wrap;
     }
     .pagination a {
-      background: var(--blue);
+      background: #002147;
       color: white;
       padding: 8px 15px;
       border-radius: 5px;
@@ -208,205 +136,151 @@
       font-weight: 600;
     }
     .pagination a:hover {
-      background: var(--accent);
+      background: #ff9500;
     }
 
     /* --- FOOTER --- */
     footer {
       text-align: center;
-      padding: 26px 10px;
-      background: var(--blue);
-      color: var(--muted);
+      padding: 30px 10px;
+      background: #002147;
+      color: #d8e0ff;
+      font-size: 0.9em;
       margin-top: 50px;
     }
-    footer strong { color: var(--accent); }
-    footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    footer a { color: #ffb300; text-decoration: none; font-weight: 600; }
   </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo"><a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a></div>
-
-        <h1><a href="index.html" style="text-decoration:none; color:inherit;">Ouffstore</a></h1>
-
-        <div class="header-actions" aria-hidden="false">
-      <a href="panier.html" class="cart-icon" title="Voir mon panier" aria-label="Panier">
-        🛒 <span id="cart-count">0</span>
-      </a>
-      <a href="https://wa.me/2250703791959" class="whatsapp-button" target="_blank" rel="noopener">WhatsApp</a>
-    </div>
+  <!-- HEADER -->
+  <header>
+    <a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
+    <h1><a href="index.html" style="color:#ffb300; text-decoration:none;">Ouffstore</a></h1>
+    <a href="https://wa.me/2250703791959" class="whatsapp-button">WhatsApp</a>
   </header>
 
-    <section>
+  <!-- SECTION CATÉGORIE -->
+  <section>
     <h2>🏋️ Appareils de sport</h2>
     <div class="produits">
-            <div class="produit">
+      <!-- Produit 1 -->
+      <div class="produit">
         <img src="AB 1.jpg" alt="AB TOMIC">
         <h3>AB TOMIC</h3>
         <p>40 000 FCFA</p>
         <a href="abtomic.html" class="button">Voir produit</a>
       </div>
 
-            <div class="produit">
+      <!-- Produit 2 -->
+      <div class="produit">
         <img src="images/Appareil de Musculation Multi-Stations1.jpg" alt="Appareil de Musculation Multi-Stations">
         <h3>Appareil de Musculation Multi-Stations</h3>
         <p>1 000 000 FCFA</p>
         <a href="Appareil de Musculation Multi-Stations.html" class="button">Voir produit</a>
       </div>
 
-            <div class="produit">
+      <!-- Produit 3 -->
+      <div class="produit">
         <img src="images/ABD/ABD1.webp" alt="Machine Abdominale Multifonctionnelle">
         <h3>Machine Abdominale Multifonctionnelle</h3>
         <p>85 000 FCFA</p>
         <a href="machine-abdominale.html" class="button">Voir produit</a>
       </div>
 
-            <div class="produit">
+      <!-- Produit 4 -->
+      <div class="produit">
         <img src="images/ABG/ABG1.webp" alt="Entraîneur Abdominal Pliable">
         <h3>Entraîneur Abdominal Pliable</h3>
         <p>65 000 FCFA</p>
         <a href="Entraîneur Abdominal Pliable.html" class="button">Voir produit</a>
       </div>
 
-            <div class="produit">
+      <!-- Produit 5 -->
+      <div class="produit">
         <img src="images/AW/AW1.jpg" alt="Machine d’exercice Air Walker">
         <h3>Machine d’exercice Air Walker</h3>
         <p>120 000 FCFA</p>
         <a href="Machine d’exercice Air Walker.html" class="button">Voir produit</a>
       </div>
 
-             <div class="produit">
+       <!-- Produit 6 -->
+      <div class="produit">
         <img src="images/CB/CB1.jpg" alt="Machine abdominale de musculation">
         <h3>Machine abdominale de musculation</h3>
         <p>95 000 FCFA</p>
         <a href="Machine abdominale de musculation.html" class="button">Voir produit</a>
       </div>
       
-              <div class="produit">
+        <!-- Produit 6 -->
+      <div class="produit">
         <img src="images/GV/GV1.jpg" alt="Grand Vélo d’Appartement">
         <h3>Grand Vélo d’Appartement</h3>
         <p>240 000 FCFA</p>
         <a href="Grand Vélo d’Appartement.html" class="button">Voir produit</a>
       </div>
 
-            <div class="produit">
+      <!-- Produit 7 -->
+      <div class="produit">
         <img src="images/MF/MF1.webp" alt="Machine de fitness">
         <h3>Machine de fitness</h3>
         <p>250 000 FCFA</p>
         <a href="Machine de fitness.html" class="button">Voir produit</a>
       </div>
 
-             <div class="produit">
+       <!-- Produit 8 -->
+      <div class="produit">
         <img src="images/TC/TC1.webp" alt="Total Crunch">
         <h3>Total Crunch</h3>
         <p>70 000 FCFA</p>
         <a href="Total Crunch.html" class="button">Voir produit</a>
       </div>
 
-            <div class="produit">
+      <!-- Produit 9 -->
+      <div class="produit">
         <img src="images/TP/TP1.webp" alt="Tapis de course pliable portative">
         <h3>Tapis de course pliable portative</h3>
         <p>195 000 FCFA</p>
         <a href="Tapis de course pliable portative.html" class="button">Voir produit</a>
       </div>
 
-            <div class="produit">
+      <!-- Produit 10 -->
+      <div class="produit">
         <img src="images/VA/VA1.webp" alt="Vélo d’exercice">
         <h3>Vélo d’exercice</h3>
         <p>180 000 FCFA</p>
         <a href="Vélo d’exercice.html" class="button">Voir produit</a>
       </div>
 
-            <div class="produit">
+      <!-- Produit 11 -->
+      <div class="produit">
         <img src="images/VP/VP1.webp" alt="Vélo d’appartement pliable">
         <h3>Vélo d’appartement pliable</h3>
         <p>130 000 FCFA</p>
         <a href="Vélo d’appartement pliable.html" class="button">Voir produit</a>
       </div>
 
-            <div class="produit">
+      <!-- Produit 12 -->
+      <div class="produit">
         <img src="images/vc/VC1.jpg" alt="Vélo Crunch">
         <h3>Vélo Crunch</h3>
         <p>150 000 FCFA</p>
         <a href="Vélo Crunch.html" class="button">Voir produit</a>
       </div>
-          </div>
+      <!-- Ajoute ici d’autres produits -->
+    </div>
 
-        <div class="pagination">
+    <!-- PAGINATION -->
+    <div class="pagination">
       <a href="#">1</a>
     </div>
   </section>
 
-    <footer>
+  <!-- FOOTER -->
+  <footer>
     © 2025 <strong>Ouffstore</strong> — Tous droits réservés<br>
     Abidjan, Côte d’Ivoire
   </footer>
 
-    <script>
-    // --- panier : mise à jour compteur depuis localStorage ---
-    let panier = JSON.parse(localStorage.getItem('panier')) || [];
-    function updateCartCount() {
-      const el = document.getElementById('cart-count');
-      if (!el) return;
-      el.textContent = panier.length || 0;
-      // add small bounce when count changes
-      el.parentElement.classList.add('cart-bounce');
-      setTimeout(()=> el.parentElement.classList.remove('cart-bounce'), 650);
-    }
-    document.addEventListener('DOMContentLoaded', updateCartCount);
-
-    // --- ripple effect for buttons ---
-    function addRippleListeners(selector) {
-      document.querySelectorAll(selector).forEach(btn => {
-        btn.addEventListener('click', function (e) {
-          const rect = this.getBoundingClientRect();
-          const size = Math.max(rect.width, rect.height) * 1.2;
-          const ripple = document.createElement('span');
-          ripple.className = 'ripple';
-          ripple.style.width = ripple.style.height = size + 'px';
-          ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
-          ripple.style.top  = (e.clientY - rect.top  - size/2) + 'px';
-          this.appendChild(ripple);
-          setTimeout(()=> ripple.remove(), 700);
-        });
-      });
-    }
-    document.addEventListener('DOMContentLoaded', function(){
-      // On ajoute l'effet ripple uniquement aux boutons de l'entête
-      addRippleListeners('.whatsapp-button, .cart-icon'); 
-    });
-
-    // --- toast helper (petit message de notification, non utilisé ici mais conservé) ---
-    function showToast(text){
-      // create temporary toast if none exists
-      let t = document.getElementById('ouff-toast');
-      if (!t) {
-        t = document.createElement('div');
-        t.id = 'ouff-toast';
-        t.style.position = 'fixed';
-        t.style.left = '50%';
-        t.style.bottom = '24px';
-        t.style.transform = 'translateX(-50%)';
-        t.style.background = 'var(--blue)';
-        t.style.color = '#fff';
-        t.style.padding = '10px 16px';
-        t.style.borderRadius = '8px';
-        t.style.boxShadow = '0 6px 20px rgba(0,0,0,0.18)';
-        t.style.zIndex = 99999;
-        t.style.opacity = '0';
-        t.style.transition = 'opacity .2s, transform .2s';
-        document.body.appendChild(t);
-      }
-      t.textContent = text;
-      t.style.opacity = '1';
-      t.style.transform = 'translateX(-50%) translateY(0)';
-      clearTimeout(t._t);
-      t._t = setTimeout(()=> {
-        t.style.opacity = '0';
-        t.style.transform = 'translateX(-50%) translateY(8px)';
-      }, 2000);
-    }
-  </script>
 </body>
 </html>

@@ -31,7 +31,6 @@
       font-size: 1.8em;
     }
 
-    /* header actions */
     .header-actions {
       display: flex;
       align-items: center;
@@ -93,7 +92,7 @@
     }
     .produit h3 { margin: 10px 0 5px; color:#002147; font-size:1em; }
     .produit p { font-weight: bold; color: #ff9500; margin: 5px 0; font-size:0.95em; }
-    .produit a.button {
+    .produit a.button, .produit button.add-cart {
       display: inline-block;
       margin-top: 5px;
       background: #ff9500;
@@ -104,8 +103,10 @@
       font-weight: 600;
       font-size: 0.9em;
       transition: 0.3s;
+      cursor: pointer;
+      border: none;
     }
-    .produit a.button:hover { background: #e07d00; transform: scale(1.05); }
+    .produit a.button:hover, .produit button.add-cart:hover { background: #e07d00; transform: scale(1.05); }
 
     /* --- FOOTER --- */
     footer {
@@ -136,84 +137,112 @@
   <section>
     <h2>🏋️ Appareils de sport</h2>
     <div class="produits">
+
+      <!-- Tous les produits avec bouton Ajouter au panier -->
       <div class="produit">
         <img src="AB 1.jpg" alt="AB TOMIC">
         <h3>AB TOMIC</h3>
         <p>40 000 FCFA</p>
         <a href="abtomic.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="AB TOMIC" data-prix="40000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/Appareil de Musculation Multi-Stations1.jpg" alt="Appareil Multi-Stations">
         <h3>Appareil de Musculation Multi-Stations</h3>
         <p>1 000 000 FCFA</p>
         <a href="Appareil de Musculation Multi-Stations.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Appareil Multi-Stations" data-prix="1000000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/ABD/ABD1.webp" alt="Machine Abdominale Multifonctionnelle">
         <h3>Machine Abdominale Multifonctionnelle</h3>
         <p>85 000 FCFA</p>
         <a href="machine-abdominale.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Machine Abdominale Multifonctionnelle" data-prix="85000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/ABG/ABG1.webp" alt="Entraîneur Abdominal Pliable">
         <h3>Entraîneur Abdominal Pliable</h3>
         <p>65 000 FCFA</p>
         <a href="Entraîneur Abdominal Pliable.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Entraîneur Abdominal Pliable" data-prix="65000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/AW/AW1.jpg" alt="Machine d’exercice Air Walker">
         <h3>Machine d’exercice Air Walker</h3>
         <p>120 000 FCFA</p>
         <a href="Machine d’exercice Air Walker.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Machine Air Walker" data-prix="120000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/CB/CB1.jpg" alt="Machine abdominale de musculation">
         <h3>Machine abdominale de musculation</h3>
         <p>95 000 FCFA</p>
         <a href="Machine abdominale de musculation.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Machine abdominale" data-prix="95000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/GV/GV1.jpg" alt="Grand Vélo d’Appartement">
         <h3>Grand Vélo d’Appartement</h3>
         <p>240 000 FCFA</p>
         <a href="Grand Vélo d’Appartement.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Grand Vélo d’Appartement" data-prix="240000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/MF/MF1.webp" alt="Machine de fitness">
         <h3>Machine de fitness</h3>
         <p>250 000 FCFA</p>
         <a href="Machine de fitness.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Machine de fitness" data-prix="250000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/TC/TC1.webp" alt="Total Crunch">
         <h3>Total Crunch</h3>
         <p>70 000 FCFA</p>
         <a href="Total Crunch.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Total Crunch" data-prix="70000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/TP/TP1.webp" alt="Tapis de course pliable portative">
         <h3>Tapis de course pliable portative</h3>
         <p>195 000 FCFA</p>
         <a href="Tapis de course pliable portative.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Tapis de course" data-prix="195000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/VA/VA1.webp" alt="Vélo d’exercice">
         <h3>Vélo d’exercice</h3>
         <p>180 000 FCFA</p>
         <a href="Vélo d’exercice.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Vélo d’exercice" data-prix="180000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/VP/VP1.webp" alt="Vélo d’appartement pliable">
         <h3>Vélo d’appartement pliable</h3>
         <p>130 000 FCFA</p>
         <a href="Vélo d’appartement pliable.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Vélo d’appartement pliable" data-prix="130000">➕ Ajouter au panier</button>
       </div>
+
       <div class="produit">
         <img src="images/vc/VC1.jpg" alt="Vélo Crunch">
         <h3>Vélo Crunch</h3>
         <p>150 000 FCFA</p>
         <a href="Vélo Crunch.html" class="button">Voir produit</a>
+        <button class="add-cart" data-nom="Vélo Crunch" data-prix="150000">➕ Ajouter au panier</button>
       </div>
+
     </div>
   </section>
 
@@ -224,13 +253,57 @@
   </footer>
 
   <script>
-    // Compteur dynamique du panier
+    // Récupération du panier depuis le localStorage
     let panier = JSON.parse(localStorage.getItem('panier')) || [];
+
     function updateCartCount() {
       const el = document.getElementById('cart-count');
       el.textContent = panier.length || 0;
     }
+
+    function showToast(text) {
+      let t = document.getElementById('ouff-toast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'ouff-toast';
+        t.style.position = 'fixed';
+        t.style.left = '50%';
+        t.style.bottom = '24px';
+        t.style.transform = 'translateX(-50%)';
+        t.style.background = '#002147';
+        t.style.color = '#fff';
+        t.style.padding = '10px 16px';
+        t.style.borderRadius = '8px';
+        t.style.boxShadow = '0 6px 20px rgba(0,0,0,0.18)';
+        t.style.zIndex = 99999;
+        t.style.opacity = '0';
+        t.style.transition = 'opacity .2s, transform .2s';
+        document.body.appendChild(t);
+      }
+      t.textContent = text;
+      t.style.opacity = '1';
+      t.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(t._t);
+      t._t = setTimeout(() => {
+        t.style.opacity = '0';
+        t.style.transform = 'translateX(-50%) translateY(8px)';
+      }, 2000);
+    }
+
+    // Ajouter au panier
+    document.querySelectorAll('.add-cart').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const nom = btn.getAttribute('data-nom');
+        const prix = parseInt(btn.getAttribute('data-prix'));
+        panier.push({ nom, prix });
+        localStorage.setItem('panier', JSON.stringify(panier));
+        updateCartCount();
+        showToast(`${nom} ajouté au panier`);
+      });
+    });
+
     document.addEventListener('DOMContentLoaded', updateCartCount);
   </script>
+
 </body>
 </html>

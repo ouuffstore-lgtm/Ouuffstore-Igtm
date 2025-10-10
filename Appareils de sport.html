@@ -1,286 +1,345 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Appareils de sport | Ouffstore</title>
-  <style>
-    body {
-      font-family: 'Poppins', 'Segoe UI', sans-serif;
-      margin: 0;
-      background: #f5f7fa;
-      color: #222;
-      line-height: 1.6;
-    }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Appareils de sport | Ouffstore</title>
+  <style>
+    /* --- DÉBUT DES AJOUTS POUR L'EN-TÊTE D'ACCUEIL --- */
+    :root{
+      --bg:#f5f7fa;
+      --blue:#002147;
+      --accent:#ff9500;
+      --accent-dark:#e07d00;
+      --card:#ffffff;
+      --muted:#d8e0ff;
+      --text:#222;
+    }
 
-    /* --- HEADER --- */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #002147;
-      padding: 10px 20px;
-      height: 70px;
-    }
-    header img { height: 50px; }
-    header h1 {
-      margin: 0;
-      color: #ffb300;
-      text-align: center;
-      flex-grow: 1;
-      font-size: 1.8em;
-    }
-    header a.whatsapp-button {
-      background: #ff9500;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    @media screen and (max-width: 600px) {
-      header { flex-direction: column; height: auto; gap: 8px; }
-      header h1 { order: 2; font-size: 1.5em; }
-      header img { order: 1; }
-      header a.whatsapp-button { order: 3; padding: 8px 15px; font-size: 0.9em; }
-    }
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      margin: 0;
+      background: var(--bg); /* Utilisation de la variable */
+      color: var(--text); /* Utilisation de la variable */
+      line-height: 1.6;
+    }
 
-    /* --- CATÉGORIE --- */
-    section {
-      max-width: 1300px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    h2 {
-      text-align: center;
-      color: #002147;
-      margin-bottom: 25px;
-      font-size: 1.8em;
-    }
+    /* --- HEADER (Style de la page d'accueil) --- */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--blue);
+      padding: 10px 20px;
+      height: 70px;
+      position: relative;
+      transition: background .25s ease;
+    }
+    header .logo img { height: 50px; display:block; }
 
-    .produits {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 25px;
-    }
+    header h1 {
+      margin: 0;
+      color: var(--accent);
+      text-align: center;
+      flex-grow: 1;
+      font-size: 1.8em;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+    header h1:hover { transform: scale(1.02); opacity: .95; }
 
-    /* --- RESPONSIVE GRID --- */
-    @media screen and (max-width: 1024px) {
-      .produits { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media screen and (max-width: 600px) {
-      .produits { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-    }
+    /* header actions */
+    .header-actions {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
 
-    .produit {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      padding: 10px;
-      transition: transform 0.2s;
-      overflow: hidden;
-    }
+    .whatsapp-button, .button, .cart-icon {
+      position: relative;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-    .produit:hover { transform: translateY(-5px); }
+    .whatsapp-button {
+      background: var(--accent);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+      display: inline-block;
+    }
+    .whatsapp-button:hover {
+      transform: translateY(-3px);
+      background: var(--accent-dark);
+      box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    }
 
-    .produit img {
-      width: 100%;
-      aspect-ratio: 1 / 1; /* image carrée */
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
+    /* --- PANIER --- */
+    .cart-icon {
+      font-size: 22px;
+      color: var(--accent);
+      padding: 6px 8px;
+      border-radius: 8px;
+      text-decoration: none;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition: transform .25s ease, color .25s ease, background .25s ease;
+    }
+    .cart-icon:hover { transform: scale(1.12); color: var(--accent-dark); background: rgba(255,255,255,0.03); }
 
-    .produit h3 {
-      margin: 10px 0 5px 0;
-      color: #002147;
-      font-size: 1em;
-    }
-    .produit p {
-      font-weight: bold;
-      color: #ff9500;
-      margin: 5px 0;
-      font-size: 0.95em;
-    }
+    #cart-count {
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      position: relative;
+      font-weight:700;
+      line-height:1;
+    }
 
-    .produit a.button {
-      display: inline-block;
-      margin-top: 5px;
-      background: #ff9500;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9em;
-      transition: 0.3s;
-    }
-    .produit a.button:hover { background: #e07d00; transform: scale(1.05); }
+    /* bounce animation (applied by JS) */
+    @keyframes bounce { 0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}60%{transform:translateY(-3px)} }
+    .cart-bounce { animation: bounce .6s; }
 
-    /* --- PAGINATION --- */
-    .pagination {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 40px;
-      flex-wrap: wrap;
-    }
-    .pagination a {
-      background: #002147;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .pagination a:hover {
-      background: #ff9500;
-    }
+    /* --- RESPONSIVE HEADER --- */
+    @media screen and (max-width: 600px) {
+      header { flex-direction: column; height:auto; gap:10px; padding:12px; }
+      header h1 { order:2; font-size:1.45em; }
+      .header-actions { order: 3; }
+    }
 
-    /* --- FOOTER --- */
-    footer {
-      text-align: center;
-      padding: 30px 10px;
-      background: #002147;
-      color: #d8e0ff;
-      font-size: 0.9em;
-      margin-top: 50px;
-    }
-    footer a { color: #ffb300; text-decoration: none; font-weight: 600; }
-  </style>
+    /* --- FIN DES AJOUTS POUR L'EN-TÊTE D'ACCUEIL --- */
+
+
+    /* --- CATÉGORIE (Styles originaux conservés) --- */
+    section {
+      max-width: 1300px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #002147;
+      margin-bottom: 25px;
+      font-size: 1.8em;
+    }
+
+    .produits {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 25px;
+    }
+
+    /* --- RESPONSIVE GRID --- */
+    @media screen and (max-width: 1024px) {
+      .produits { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media screen and (max-width: 600px) {
+      .produits { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    }
+
+    .produit {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 10px;
+      transition: transform 0.2s;
+      overflow: hidden;
+    }
+
+    .produit:hover { transform: translateY(-5px); }
+
+    .produit img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .produit h3 {
+      margin: 10px 0 5px 0;
+      color: #002147;
+      font-size: 1em;
+    }
+    .produit p {
+      font-weight: bold;
+      color: #ff9500;
+      margin: 5px 0;
+      font-size: 0.95em;
+    }
+
+    .produit a.button {
+      display: inline-block;
+      margin-top: 5px;
+      background: #ff9500;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9em;
+      transition: 0.3s;
+    }
+    .produit a.button:hover { background: #e07d00; transform: scale(1.05); }
+
+    /* --- PAGINATION --- */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .pagination a {
+      background: #002147;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .pagination a:hover {
+      background: #ff9500;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      background: #002147;
+      color: #d8e0ff;
+      font-size: 0.9em;
+      margin-top: 50px;
+    }
+    footer a { color: #ffb300; text-decoration: none; font-weight: 600; }
+  </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
-    <h1><a href="index.html" style="color:#ffb300; text-decoration:none;">Ouffstore</a></h1>
-    <a href="https://wa.me/2250703791959" class="whatsapp-button">WhatsApp</a>
-  </header>
+    <header>
+        <div class="logo"><a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a></div>
 
-  <!-- SECTION CATÉGORIE -->
-  <section>
-    <h2>🏋️ Appareils de sport</h2>
-    <div class="produits">
-      <!-- Produit 1 -->
-      <div class="produit">
-        <img src="AB 1.jpg" alt="AB TOMIC">
-        <h3>AB TOMIC</h3>
-        <p>40 000 FCFA</p>
-        <a href="abtomic.html" class="button">Voir produit</a>
-      </div>
+        <h1><a href="index.html" style="text-decoration:none; color:inherit;">Ouffstore</a></h1>
 
-      <!-- Produit 2 -->
-      <div class="produit">
-        <img src="images/Appareil de Musculation Multi-Stations1.jpg" alt="Appareil de Musculation Multi-Stations">
-        <h3>Appareil de Musculation Multi-Stations</h3>
-        <p>1 000 000 FCFA</p>
-        <a href="Appareil de Musculation Multi-Stations.html" class="button">Voir produit</a>
-      </div>
+        <div class="header-actions" aria-hidden="false">
+      <a href="panier.html" class="cart-icon" title="Voir mon panier" aria-label="Panier">
+        🛒 <span id="cart-count">0</span>
+      </a>
+      <a href="https://wa.me/2250703791959" class="whatsapp-button" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </header>
 
-      <!-- Produit 3 -->
-      <div class="produit">
-        <img src="images/ABD/ABD1.webp" alt="Machine Abdominale Multifonctionnelle">
-        <h3>Machine Abdominale Multifonctionnelle</h3>
-        <p>85 000 FCFA</p>
-        <a href="machine-abdominale.html" class="button">Voir produit</a>
-      </div>
+    <section>
+    <h2>🏋️ Appareils de sport</h2>
+    <div class="produits">
+            <div class="produit">
+        <img src="AB 1.jpg" alt="AB TOMIC">
+        <h3>AB TOMIC</h3>
+        <p>40 000 FCFA</p>
+        <a href="abtomic.html" class="button">Voir produit</a>
+      </div>
 
-      <!-- Produit 4 -->
-      <div class="produit">
-        <img src="images/ABG/ABG1.webp" alt="Entraîneur Abdominal Pliable">
-        <h3>Entraîneur Abdominal Pliable</h3>
-        <p>65 000 FCFA</p>
-        <a href="Entraîneur Abdominal Pliable.html" class="button">Voir produit</a>
-      </div>
+            <div class="produit">
+        <img src="images/Appareil de Musculation Multi-Stations1.jpg" alt="Appareil de Musculation Multi-Stations">
+        <h3>Appareil de Musculation Multi-Stations</h3>
+        <p>1 000 000 FCFA</p>
+        <a href="Appareil de Musculation Multi-Stations.html" class="button">Voir produit</a>
+      </div>
 
-      <!-- Produit 5 -->
-      <div class="produit">
-        <img src="images/AW/AW1.jpg" alt="Machine d’exercice Air Walker">
-        <h3>Machine d’exercice Air Walker</h3>
-        <p>120 000 FCFA</p>
-        <a href="Machine d’exercice Air Walker.html" class="button">Voir produit</a>
-      </div>
+            <div class="produit">
+        <img src="images/ABD/ABD1.webp" alt="Machine Abdominale Multifonctionnelle">
+        <h3>Machine Abdominale Multifonctionnelle</h3>
+        <p>85 000 FCFA</p>
+        <a href="machine-abdominale.html" class="button">Voir produit</a>
+      </div>
 
-       <!-- Produit 6 -->
-      <div class="produit">
-        <img src="images/CB/CB1.jpg" alt="Machine abdominale de musculation">
-        <h3>Machine abdominale de musculation</h3>
-        <p>95 000 FCFA</p>
-        <a href="Machine abdominale de musculation.html" class="button">Voir produit</a>
-      </div>
-      
-        <!-- Produit 6 -->
-      <div class="produit">
-        <img src="images/GV/GV1.jpg" alt="Grand Vélo d’Appartement">
-        <h3>Grand Vélo d’Appartement</h3>
-        <p>240 000 FCFA</p>
-        <a href="Grand Vélo d’Appartement.html" class="button">Voir produit</a>
-      </div>
+            <div class="produit">
+        <img src="images/ABG/ABG1.webp" alt="Entraîneur Abdominal Pliable">
+        <h3>Entraîneur Abdominal Pliable</h3>
+        <p>65 000 FCFA</p>
+        <a href="Entraîneur Abdominal Pliable.html" class="button">Voir produit</a>
+      </div>
 
-      <!-- Produit 7 -->
-      <div class="produit">
-        <img src="images/MF/MF1.webp" alt="Machine de fitness">
-        <h3>Machine de fitness</h3>
-        <p>250 000 FCFA</p>
-        <a href="Machine de fitness.html" class="button">Voir produit</a>
-      </div>
+            <div class="produit">
+        <img src="images/AW/AW1.jpg" alt="Machine d’exercice Air Walker">
+        <h3>Machine d’exercice Air Walker</h3>
+        <p>120 000 FCFA</p>
+        <a href="Machine d’exercice Air Walker.html" class="button">Voir produit</a>
+      </div>
 
-       <!-- Produit 8 -->
-      <div class="produit">
-        <img src="images/TC/TC1.webp" alt="Total Crunch">
-        <h3>Total Crunch</h3>
-        <p>70 000 FCFA</p>
-        <a href="Total Crunch.html" class="button">Voir produit</a>
-      </div>
+             <div class="produit">
+        <img src="images/CB/CB1.jpg" alt="Machine abdominale de musculation">
+        <h3>Machine abdominale de musculation</h3>
+        <p>95 000 FCFA</p>
+        <a href="Machine abdominale de musculation.html" class="button">Voir produit</a>
+      </div>
+       
+              <div class="produit">
+        <img src="images/GV/GV1.jpg" alt="Grand Vélo d’Appartement">
+        <h3>Grand Vélo d’Appartement</h3>
+        <p>240 000 FCFA</p>
+        <a href="Grand Vélo d’Appartement.html" class="button">Voir produit</a>
+      </div>
 
-      <!-- Produit 9 -->
-      <div class="produit">
-        <img src="images/TP/TP1.webp" alt="Tapis de course pliable portative">
-        <h3>Tapis de course pliable portative</h3>
-        <p>195 000 FCFA</p>
-        <a href="Tapis de course pliable portative.html" class="button">Voir produit</a>
-      </div>
+            <div class="produit">
+        <img src="images/MF/MF1.webp" alt="Machine de fitness">
+        <h3>Machine de fitness</h3>
+        <p>250 000 FCFA</p>
+        <a href="Machine de fitness.html" class="button">Voir produit</a>
+      </div>
 
-      <!-- Produit 10 -->
-      <div class="produit">
-        <img src="images/VA/VA1.webp" alt="Vélo d’exercice">
-        <h3>Vélo d’exercice</h3>
-        <p>180 000 FCFA</p>
-        <a href="Vélo d’exercice.html" class="button">Voir produit</a>
-      </div>
+             <div class="produit">
+        <img src="images/TC/TC1.webp" alt="Total Crunch">
+        <h3>Total Crunch</h3>
+        <p>70 000 FCFA</p>
+        <a href="Total Crunch.html" class="button">Voir produit</a>
+      </div>
 
-      <!-- Produit 11 -->
-      <div class="produit">
-        <img src="images/VP/VP1.webp" alt="Vélo d’appartement pliable">
-        <h3>Vélo d’appartement pliable</h3>
-        <p>130 000 FCFA</p>
-        <a href="Vélo d’appartement pliable.html" class="button">Voir produit</a>
-      </div>
+            <div class="produit">
+        <img src="images/TP/TP1.webp" alt="Tapis de course pliable portative">
+        <h3>Tapis de course pliable portative</h3>
+        <p>195 000 FCFA</p>
+        <a href="Tapis de course pliable portative.html" class="button">Voir produit</a>
+      </div>
 
-      <!-- Produit 12 -->
-      <div class="produit">
-        <img src="images/vc/VC1.jpg" alt="Vélo Crunch">
-        <h3>Vélo Crunch</h3>
-        <p>150 000 FCFA</p>
-        <a href="Vélo Crunch.html" class="button">Voir produit</a>
-      </div>
-      <!-- Ajoute ici d’autres produits -->
-    </div>
+            <div class="produit">
+        <img src="images/VA/VA1.webp" alt="Vélo d’exercice">
+        <h3>Vélo d’exercice</h3>
+        <p>180 000 FCFA</p>
+        <a href="Vélo d’exercice.html" class="button">Voir produit</a>
+      </div>
 
-    <!-- PAGINATION -->
-    <div class="pagination">
-      <a href="#">1</a>
-    </div>
-  </section>
+            <div class="produit">
+        <img src="images/VP/VP1.webp" alt="Vélo d’appartement pliable">
+        <h3>Vélo d’appartement pliable</h3>
+        <p>130 000 FCFA</p>
+        <a href="Vélo d’appartement pliable.html" class="button">Voir produit</a>
+      </div>
 
-  <!-- FOOTER -->
-  <footer>
-    © 2025 <strong>Ouffstore</strong> — Tous droits réservés<br>
-    Abidjan, Côte d’Ivoire
-  </footer>
+            <div class="produit">
+        <img src="images/vc/VC1.jpg" alt="Vélo Crunch">
+        <h3>Vélo Crunch</h3>
+        <p>150 000 FCFA</p>
+        <a href="Vélo Crunch.html" class="button">Voir produit</a>
+      </div>
+    </div>
+
+        <div class="pagination">
+      <a href="#">1</a>
+    </div>
+  </section>
+
+    <footer>
+    © 2025 <strong>Ouffstore</strong> — Tous droits réservés<br>
+    Abidjan, Côte d’Ivoire
+  </footer>
 
 </body>
 </html>

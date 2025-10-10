@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Appareils de sport | Ouffstore</title>
   <style>
-    /* --- DÉBUT DES AJOUTS POUR L'EN-TÊTE D'ACCUEIL --- */
+    /* Définition des variables de couleur du premier code */
     :root{
       --bg:#f5f7fa;
       --blue:#002147;
@@ -22,9 +22,11 @@
       background: var(--bg); /* Utilisation de la variable */
       color: var(--text); /* Utilisation de la variable */
       line-height: 1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    /* --- HEADER (Style de la page d'accueil) --- */
+    /* --- HEADER du premier code --- */
     header {
       display: flex;
       align-items: center;
@@ -55,7 +57,7 @@
     }
 
     .whatsapp-button, .button, .cart-icon {
-      position: relative;
+      position: relative; /* required for ripple */
       overflow: hidden;
       -webkit-tap-highlight-color: transparent;
     }
@@ -106,17 +108,17 @@
     @keyframes bounce { 0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}60%{transform:translateY(-3px)} }
     .cart-bounce { animation: bounce .6s; }
 
-    /* --- RESPONSIVE HEADER --- */
+    /* Responsive pour l'entête */
     @media screen and (max-width: 600px) {
       header { flex-direction: column; height:auto; gap:10px; padding:12px; }
       header h1 { order:2; font-size:1.45em; }
-      .header-actions { order: 3; }
     }
+    /* FIN du style HEADER du premier code */
 
-    /* --- FIN DES AJOUTS POUR L'EN-TÊTE D'ACCUEIL --- */
 
+    /* --- Le reste des styles de la page "Appareils de sport" (ajusté pour utiliser les variables) --- */
 
-    /* --- CATÉGORIE (Styles originaux conservés) --- */
+    /* --- CATÉGORIE --- */
     section {
       max-width: 1300px;
       margin: 40px auto;
@@ -124,7 +126,7 @@
     }
     h2 {
       text-align: center;
-      color: #002147;
+      color: var(--blue);
       margin-bottom: 25px;
       font-size: 1.8em;
     }
@@ -144,7 +146,7 @@
     }
 
     .produit {
-      background: white;
+      background: var(--card);
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       text-align: center;
@@ -157,7 +159,7 @@
 
     .produit img {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 1 / 1; /* image carrée */
       object-fit: cover;
       border-radius: 10px;
       margin-bottom: 10px;
@@ -165,12 +167,12 @@
 
     .produit h3 {
       margin: 10px 0 5px 0;
-      color: #002147;
+      color: var(--blue);
       font-size: 1em;
     }
     .produit p {
       font-weight: bold;
-      color: #ff9500;
+      color: var(--accent);
       margin: 5px 0;
       font-size: 0.95em;
     }
@@ -178,7 +180,7 @@
     .produit a.button {
       display: inline-block;
       margin-top: 5px;
-      background: #ff9500;
+      background: var(--accent);
       color: white;
       padding: 8px 15px;
       border-radius: 8px;
@@ -187,7 +189,7 @@
       font-size: 0.9em;
       transition: 0.3s;
     }
-    .produit a.button:hover { background: #e07d00; transform: scale(1.05); }
+    .produit a.button:hover { background: var(--accent-dark); transform: scale(1.05); }
 
     /* --- PAGINATION --- */
     .pagination {
@@ -198,7 +200,7 @@
       flex-wrap: wrap;
     }
     .pagination a {
-      background: #002147;
+      background: var(--blue);
       color: white;
       padding: 8px 15px;
       border-radius: 5px;
@@ -206,19 +208,19 @@
       font-weight: 600;
     }
     .pagination a:hover {
-      background: #ff9500;
+      background: var(--accent);
     }
 
     /* --- FOOTER --- */
     footer {
       text-align: center;
-      padding: 30px 10px;
-      background: #002147;
-      color: #d8e0ff;
-      font-size: 0.9em;
+      padding: 26px 10px;
+      background: var(--blue);
+      color: var(--muted);
       margin-top: 50px;
     }
-    footer a { color: #ffb300; text-decoration: none; font-weight: 600; }
+    footer strong { color: var(--accent); }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -280,7 +282,7 @@
         <p>95 000 FCFA</p>
         <a href="Machine abdominale de musculation.html" class="button">Voir produit</a>
       </div>
-       
+      
               <div class="produit">
         <img src="images/GV/GV1.jpg" alt="Grand Vélo d’Appartement">
         <h3>Grand Vélo d’Appartement</h3>
@@ -329,7 +331,7 @@
         <p>150 000 FCFA</p>
         <a href="Vélo Crunch.html" class="button">Voir produit</a>
       </div>
-    </div>
+          </div>
 
         <div class="pagination">
       <a href="#">1</a>
@@ -341,5 +343,70 @@
     Abidjan, Côte d’Ivoire
   </footer>
 
+    <script>
+    // --- panier : mise à jour compteur depuis localStorage ---
+    let panier = JSON.parse(localStorage.getItem('panier')) || [];
+    function updateCartCount() {
+      const el = document.getElementById('cart-count');
+      if (!el) return;
+      el.textContent = panier.length || 0;
+      // add small bounce when count changes
+      el.parentElement.classList.add('cart-bounce');
+      setTimeout(()=> el.parentElement.classList.remove('cart-bounce'), 650);
+    }
+    document.addEventListener('DOMContentLoaded', updateCartCount);
+
+    // --- ripple effect for buttons ---
+    function addRippleListeners(selector) {
+      document.querySelectorAll(selector).forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height) * 1.2;
+          const ripple = document.createElement('span');
+          ripple.className = 'ripple';
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+          ripple.style.top  = (e.clientY - rect.top  - size/2) + 'px';
+          this.appendChild(ripple);
+          setTimeout(()=> ripple.remove(), 700);
+        });
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+      // On ajoute l'effet ripple uniquement aux boutons de l'entête
+      addRippleListeners('.whatsapp-button, .cart-icon'); 
+    });
+
+    // --- toast helper (petit message de notification, non utilisé ici mais conservé) ---
+    function showToast(text){
+      // create temporary toast if none exists
+      let t = document.getElementById('ouff-toast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'ouff-toast';
+        t.style.position = 'fixed';
+        t.style.left = '50%';
+        t.style.bottom = '24px';
+        t.style.transform = 'translateX(-50%)';
+        t.style.background = 'var(--blue)';
+        t.style.color = '#fff';
+        t.style.padding = '10px 16px';
+        t.style.borderRadius = '8px';
+        t.style.boxShadow = '0 6px 20px rgba(0,0,0,0.18)';
+        t.style.zIndex = 99999;
+        t.style.opacity = '0';
+        t.style.transition = 'opacity .2s, transform .2s';
+        document.body.appendChild(t);
+      }
+      t.textContent = text;
+      t.style.opacity = '1';
+      t.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(t._t);
+      t._t = setTimeout(()=> {
+        t.style.opacity = '0';
+        t.style.transform = 'translateX(-50%) translateY(8px)';
+      }, 2000);
+    }
+  </script>
 </body>
 </html>

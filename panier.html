@@ -3,226 +3,290 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Mon Panier | Ouffstore</title>
+  <title>Panier | Ouffstore</title>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
       margin: 0;
-      background: #f5f7fa;
+      font-family: 'Poppins', sans-serif;
+      background: #f7f8fa;
       color: #222;
     }
-
     header {
+      background: #002c5f;
+      color: white;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #002147;
       padding: 10px 20px;
-      height: 70px;
     }
-
-    header img {
-      height: 50px;
-    }
-
+    header img { height: 50px; cursor:pointer; }
     header h1 {
       margin: 0;
       color: #ffb300;
-      flex-grow: 1;
-      text-align: center;
       font-size: 1.8em;
+      flex-grow:1;
+      text-align:center;
+      cursor:pointer;
     }
-
-    header a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      padding-bottom: 30px;
-    }
-
-    h2 {
-      text-align: center;
-      color: #002147;
-      margin-top: 30px;
-    }
-
-    .cart-item {
+    header .header-actions {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 12px;
+    }
+    .cart-icon {
+      font-size: 22px;
+      color: #ff9500;
+      padding: 6px 10px;
+      border-radius: 8px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+    #cart-count {
+      background: #ff9500;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      font-weight:700;
+      line-height:1;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 25px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      padding: 20px;
+    }
+    h2 { color: #002c5f; text-align: center; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
       border-bottom: 1px solid #ddd;
-      padding: 15px;
-      transition: background 0.3s;
     }
+    th { background: #f1f3f6; }
 
-    .cart-item:hover {
-      background: #f0f6ff;
-    }
-
-    .cart-item img {
-      width: 80px;
-      border-radius: 10px;
-    }
-
-    .cart-details {
-      flex: 1;
-      margin-left: 15px;
-    }
-
-    .cart-details h3 {
-      margin: 0;
-      font-size: 1.1em;
-      color: #002147;
-    }
-
-    .cart-details p {
-      margin: 5px 0;
-      color: #555;
-    }
-
-    .remove-btn {
+    .delete-btn {
       background: #ff4d4d;
       color: white;
       border: none;
+      padding: 6px 12px;
       border-radius: 6px;
-      padding: 8px 12px;
       cursor: pointer;
-      transition: transform 0.2s, background 0.3s;
+      transition: background 0.3s;
     }
-
-    .remove-btn:hover {
-      background: #d60000;
-      transform: scale(1.1);
-    }
+    .delete-btn:hover { background: #e60000; }
 
     .total {
       text-align: right;
+      font-size: 1.2em;
       font-weight: bold;
-      color: #002147;
-      font-size: 1.3em;
-      margin: 20px;
+      margin-top: 20px;
+      color: #ff7a00;
+    }
+
+    .whatsapp-button {
+      display: block;
+      background: #25D366;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 15px;
+      transition: background 0.3s;
+    }
+    .whatsapp-button:hover { background: #1ebe5d; }
+
+    form {
+      background: #f1f3f6;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    form label {
+      display: block;
+      font-weight: 600;
+      margin: 10px 0 5px;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+    form button {
+      background: #002c5f;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 15px;
+      width: 100%;
+    }
+    form button:hover { background: #004b91; }
+
+    .thank-you {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
     }
 
     .empty {
-      text-align: center;
-      padding: 40px 10px;
-      font-size: 1.1em;
-      color: #777;
-    }
-
-    .checkout {
-      display: block;
-      width: max-content;
-      margin: 20px auto;
-      background: #ff9500;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.3s, background 0.3s;
-    }
-
-    .checkout:hover {
-      background: #e07d00;
-      transform: scale(1.05);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #002147;
-      color: #d8e0ff;
-      font-size: 0.9em;
-      margin-top: 50px;
-    }
-
-    footer a {
-      color: #ffb300;
-      text-decoration: none;
+      text-align:center;
+      margin-top:50px;
+      font-size:1.2em;
+      color:#555;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <a href="index.html"><img src="LOGO1.jpg" alt="Ouffstore"></a>
-    <h1>Mon Panier</h1>
-    <a href="https://wa.me/2250703791959">WhatsApp</a>
+    <a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
+    <h1 onclick="window.location.href='index.html'">Ouffstore</h1>
+    <div class="header-actions">
+      <a href="panier.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+    </div>
   </header>
 
-  <main>
-    <h2>🛒 Vos articles</h2>
-    <div id="cart-container"></div>
-    <div class="total" id="cart-total"></div>
-    <a href="#" id="checkout-button" class="checkout">Commander sur WhatsApp</a>
-  </main>
+  <div class="container">
+    <h2>🛒 Mon Panier</h2>
+    <div id="cartContainer"></div>
 
-  <footer>
-    © 2025 <strong>Ouffstore</strong> — Tous droits réservés
-  </footer>
+    <form id="commandeForm">
+      <h3>📝 Informations de commande</h3>
+      <label>Nom complet :</label>
+      <input type="text" name="Nom" required>
+      <label>Email :</label>
+      <input type="email" name="Email" required>
+      <label>Numéro de téléphone :</label>
+      <input type="tel" name="Téléphone" placeholder="+2250703791959" required>
+      <label>Adresse de livraison :</label>
+      <textarea name="Adresse" rows="3" placeholder="Ex: Cocody, Abidjan" required></textarea>
+      <div class="total" id="totalForm">Total : 0 FCFA</div>
+      <button type="submit">📦 Valider la commande</button>
+    </form>
+
+    <div class="thank-you" id="thankYouMessage">
+      ✅ Merci, votre commande a bien été envoyée !
+    </div>
+
+    <a id="whatsappOrder" href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
+  </div>
 
   <script>
-    // Charger le panier depuis le localStorage
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartContainer = document.getElementById('cart-container');
-    const totalDisplay = document.getElementById('cart-total');
-    const checkoutButton = document.getElementById('checkout-button');
+    let panier = JSON.parse(localStorage.getItem('panier')) || [];
+    const cartContainer = document.getElementById('cartContainer');
+    const cartCount = document.getElementById('cart-count');
+    const whatsappOrder = document.getElementById('whatsappOrder');
+    const totalForm = document.getElementById('totalForm');
+    const form = document.getElementById('commandeForm');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+    const numero = "2250703791959";
+    const fraisLivraison = 2000;
+
+    function updateCartCount() {
+      cartCount.textContent = panier.length;
+    }
 
     function renderCart() {
-      cartContainer.innerHTML = '';
-
-      if (cart.length === 0) {
-        cartContainer.innerHTML = '<p class="empty">Votre panier est vide 😅</p>';
-        totalDisplay.textContent = '';
-        checkoutButton.style.display = 'none';
+      if (panier.length === 0) {
+        cartContainer.innerHTML = '<p class="empty">Votre panier est vide 😔</p>';
+        whatsappOrder.style.display = 'none';
+        totalForm.textContent = 'Total : 0 FCFA';
         return;
       }
 
-      let total = 0;
-      cart.forEach((item, index) => {
-        total += item.price;
-
-        const div = document.createElement('div');
-        div.classList.add('cart-item');
-        div.innerHTML = `
-          <img src="${item.image}" alt="${item.name}">
-          <div class="cart-details">
-            <h3>${item.name}</h3>
-            <p>${item.price.toLocaleString()} FCFA</p>
-          </div>
-          <button class="remove-btn" onclick="removeItem(${index})">🗑️</button>
-        `;
-        cartContainer.appendChild(div);
+      let totalPrix = 0;
+      let html = `<table>
+        <tr><th>Produit</th><th>Prix (FCFA)</th><th>Supprimer</th></tr>`;
+      panier.forEach((item, index) => {
+        html += `<tr>
+          <td>${item.nom}</td>
+          <td>${item.prix.toLocaleString()}</td>
+          <td><button class="delete-btn" onclick="removeItem(${index})">❌</button></td>
+        </tr>`;
+        totalPrix += item.prix;
       });
+      html += `</table>`;
+      cartContainer.innerHTML = html;
 
-      totalDisplay.textContent = 'Total : ' + total.toLocaleString() + ' FCFA';
-      checkoutButton.style.display = 'block';
+      const totalAvecLivraison = totalPrix + fraisLivraison;
+      totalForm.textContent = `Total : ${totalAvecLivraison.toLocaleString()} FCFA`;
+
+      // Lien WhatsApp
+      let message = "Je souhaite commander les produits suivants :\n";
+      panier.forEach(item => {
+        message += `- ${item.nom} : ${item.prix.toLocaleString()} FCFA\n`;
+      });
+      message += `Frais de livraison : ${fraisLivraison.toLocaleString()} FCFA\n`;
+      message += `Total : ${totalAvecLivraison.toLocaleString()} FCFA`;
+      whatsappOrder.href = `https://wa.me/${numero}?text=${encodeURIComponent(message)}`;
+      whatsappOrder.style.display = 'block';
     }
 
     function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
+      panier.splice(index,1);
+      localStorage.setItem('panier', JSON.stringify(panier));
+      updateCartCount();
       renderCart();
     }
 
-    checkoutButton.addEventListener('click', () => {
-      const message = cart.map(item => `• ${item.name} - ${item.price.toLocaleString()} FCFA`).join('%0A');
-      const total = cart.reduce((sum, i) => sum + i.price, 0);
-      const whatsappMessage = `Bonjour 👋, je souhaite commander les articles suivants :%0A${message}%0A%0ATotal : ${total.toLocaleString()} FCFA`;
-      window.open(`https://wa.me/2250703791959?text=${whatsappMessage}`, '_blank');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(panier.length === 0){
+        alert("Votre panier est vide !");
+        return;
+      }
+      const formData = new FormData(form);
+      panier.forEach((item, i) => formData.append(`Produit ${i+1}`, item.nom));
+      formData.append('Total', totalForm.textContent.replace('Total : ', ''));
+
+      fetch('https://formsubmit.co/ajax/ouff300@gmail.com', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.ok ? response.json() : Promise.reject(response))
+      .then(data => {
+        thankYouMessage.style.display = 'block';
+        form.reset();
+        panier = [];
+        localStorage.setItem('panier', JSON.stringify(panier));
+        updateCartCount();
+        renderCart();
+        window.scrollTo({top:0, behavior:'smooth'});
+      })
+      .catch(err => {
+        alert("Une erreur est survenue, veuillez réessayer.");
+        console.error(err);
+      });
     });
 
-    renderCart();
+    document.addEventListener('DOMContentLoaded', function(){
+      updateCartCount();
+      renderCart();
+    });
   </script>
 </body>
 </html>

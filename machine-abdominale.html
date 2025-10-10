@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Machine Abdominale Multifonctionnelle | Ouffstore</title>
+  <style>
+    body { margin:0; font-family:'Poppins',sans-serif; background:#f7f8fa; color:#222; }
+    header {
+      background:#002c5f;
+      color:white;
+      text-align:center;
+      padding:20px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+    header img { height:60px; vertical-align:middle; margin-right:10px; cursor:pointer; }
+    header h1 { display:inline-block; margin:0; vertical-align:middle; font-size:1.8em; cursor:pointer; }
+
+    .container {
+      max-width:800px;
+      margin:25px auto;
+      background:white;
+      border-radius:12px;
+      box-shadow:0 3px 10px rgba(0,0,0,0.15);
+      padding:20px;
+    }
+    .container h2 { color:#002c5f; margin-top:0; }
+
+    .gallery { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+    .gallery img {
+      width:48%;
+      border-radius:10px;
+      object-fit:cover;
+    }
+
+    p { line-height:1.6; }
+    .price {
+      font-size:1.5em;
+      color:#ff7a00;
+      font-weight:bold;
+      margin:15px 0;
+    }
+
+    form {
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:15px;
+    }
+    input, textarea {
+      padding:10px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      font-size:1em;
+      width:100%;
+      box-sizing:border-box;
+    }
+    button {
+      background:#002c5f;
+      color:white;
+      border:none;
+      padding:12px;
+      font-weight:bold;
+      border-radius:6px;
+      cursor:pointer;
+      transition:background 0.3s;
+    }
+    button:hover { background:#004080; }
+
+    .success {
+      display:none;
+      background:#25D366;
+      color:white;
+      padding:10px;
+      border-radius:6px;
+      margin-top:15px;
+      text-align:center;
+      font-weight:600;
+    }
+
+    .back {
+      display:inline-block;
+      margin-top:15px;
+      text-decoration:none;
+      color:#002c5f;
+      font-weight:600;
+    }
+    .back:hover { text-decoration:underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="LOGO1.jpg" alt="Logo Ouffstore" onclick="window.location.href='index.html'">
+    <h1 onclick="window.location.href='index.html'">Ouffstore</h1>
+  </header>
+
+  <div class="container">
+    <h2>Machine Abdominale Multifonctionnelle</h2>
+
+    <div class="gallery">
+      <img src="images/ABD/ABD1.webp" alt="Machine Abdominale Multifonctionnelle vue 1">
+      <img src="images/ABD/ABD2.webp" alt="Machine Abdominale Multifonctionnelle vue 2">
+      <img src="images/ABD/ABD3.webp" alt="Machine Abdominale Multifonctionnelle vue 3">
+      <img src="images/ABD/ABD4.webp" alt="Machine Abdominale Multifonctionnelle vue 4">
+      <img src="images/ABD/ABD5.webp" alt="Machine Abdominale Multifonctionnelle vue 5">
+      <img src="images/ABD/ABD5.webp" alt="Machine Abdominale Multifonctionnelle vue 6">
+    </div>
+
+    <p>
+      La Machine Abdominale Multifonctionnelle est un équipement de fitness polyvalent conçu pour cibler et renforcer efficacement les muscles abdominaux. 
+      Elle permet une variété d'exercices pour tonifier votre sangle abdominale et améliorer votre forme physique. 🏋️‍♂️
+    </p>
+
+    <div class="price">Prix : 85 000 FCFA</div>
+
+    <form id="commandeForm">
+      <input type="text" name="nom" placeholder="Votre nom complet" required>
+      <input type="tel" name="telephone" placeholder="Votre numéro de téléphone" required>
+      <input type="text" name="adresse" placeholder="Adresse de livraison" required>
+      <textarea name="message" rows="3" placeholder="Message ou précision (facultatif)"></textarea>
+      <input type="hidden" name="produit" value="Machine Abdominale Multifonctionnelle">
+      <input type="hidden" name="prix" value="85000 FCFA">
+      <button type="submit">✅ Envoyer la commande</button>
+    </form>
+
+    <div class="success" id="successMessage">
+      ✅ Merci, votre commande a bien été envoyée ! Nous vous contacterons pour confirmer la livraison.
+    </div>
+
+    <div>
+      <a href="index.html" class="back">⬅ Retour à la Boutique</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('commandeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('successMessage').style.display = 'block';
+      this.reset();
+      setTimeout(() => {
+        document.getElementById('successMessage').style.display = 'none';
+      }, 6000);
+    });
+  </script>
+</body>
+</html>

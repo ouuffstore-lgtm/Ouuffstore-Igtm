@@ -143,7 +143,7 @@
   </header>
 
   <div class="container">
-    <h2 id="nom-produit">AB TOMIC</h2>
+    <h2 id="nom-produit">Machine abdominale multifonctionnelle</h2>
 
     <div class="gallery">
       <img src="images/ABD/ABD2.webp" alt="Machine Abdominale Multifonctionnelle vue 2">
@@ -165,7 +165,7 @@
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
       
-      <input type="hidden" id="produitNom" name="Produit_Commandé" value="AB TOMIC">
+      <input type="hidden" id="produitNom" name="Produit_Commandé" value="Machine abdominale multifonctionnelle">
 
       <label>Nom complet :</label>
       <input type="text" name="Nom" required>
@@ -216,7 +216,7 @@
 
     // Génère le lien WhatsApp automatiquement
     const numero = "2250703791959";
-    const message = `Je suis intéressé par le produit ${machine-abdominale} au prix de ${85000} FCFA (+${2000} FCFA de livraison).`;
+    const message = `Je suis intéressé par le produit ${produitNom} au prix de ${prixProduit} FCFA (+${fraisLivraison} FCFA de livraison).`;
     whatsappLink.href = `https://wa.me/${numero}?text=${encodeURIComponent(message)}`;
 
     // Soumission du formulaire sans rechargement

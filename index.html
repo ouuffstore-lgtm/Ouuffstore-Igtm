@@ -22,38 +22,31 @@ body {
   background:var(--bg);
   color:var(--text);
   line-height:1.6;
-  padding-top:70px; /* espace pour header fixe */
 }
 
-/* --- HEADER DYNAMIQUE --- */
+/* HEADER */
 header {
   display:flex;
   align-items:center;
   justify-content:space-between;
   background:var(--blue);
-  padding:15px 20px;
+  padding:10px 20px;
   height:70px;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  z-index:999;
-  transition: all 0.3s ease, transform 0.3s ease;
+  position:relative;
 }
-header.shrink {
-  background:#001531;
-  padding:8px 20px;
-  height:60px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.12);
+header .logo img { height:50px; display:block; }
+header h1 {
+  margin:0;
+  color:var(--accent);
+  text-align:center;
+  flex-grow:1;
+  font-size:1.8em;
 }
-header.hidden {
-  transform: translateY(-100%);
+.header-actions {
+  display:flex;
+  gap:12px;
+  align-items:center;
 }
-header .logo img { height:50px; transition:height 0.3s ease;}
-header.shrink .logo img { height:40px;}
-header h1 { margin:0; color:var(--accent); text-align:center; flex-grow:1; font-size:1.8em; transition:font-size 0.3s ease;}
-header.shrink h1 { font-size:1.5em;}
-.header-actions { display:flex; gap:12px; align-items:center;}
 .whatsapp-button {
   background:var(--accent);
   color:white;
@@ -85,7 +78,7 @@ header.shrink h1 { font-size:1.5em;}
 @keyframes bounce { 0%,20%,50%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} 60%{transform:translateY(-3px)} }
 .cart-bounce { animation:bounce .6s; }
 
-/* --- SECTIONS --- */
+/* SECTIONS */
 section { max-width:1100px; margin:60px auto; padding:0 20px; }
 h2 { text-align:center; color:var(--blue); margin-bottom:18px; font-size:1.8em; }
 
@@ -156,9 +149,19 @@ h2 { text-align:center; color:var(--blue); margin-bottom:18px; font-size:1.8em; 
 /* FOOTER */
 footer { text-align:center; padding:26px 10px; background:var(--blue); color:var(--muted); margin-top:36px;}
 
+/* --- RESPONSIVE --- */
+@media screen and (max-width:900px){
+  .produit { width:200px; }
+  section { margin:30px auto; }
+}
 @media screen and (max-width:600px){
-  header { flex-direction:column; height:auto; gap:10px; padding:12px;}
-  header h1 { order:2; font-size:1.45em;}
+  header { flex-direction:row; height:50px; padding:8px 12px; }
+  header .logo img { height:30px; }
+  header h1 { font-size:1.3em; flex-grow:1; text-align:center; margin:0; }
+  .header-actions { gap:6px; }
+  .cart-icon { font-size:16px; padding:3px 4px; }
+  #cart-count { font-size:10px; padding:1px 3px; }
+  .whatsapp-button { padding:5px 10px; font-size:0.75em; }
   .produit { width:46%; }
   .produits { gap:12px; }
 }
@@ -244,6 +247,36 @@ function updateCartCount() {
 }
 document.addEventListener('DOMContentLoaded', updateCartCount);
 
+// --- Toast ---
+function showToast(text){
+  let t = document.getElementById('ouff-toast');
+  if(!t){
+    t = document.createElement('div');
+    t.id='ouff-toast';
+    t.style.position='fixed';
+    t.style.left='50%';
+    t.style.bottom='24px';
+    t.style.transform='translateX(-50%)';
+    t.style.background='var(--blue)';
+    t.style.color='#fff';
+    t.style.padding='10px 16px';
+    t.style.borderRadius='8px';
+    t.style.boxShadow='0 6px 20px rgba(0,0,0,0.18)';
+    t.style.zIndex=99999;
+    t.style.opacity='0';
+    t.style.transition='opacity .2s, transform .2s';
+    document.body.appendChild(t);
+  }
+  t.textContent = text;
+  t.style.opacity='1';
+  t.style.transform='translateX(-50%) translateY(0)';
+  clearTimeout(t._t);
+  t._t = setTimeout(()=>{
+    t.style.opacity='0';
+    t.style.transform='translateX(-50%) translateY(8px)';
+  },2000);
+}
+
 // --- Intersection Observer animation ---
 document.addEventListener('DOMContentLoaded', function(){
   const animated = Array.from(document.querySelectorAll('[data-animate]'));
@@ -262,24 +295,6 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }, {threshold:0.08});
   animated.forEach(el=>observer.observe(el));
-});
-
-// --- Header dynamique scroll ---
-let lastScroll = 0;
-const header = document.querySelector('header');
-window.addEventListener('scroll', ()=>{
-  const currentScroll = window.scrollY;
-  if(currentScroll > 50){
-    header.classList.add('shrink');
-  } else {
-    header.classList.remove('shrink');
-  }
-  if(currentScroll > lastScroll && currentScroll > 100){
-    header.classList.add('hidden');
-  } else {
-    header.classList.remove('hidden');
-  }
-  lastScroll = currentScroll;
 });
 </script>
 

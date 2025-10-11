@@ -8,29 +8,61 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: #f7f8fa;
+      background: linear-gradient(180deg, #eef3f9 0%, #ffffff 100%);
       color: #222;
     }
     header {
-      background: #002c5f;
+      background: linear-gradient(90deg, #002c5f, #004b91);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    header img { height: 50px; cursor:pointer; }
+    header h1 {
+      margin: 0;
+      color: #ffb300;
+      text-align: center;
+      flex-grow: 1;
+      font-size: 1.8em;
+      cursor:pointer;
+    }
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .whatsapp-button {
+      background: #25D366;
       color: white;
       text-align: center;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      cursor: pointer;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
     }
-    header img {
-      height: 60px;
-      vertical-align: middle;
-      margin-right: 10px;
+    .whatsapp-button:hover { background: #1ebe5d; }
+    .cart-icon {
+      font-size: 22px;
+      color: #ffb300;
+      padding: 6px 10px;
+      border-radius: 8px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      text-decoration:none;
+      font-weight:bold;
+      cursor:pointer;
     }
-    header h1 {
-      display: inline-block;
-      margin: 0;
-      vertical-align: middle;
-      font-size: 1.8em;
+    #cart-count {
+      background: #ffb300;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      font-weight:700;
+      line-height:1;
     }
-
     .container {
       max-width: 850px;
       margin: 25px auto;
@@ -40,26 +72,19 @@
       padding: 20px;
     }
     .container h2 { color: #002c5f; margin-top: 0; text-align: center; }
-
-    .gallery {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 10px 0;
-      scroll-snap-type: x mandatory;
-    }
-    .gallery img {
-      width: 45%;
-      border-radius: 10px;
-      object-fit: cover;
-      scroll-snap-align: center;
-    }
+    .gallery { display: flex; overflow-x: auto; gap: 10px; padding: 10px 0; scroll-snap-type: x mandatory; }
+    .gallery img { width: 45%; border-radius: 10px; object-fit: cover; scroll-snap-align: center; }
     .price {
       font-size: 1.5em;
       color: #ff7a00;
       font-weight: bold;
       text-align: center;
       margin: 15px 0;
+      background: #fff7e6;
+      border: 2px solid #ffb300;
+      border-radius: 10px;
+      display: inline-block;
+      padding: 10px 20px;
     }
     form {
       background: #f1f3f6;
@@ -67,11 +92,7 @@
       border-radius: 10px;
       margin-top: 20px;
     }
-    form label {
-      display: block;
-      font-weight: 600;
-      margin: 10px 0 5px;
-    }
+    form label { display: block; font-weight: 600; margin: 10px 0 5px; }
     form input, form textarea {
       width: 100%;
       padding: 10px;
@@ -79,7 +100,7 @@
       border-radius: 8px;
       font-size: 1em;
     }
-    button {
+    button, #addCartBtn {
       background: #002c5f;
       color: white;
       border: none;
@@ -91,15 +112,8 @@
       margin-top: 15px;
       width: 100%;
     }
-    button:hover { background: #004b91; }
-
-    .total {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #ff7a00;
-      text-align: right;
-    }
-
+    button:hover, #addCartBtn:hover { background: #004b91; }
+    .total { font-size: 1.1em; font-weight: bold; margin-top: 10px; text-align: right; }
     .back {
       display: inline-block;
       margin-top: 15px;
@@ -108,21 +122,6 @@
       font-weight: 600;
     }
     .back:hover { text-decoration: underline; }
-
-    .whatsapp-button {
-      display: block;
-      background: #25D366;
-      color: white;
-      text-align: center;
-      padding: 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 10px;
-      transition: background 0.3s;
-    }
-    .whatsapp-button:hover { background: #1ebe5d; }
-
     .thank-you {
       display: none;
       margin-top: 20px;
@@ -134,12 +133,21 @@
       text-align: center;
       font-weight: bold;
     }
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4em; }
+      .gallery img { width: 80%; }
+      .container { margin: 15px; padding: 15px; }
+    }
   </style>
 </head>
 <body>
-  <header id="headerLink">
-    <img src="LOGO1.jpg" alt="Logo Ouffstore">
-    <h1>Ouffstore</h1>
+  <header>
+    <a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
+    <h1 onclick="window.location.href='index.html'">Ouffstore</h1>
+    <div class="header-actions">
+      <a href="panier.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+      <a href="https://wa.me/2250703791959" class="whatsapp-button" target="_blank">WhatsApp</a>
+    </div>
   </header>
 
   <div class="container">
@@ -154,48 +162,36 @@
     </div>
 
     <p>
-     Le grand vélo d’appartement à résistance réglable avec une assise rembourrée est Conçu pour être super stable et silencieux, il est équipé d’un moniteur numérique multifonctionnel pour suivre vos progrès. Facile à déplacer et sécurisé, il est parfait pour une utilisation à domicile.
+      Le grand vélo d’appartement à résistance réglable avec une assise rembourrée est conçu pour être super stable et silencieux. Équipé d’un moniteur numérique multifonctionnel pour suivre vos progrès. Facile à déplacer et sécurisé, parfait pour une utilisation à domicile.
     </p>
 
-    <div class="price">Prix : <span id="prix-produit">240000</span> FCFA</div>
+    <div class="price">Prix : <span id="prix-produit">240 000</span> FCFA</div>
 
-    <!-- Formulaire de commande -->
     <form id="commandeForm">
-      <input type="hidden" name="_subject" value="Nouvelle commande Ouffstore">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      
       <input type="hidden" id="produitNom" name="Produit_Commandé" value="Grand Vélo d’Appartement">
-
       <label>Nom complet :</label>
       <input type="text" name="Nom" required>
-
       <label>Email :</label>
       <input type="email" name="Email" required>
-
       <label>Numéro de téléphone :</label>
       <input type="tel" name="Téléphone" placeholder="+2250703791959" required>
-
       <label>Adresse de livraison :</label>
       <textarea name="Adresse" rows="3" placeholder="Ex: Cocody, Abidjan" required></textarea>
-
       <label>Coût du produit (FCFA) :</label>
       <input type="number" id="prix" name="Prix_Produit" value="240000" readonly>
-
       <label>Frais de livraison (FCFA) :</label>
       <input type="number" id="livraison" name="Frais_Livraison" value="2000" readonly>
-
       <div class="total">Total : <span id="total">242000</span> FCFA</div>
-
       <button type="submit">📦 Valider la commande</button>
     </form>
+
+    <button id="addCartBtn">🛒 Ajouter au panier</button>
+
+    <a id="whatsappLink" href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
 
     <div class="thank-you" id="thankYouMessage">
       ✅ Merci, votre commande a bien été envoyée !
     </div>
-
-    <!-- Bouton WhatsApp -->
-    <a id="whatsappLink" href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
 
     <div>
       <a href="index.html" class="back">⬅ Retour à la boutique</a>
@@ -203,41 +199,40 @@
   </div>
 
   <script>
-    // Calcul automatique du total
-    const prix = document.getElementById('prix');
-    const livraison = document.getElementById('livraison');
+    const prixInput = document.getElementById('prix');
+    const livraisonInput = document.getElementById('livraison');
     const totalEl = document.getElementById('total');
-    const whatsappLink = document.getElementById('whatsappLink');
+    function updateTotal() {
+      totalEl.textContent = parseInt(prixInput.value) + parseInt(livraisonInput.value);
+    }
+    updateTotal();
+    [prixInput, livraisonInput].forEach(el => el.addEventListener('input', updateTotal));
+
     const produitNom = document.getElementById('produitNom').value;
-    const prixProduit = parseInt(prix.value);
-    const fraisLivraison = parseInt(livraison.value);
-    const total = prixProduit + fraisLivraison;
-    totalEl.textContent = total;
-
-    // Génère le lien WhatsApp automatiquement
     const numero = "2250703791959";
-    const message = `Je suis intéressé par le produit ${produitNom} au prix de ${prixProduit} FCFA (+${fraisLivraison} FCFA de livraison).`;
-    whatsappLink.href = `https://wa.me/${numero}?text=${encodeURIComponent(message)}`;
+    const whatsappLink = document.getElementById('whatsappLink');
+    function updateWhatsAppLink() {
+      const total = parseInt(prixInput.value) + parseInt(livraisonInput.value);
+      whatsappLink.href = `https://wa.me/${numero}?text=${encodeURIComponent(
+        `Je souhaite commander ${produitNom} pour un total de ${total} FCFA (produit : ${prixInput.value} + livraison : ${livraisonInput.value}).`
+      )}`;
+    }
+    updateWhatsAppLink();
 
-    // Soumission du formulaire sans rechargement
     const form = document.getElementById('commandeForm');
     const thankYouMessage = document.getElementById('thankYouMessage');
-
     form.addEventListener('submit', function(e) {
-      e.preventDefault(); // Empêche le rechargement de page
-
+      e.preventDefault();
       const formData = new FormData(form);
-
       fetch('https://formsubmit.co/ajax/ouff300@gmail.com', {
         method: 'POST',
         body: formData
       })
       .then(response => response.ok ? response.json() : Promise.reject(response))
       .then(data => {
-        // Affiche le message de remerciement sans cacher le formulaire
         thankYouMessage.style.display = 'block';
         thankYouMessage.scrollIntoView({ behavior: 'smooth' });
-        form.reset(); // Réinitialise le formulaire
+        form.reset();
       })
       .catch(err => {
         alert("Une erreur est survenue, veuillez réessayer.");
@@ -245,9 +240,42 @@
       });
     });
 
-    // Redirection vers la page principale si clic sur le header
-    document.getElementById('headerLink').addEventListener('click', function() {
-      window.location.href = 'index.html';
+    let panier = JSON.parse(localStorage.getItem('panier')) || [];
+    const cartCount = document.getElementById('cart-count');
+    function updateCartCount() { cartCount.textContent = panier.length || 0; }
+    document.addEventListener('DOMContentLoaded', updateCartCount);
+
+    const addCartBtn = document.getElementById('addCartBtn');
+    addCartBtn.addEventListener('click', () => {
+      panier.push({ nom: produitNom, prix: parseInt(prixInput.value) });
+      localStorage.setItem('panier', JSON.stringify(panier));
+      updateCartCount();
+
+      let t = document.getElementById('ouff-toast');
+      if(!t){
+        t = document.createElement('div');
+        t.id = 'ouff-toast';
+        t.style.position = 'fixed';
+        t.style.left = '50%';
+        t.style.bottom = '24px';
+        t.style.transform = 'translateX(-50%)';
+        t.style.background = '#002c5f';
+        t.style.color = '#fff';
+        t.style.padding = '10px 16px';
+        t.style.borderRadius = '8px';
+        t.style.zIndex = 99999;
+        t.style.opacity = '0';
+        t.style.transition = 'opacity .2s, transform .2s';
+        document.body.appendChild(t);
+      }
+      t.textContent = `${produitNom} ajouté au panier`;
+      t.style.opacity = '1';
+      t.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(t._t);
+      t._t = setTimeout(()=> {
+        t.style.opacity = '0';
+        t.style.transform = 'translateX(-50%) translateY(8px)';
+      }, 2000);
     });
   </script>
 </body>

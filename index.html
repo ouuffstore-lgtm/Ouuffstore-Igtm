@@ -22,31 +22,38 @@ body {
   background:var(--bg);
   color:var(--text);
   line-height:1.6;
+  padding-top:70px; /* espace pour header fixe */
 }
 
-/* HEADER */
+/* --- HEADER DYNAMIQUE --- */
 header {
   display:flex;
   align-items:center;
   justify-content:space-between;
   background:var(--blue);
-  padding:10px 20px;
+  padding:15px 20px;
   height:70px;
-  position:relative;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:999;
+  transition: all 0.3s ease, transform 0.3s ease;
 }
-header .logo img { height:50px; display:block; }
-header h1 {
-  margin:0;
-  color:var(--accent);
-  text-align:center;
-  flex-grow:1;
-  font-size:1.8em;
+header.shrink {
+  background:#001531;
+  padding:8px 20px;
+  height:60px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.12);
 }
-.header-actions {
-  display:flex;
-  gap:12px;
-  align-items:center;
+header.hidden {
+  transform: translateY(-100%);
 }
+header .logo img { height:50px; transition:height 0.3s ease;}
+header.shrink .logo img { height:40px;}
+header h1 { margin:0; color:var(--accent); text-align:center; flex-grow:1; font-size:1.8em; transition:font-size 0.3s ease;}
+header.shrink h1 { font-size:1.5em;}
+.header-actions { display:flex; gap:12px; align-items:center;}
 .whatsapp-button {
   background:var(--accent);
   color:white;
@@ -78,7 +85,7 @@ header h1 {
 @keyframes bounce { 0%,20%,50%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} 60%{transform:translateY(-3px)} }
 .cart-bounce { animation:bounce .6s; }
 
-/* SECTIONS */
+/* --- SECTIONS --- */
 section { max-width:1100px; margin:60px auto; padding:0 20px; }
 h2 { text-align:center; color:var(--blue); margin-bottom:18px; font-size:1.8em; }
 
@@ -209,18 +216,17 @@ footer { text-align:center; padding:26px 10px; background:var(--blue); color:var
   </div>
 </section>
 
-  <div data-animate>
-    <h2>🔥 Produits populaires</h2>
-    <div class="products">
-      <div class="card" data-nom="AB TOMIC" data-prix="40000">
-        <img src="AB 1.jpg" alt="AB TOMIC">
-        <h3>AB TOMIC</h3>
-        <div class="price">40 000 FCFA</div>
-        <a href="abtomic.html" class="button">Voir produit</a>
-      </div>
+<div data-animate>
+  <h2>🔥 Produits populaires</h2>
+  <div class="products">
+    <div class="card" data-nom="AB TOMIC" data-prix="40000">
+      <img src="AB 1.jpg" alt="AB TOMIC">
+      <h3>AB TOMIC</h3>
+      <div class="price">40 000 FCFA</div>
+      <a href="abtomic.html" class="button">Voir produit</a>
     </div>
   </div>
-</section>
+</div>
 
 <footer>
   © 2025 <strong>Ouffstore</strong> — Tous droits réservés<br>
@@ -237,48 +243,6 @@ function updateCartCount() {
   setTimeout(()=> el.parentElement.classList.remove('cart-bounce'),650);
 }
 document.addEventListener('DOMContentLoaded', updateCartCount);
-
-// --- Ajouter au panier ---
-document.querySelectorAll('.add-cart').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const nom = btn.dataset.nom;
-    const prix = Number(btn.dataset.prix);
-    panier.push({nom, prix});
-    localStorage.setItem('panier', JSON.stringify(panier));
-    updateCartCount();
-    showToast(`${nom} ajouté au panier`);
-  });
-});
-
-// --- Toast ---
-function showToast(text){
-  let t = document.getElementById('ouff-toast');
-  if(!t){
-    t = document.createElement('div');
-    t.id='ouff-toast';
-    t.style.position='fixed';
-    t.style.left='50%';
-    t.style.bottom='24px';
-    t.style.transform='translateX(-50%)';
-    t.style.background='var(--blue)';
-    t.style.color='#fff';
-    t.style.padding='10px 16px';
-    t.style.borderRadius='8px';
-    t.style.boxShadow='0 6px 20px rgba(0,0,0,0.18)';
-    t.style.zIndex=99999;
-    t.style.opacity='0';
-    t.style.transition='opacity .2s, transform .2s';
-    document.body.appendChild(t);
-  }
-  t.textContent = text;
-  t.style.opacity='1';
-  t.style.transform='translateX(-50%) translateY(0)';
-  clearTimeout(t._t);
-  t._t = setTimeout(()=>{
-    t.style.opacity='0';
-    t.style.transform='translateX(-50%) translateY(8px)';
-  },2000);
-}
 
 // --- Intersection Observer animation ---
 document.addEventListener('DOMContentLoaded', function(){
@@ -298,6 +262,24 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }, {threshold:0.08});
   animated.forEach(el=>observer.observe(el));
+});
+
+// --- Header dynamique scroll ---
+let lastScroll = 0;
+const header = document.querySelector('header');
+window.addEventListener('scroll', ()=>{
+  const currentScroll = window.scrollY;
+  if(currentScroll > 50){
+    header.classList.add('shrink');
+  } else {
+    header.classList.remove('shrink');
+  }
+  if(currentScroll > lastScroll && currentScroll > 100){
+    header.classList.add('hidden');
+  } else {
+    header.classList.remove('hidden');
+  }
+  lastScroll = currentScroll;
 });
 </script>
 

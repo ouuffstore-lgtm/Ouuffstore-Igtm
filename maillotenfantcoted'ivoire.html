@@ -3,307 +3,254 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Maillot Enfant | Ouffstore</title>
+<title>Maillot Enfant Côte d’Ivoire | Ouffstore</title>
 <style>
-:root {
-  --bg: #f5f7fa;
-  --blue: #002147;
-  --accent: #ff9500;
-  --accent-dark: #e07d00;
-  --card: #ffffff;
-  --text: #222;
-  --shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
 body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(180deg,#eef3f9 0%,#ffffff 100%);
+  color:#222;
 }
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--blue);
-  padding: 10px 20px;
-  height: 70px;
+  background:linear-gradient(90deg,#002c5f,#004b91);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 20px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.2);
 }
-header .logo img {
-  height: 45px;
-  flex-shrink: 0;
-}
+header img {height:50px; cursor:pointer;}
 header h1 {
-  margin: 0;
-  color: var(--accent);
-  font-size: 1.6em;
+  margin:0;
+  color:#ffb300;
+  flex-grow:1;
+  text-align:center;
+  font-size:1.6em;
+  cursor:pointer;
 }
-.header-actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
+.header-actions {display:flex; align-items:center; gap:12px;}
 .whatsapp-button {
-  background: var(--accent);
-  color: white;
-  padding: 8px 14px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
+  background:#25D366;
+  color:white;
+  padding:10px 16px;
+  border-radius:8px;
+  font-weight:bold;
+  text-decoration:none;
+  transition:background 0.3s;
 }
-.whatsapp-button:hover {
-  background: var(--accent-dark);
-}
-.cart-icon {
-  font-size: 20px;
-  color: var(--accent);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-#cart-count {
-  background: var(--accent);
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 11px;
-  font-weight: 700;
-}
+.whatsapp-button:hover {background:#1ebe5d;}
+.cart-icon {font-size:22px; color:#ffb300; display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-weight:bold; cursor:pointer;}
+#cart-count {background:#ffb300;color:white;border-radius:50%;padding:2px 6px;font-size:12px;font-weight:700;line-height:1;}
 .container {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 0 15px;
+  max-width:850px;
+  margin:20px auto;
+  background:white;
+  border-radius:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.15);
+  padding:20px;
 }
-.main-image {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-}
+.container h2 {text-align:center; color:#002c5f; margin-top:0;}
+.main-image {width:100%; border-radius:10px; margin-bottom:15px;}
 .gallery {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
+  display:flex;
+  overflow-x:auto;
+  gap:10px;
+  padding-bottom:5px;
 }
 .gallery img {
-  width: 65px;
-  height: 65px;
-  object-fit: cover;
-  border-radius: 8px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: .2s;
+  width:80px;
+  height:80px;
+  object-fit:cover;
+  border-radius:8px;
+  border:2px solid #ccc;
+  cursor:pointer;
+  transition:transform .2s, border .2s;
 }
-.gallery img.selected {
-  border-color: var(--accent);
+.gallery img.selected {border:3px solid #ffb300; transform:scale(1.1);}
+.color-buttons {
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin:10px 0;
 }
-.description {
-  margin-top: 15px;
-  background: var(--card);
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
+.color-buttons button {
+  width:40px; height:40px; border-radius:50%; border:2px solid #ccc; cursor:pointer;
+  transition: transform .2s, border .2s;
 }
+.color-buttons button.active {border:3px solid #ffb300; transform:scale(1.3);}
+.color-buttons button:hover {transform:scale(1.2); border-color:#002c5f;}
+.description p {margin:6px 0;}
 form {
-  margin-top: 20px;
-  background: var(--card);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
+  background:#f1f3f6;
+  padding:20px;
+  border-radius:10px;
+  margin-top:20px;
 }
-form label {
-  display: block;
-  margin: 8px 0 4px;
-  font-weight: 500;
+form label {display:block; font-weight:600; margin:10px 0 5px;}
+form input, form textarea, form select {
+  width:100%; padding:10px; border:1px solid #ccc; border-radius:8px; font-size:1em;
 }
-form input, form select {
-  width: 100%;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
+button, #addCartBtn {background:#002c5f; color:white; border:none; padding:12px 18px; border-radius:8px; cursor:pointer; margin-top:15px; width:100%; transition:background .3s;}
+button:hover, #addCartBtn:hover {background:#004b91;}
+.total {font-size:1.1em; font-weight:bold; margin-top:10px; text-align:right;}
+.thank-you {
+  display:none;
+  margin-top:20px;
+  padding:15px;
+  background:#d4edda;
+  color:#155724;
+  border:1px solid #c3e6cb;
+  border-radius:8px;
+  text-align:center;
+  font-weight:bold;
 }
-button {
-  background: var(--accent);
-  color: white;
-  padding: 10px 14px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: .2s;
-}
-button:hover {
-  background: var(--accent-dark);
-}
-.buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.total {
-  font-weight: 700;
-  color: var(--blue);
-  margin-top: 10px;
-  text-align: right;
-  font-size: 1em;
-}
-#confirmation {
-  color: green;
-  margin-top: 12px;
-  text-align: center;
-  font-size: 0.95em;
-}
-@media screen and (max-width:600px) {
-  header {flex-wrap: wrap; gap: 8px;}
-  header h1 {font-size: 1.4em;}
-  .gallery img {width: 55px; height: 55px;}
+@media(max-width:600px){
+  .gallery img{width:60px; height:60px;}
+  .color-buttons button{width:35px; height:35px;}
+  .container{margin:10px; padding:15px;}
+  header h1{font-size:1.4em;}
 }
 </style>
 </head>
 <body>
-
 <header>
-  <div class="logo"><a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a></div>
-  <h1>Ouffstore</h1>
-  <div class="header-actions">
-    <a href="panier.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
-    <a href="https://wa.me/2250703791959" class="whatsapp-button" target="_blank">WhatsApp</a>
-  </div>
+<a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
+<h1 onclick="window.location.href='index.html'">Ouffstore</h1>
+<div class="header-actions">
+<a href="panier.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+<a href="https://wa.me/2250703791959" class="whatsapp-button" target="_blank">WhatsApp</a>
+</div>
 </header>
 
 <div class="container">
-  <h2 style="text-align:center;"> Côte d'Ivoire</h2>
-  <img src="images/Maillot Enfant/CI ORANGE.jpg" class="main-image" id="main-image" alt="cote d'ivoire">
+<h2>Côte d'Ivoire</h2>
+<img src="images/Maillot Enfant/CI ORANGE.jpg" class="main-image" id="main-image" alt="Côte d'Ivoire">
 
-  <div class="gallery">
-    <img src="images/Maillot Enfant/CI ORANGE.jpg" alt="Orange" data-color="Orange" class="selected">
-    <img src="images/Maillot Enfant/CI BLANC.jpg" alt="Blanc" data-color="Blanc">
-  </div>
+<div class="gallery">
+<img src="images/Maillot Enfant/CI ORANGE.jpg" alt="Orange" data-color="Orange" class="selected">
+<img src="images/Maillot Enfant/CI BLANC.jpg" alt="Blanc" data-color="Blanc">
+</div>
 
-  <div class="description">
-    <p><strong>Description :</strong> Maillot + Short Enfant - Équipe Nationale de Côte d'Ivoire 🇨🇮.<br>
-    Disponible en plusieurs tailles de 2 à 13 ans. Tissu respirant et confortable.</p>
-    <p><strong>Prix :</strong> 10 000 FCFA<br><strong>Livraison :</strong> 1 500 FCFA (fixe)</p>
-  </div>
+<div class="color-buttons">
+<button type="button" data-color="Orange" style="background:orange;"></button>
+<button type="button" data-color="Blanc" style="background:white; border:2px solid #ccc;"></button>
+</div>
 
-  <form id="orderForm" action="https://formsubmit.co/ouffstore@gmail.com" method="POST">
-    <label>Nom complet</label>
-    <input type="text" name="nom" required>
+<div class="description">
+<p><strong>Description :</strong> Maillot + Short Enfant - Équipe Nationale de Côte d'Ivoire 🇨🇮.<br>Disponible en plusieurs tailles de 2 à 13 ans. Tissu respirant et confortable.</p>
+<p><strong>Prix :</strong> 10 000 FCFA<br><strong>Livraison :</strong> 1 500 FCFA (fixe)</p>
+</div>
 
-    <label>Numéro de téléphone</label>
-    <input type="tel" name="telephone" required>
+<form id="commandeForm">
+<input type="hidden" id="produitNom" name="Produit_Commandé" value="Maillot Enfant Côte d’Ivoire">
+<label>Nom complet :</label><input type="text" name="Nom" required>
+<label>Email :</label><input type="email" name="Email" required>
+<label>Numéro de téléphone :</label><input type="tel" name="Téléphone" placeholder="+2250703791959" required>
+<label>Adresse de livraison :</label><textarea name="Adresse" rows="3" placeholder="Ex: Cocody, Abidjan" required></textarea>
 
-    <label>Adresse de livraison</label>
-    <input type="text" name="adresse" required>
+<label>Âge :</label>
+<select name="Âge" required>
+<option value="">Sélectionnez un âge</option>
+<script>for(let i=2;i<=13;i++){document.write(`<option value="${i} ans">${i} ans</option>`);}</script>
+</select>
 
-    <label>Couleur</label>
-    <select name="couleur" id="couleur">
-      <option value="Orange">Orange</option>
-      <option value="Blanc">Blanc</option>
-    </select>
+<label>Couleur :</label>
+<select id="couleurSelect" name="Couleur" required>
+<option value="">Sélectionnez une couleur</option>
+<option value="Orange">Orange</option>
+<option value="Blanc">Blanc</option>
+</select>
 
-    <label>Âge</label>
-    <select name="age">
-      <option value="2 ans">2 ans</option>
-      <option value="3 ans">3 ans</option>
-      <option value="4 ans">4 ans</option>
-      <option value="5 ans">5 ans</option>
-      <option value="6 ans">6 ans</option>
-      <option value="7 ans">7 ans</option>
-      <option value="8 ans">8 ans</option>
-      <option value="9 ans">9 ans</option>
-      <option value="10 ans">10 ans</option>
-      <option value="11 ans">11 ans</option>
-      <option value="12 ans">12 ans</option>
-      <option value="13 ans">13 ans</option>
-    </select>
+<label>Prix du produit (FCFA) :</label><input type="number" id="prix" name="Prix_Produit" value="10000" readonly>
+<label>Frais de livraison (FCFA) :</label><input type="number" id="livraison" name="Frais_Livraison" value="1500" readonly>
+<div class="total">Total : <span id="total">11500</span> FCFA</div>
 
-    <label>Quantité</label>
-    <input type="number" name="quantite" value="1" min="1" required>
+<button type="submit">📦 Valider la commande</button>
+</form>
 
-    <div class="total" id="total">Total : 11 500 FCFA</div>
+<button id="addCartBtn">🛒 Ajouter au panier</button>
+<a id="whatsappLink" href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
 
-    <div class="buttons">
-      <button type="button" id="addToCart">🛒 Ajouter au panier</button>
-      <button type="submit">Commander maintenant</button>
-    </div>
-
-    <div id="confirmation"></div>
-  </form>
+<div class="thank-you" id="thankYouMessage">✅ Merci, votre commande a bien été envoyée !</div>
 </div>
 
 <script>
-const price = 10000;
-const livraison = 1500;
-const totalEl = document.getElementById('total');
-const quantityEl = document.querySelector('input[name="quantite"]');
-const cartCountEl = document.getElementById('cart-count');
-const mainImage = document.getElementById('main-image');
-const gallery = document.querySelectorAll('.gallery img');
-const selectColor = document.getElementById('couleur');
+const mainImage=document.getElementById('main-image');
+const galleryImages=document.querySelectorAll('.gallery img');
+const colorButtons=document.querySelectorAll('.color-buttons button');
+const couleurSelect=document.getElementById('couleurSelect');
+const prixInput=document.getElementById('prix');
+const livraisonInput=document.getElementById('livraison');
+const totalEl=document.getElementById('total');
+const produitNom=document.getElementById('produitNom').value;
+const numero="2250703791959";
+const whatsappLink=document.getElementById('whatsappLink');
 
-gallery.forEach(img=>{
-  img.addEventListener('click', ()=>{
-    gallery.forEach(i=>i.classList.remove('selected'));
-    img.classList.add('selected');
-    mainImage.src = img.src;
-    selectColor.value = img.dataset.color;
-  });
-});
-
-function updateTotal(){
-  const total = (price * Number(quantityEl.value)) + livraison;
-  totalEl.textContent = 'Total : ' + total.toLocaleString() + ' FCFA';
-}
-quantityEl.addEventListener('input', updateTotal);
+function updateTotal(){totalEl.textContent=parseInt(prixInput.value)+parseInt(livraisonInput.value);}
 updateTotal();
 
-// Ajouter au panier
-document.getElementById('addToCart').addEventListener('click', ()=>{
-  const product = {
-    nom: "Maillot + Short | Côte d'Ivoire",
-    couleur: selectColor.value,
-    age: document.querySelector('select[name="age"]').value,
-    quantite: Number(quantityEl.value),
-    prix: price,
-    livraison: livraison,
-    image: mainImage.src
-  };
+function updateWhatsAppLink(){
+const total=parseInt(prixInput.value)+parseInt(livraisonInput.value);
+const couleur=couleurSelect.value||"non précisée";
+whatsappLink.href=`https://wa.me/${numero}?text=${encodeURIComponent(
+`Je souhaite commander ${produitNom} (${couleur}) pour un total de ${total} FCFA (produit : ${prixInput.value} + livraison : ${livraisonInput.value}).`
+)}`;
+}
+updateWhatsAppLink();
 
-  let panier = JSON.parse(localStorage.getItem('panier')) || [];
-  panier.push(product);
-  localStorage.setItem('panier', JSON.stringify(panier));
-  updateCartCount();
-  alert("✅ Produit ajouté au panier !");
+function selectColor(couleur){
+mainImage.src=`images/Maillot Enfant/CI ${couleur.toUpperCase()}.jpg`;
+galleryImages.forEach(img=>{img.classList.toggle('selected',img.dataset.color===couleur)});
+colorButtons.forEach(btn=>{btn.classList.toggle('active',btn.dataset.color===couleur)});
+couleurSelect.value=couleur;
+updateWhatsAppLink();
+}
+
+colorButtons.forEach(btn=>{btn.addEventListener('click',()=>selectColor(btn.dataset.color))});
+couleurSelect.addEventListener('change',()=>{if(couleurSelect.value) selectColor(couleurSelect.value)});
+galleryImages.forEach(img=>{img.addEventListener('click',()=>selectColor(img.dataset.color))});
+
+const form=document.getElementById('commandeForm');
+const thankYouMessage=document.getElementById('thankYouMessage');
+form.addEventListener('submit',function(e){
+e.preventDefault();
+const formData=new FormData(form);
+fetch('https://formsubmit.co/ajax/ouff300@gmail.com',{method:'POST',body:formData})
+.then(response=>response.ok?response.json():Promise.reject(response))
+.then(data=>{thankYouMessage.style.display='block';thankYouMessage.scrollIntoView({behavior:'smooth'});form.reset();updateTotal();})
+.catch(err=>{alert("Une erreur est survenue, veuillez réessayer.");console.error(err);});
+
 });
 
-function updateCartCount(){
-  const panier = JSON.parse(localStorage.getItem('panier')) || [];
-  cartCountEl.textContent = panier.length;
-}
-updateCartCount();
+let panier=JSON.parse(localStorage.getItem('panier'))||[];
+const cartCount=document.getElementById('cart-count');
+function updateCartCount(){cartCount.textContent=panier.length||0;}
+document.addEventListener('DOMContentLoaded',updateCartCount);
 
-// Envoi du formulaire FormSubmit
-const form = document.getElementById('orderForm');
-form.addEventListener('submit', function(e){
-  e.preventDefault();
-  fetch(form.action, {
-    method:'POST',
-    body:new FormData(form),
-    headers:{'Accept':'application/json'}
-  }).then(response=>{
-    if(response.ok){
-      document.getElementById('confirmation').textContent="Merci ! Votre commande a été envoyée.";
-      form.reset();
-      updateTotal();
-    } else {
-      document.getElementById('confirmation').textContent="Erreur, veuillez réessayer.";
-    }
-  });
+const addCartBtn=document.getElementById('addCartBtn');
+addCartBtn.addEventListener('click',()=>{
+panier.push({nom:produitNom,prix:parseInt(prixInput.value)});
+localStorage.setItem('panier',JSON.stringify(panier));
+updateCartCount();
+let t=document.getElementById('ouff-toast');
+if(!t){t=document.createElement('div');t.id='ouff-toast';
+t.style.position='fixed';t.style.left='50%';t.style.bottom='24px';
+t.style.transform='translateX(-50%)';
+t.style.background='#002c5f';
+t.style.color='#fff';
+t.style.padding='10px 16px';
+t.style.borderRadius='8px';
+t.style.zIndex=99999;
+t.style.opacity='0';
+t.style.transition='opacity .2s, transform .2s';
+document.body.appendChild(t);}
+t.textContent=`${produitNom} ajouté au panier`;
+t.style.opacity='1';
+t.style.transform='translateX(-50%) translateY(0)';
+clearTimeout(t._t);
+t._t=setTimeout(()=>{t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(8px)';},2000);
 });
 </script>
-
 </body>
 </html>

@@ -14,17 +14,14 @@
   --muted:#d8e0ff;
   --text:#222;
 }
-
 *{box-sizing:border-box;}
 body {
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  font-family: 'Poppins','Segoe UI',sans-serif;
   margin:0;
   background:var(--bg);
   color:var(--text);
   line-height:1.6;
 }
-
-/* HEADER */
 header {
   display:flex;
   align-items:center;
@@ -32,7 +29,6 @@ header {
   background:var(--blue);
   padding:10px 20px;
   height:70px;
-  position:relative;
 }
 header .logo img { height:50px; display:block; }
 header h1 {
@@ -42,11 +38,7 @@ header h1 {
   flex-grow:1;
   font-size:1.8em;
 }
-.header-actions {
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
+.header-actions { display:flex; gap:12px; align-items:center; }
 .whatsapp-button {
   background:var(--accent);
   color:white;
@@ -75,96 +67,36 @@ header h1 {
   line-height:1;
   position:relative;
 }
-@keyframes bounce { 0%,20%,50%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} 60%{transform:translateY(-3px)} }
-.cart-bounce { animation:bounce .6s; }
-
-/* SECTIONS */
 section { max-width:1100px; margin:60px auto; padding:0 20px; }
 h2 { text-align:center; color:var(--blue); margin-bottom:18px; font-size:1.8em; }
-
-/* CATALOGUES */
-.categorie {
-  background:var(--card);
-  border-radius:15px;
-  box-shadow:0 3px 10px rgba(0,0,0,0.06);
-  padding:18px;
-  margin-bottom:30px;
-  opacity:0;
-  transform:translateY(10px);
-  transition:opacity .45s ease, transform .45s ease;
+.categorie { margin-bottom:40px; }
+.carousel-wrapper { position:relative; overflow:hidden; }
+.produits { display:flex; gap:18px; overflow-x:auto; scroll-behavior:smooth; padding-bottom:8px; }
+.produit { flex:0 0 auto; width:230px; background:var(--card); border-radius:12px; text-align:center; padding:10px; box-shadow:0 4px 12px rgba(0,0,0,0.06); transition:transform 0.3s ease; }
+.produit:hover { transform:translateY(-6px); }
+.produit img { width:100%; border-radius:10px; margin-bottom:10px; }
+.produit h3 { margin:6px 0; font-size:1.05em; color:var(--blue); }
+.produit .price { font-weight:700; color:var(--accent); margin:6px 0; }
+.produit .button { display:block; width:90%; margin:0 auto; padding:8px 12px; border-radius:8px; background:var(--accent); color:white; text-decoration:none; font-weight:600; text-align:center; }
+.produit .button:hover { background:var(--accent-dark); }
+.carousel-btn { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); color:white; border:none; font-size:24px; width:36px; height:36px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:5; transition:background 0.2s ease, transform 0.2s ease; }
+.carousel-btn:hover { background:var(--accent); transform:scale(1.2); }
+.carousel-btn.prev { left:8px; }
+.carousel-btn.next { right:8px; }
+.carousel-indicators { text-align:center; margin-top:10px; }
+.carousel-indicators span { display:inline-block; width:10px; height:10px; border-radius:50%; background:rgba(0,0,0,0.2); margin:0 4px; cursor:pointer; transition:background 0.2s ease; }
+.carousel-indicators span.active { background:var(--accent); }
+@media screen and (max-width:900px){ .produit { width:200px; } }
+@media screen and (max-width:600px){ header { flex-direction:row; height:50px; padding:8px 12px; }
+header .logo img { height:30px; }
+header h1 { font-size:1.3em; flex-grow:1; text-align:center; margin:0; }
+.header-actions { gap:6px; }
+.cart-icon { font-size:16px; padding:3px 4px; }
+#cart-count { font-size:10px; padding:1px 3px; }
+.whatsapp-button { padding:5px 10px; font-size:0.75em; }
+.produit { width:60%; }
 }
-.categorie.is-visible { opacity:1; transform:none; }
-.produits {
-  display:flex;
-  gap:18px;
-  overflow-x:auto;
-  padding-bottom:8px;
-  -webkit-overflow-scrolling:touch;
-}
-.produit {
-  flex:0 0 auto;
-  width:230px;
-  text-align:center;
-  transition: transform .28s ease, box-shadow .28s ease, opacity .35s ease;
-  border-radius:12px;
-  background:transparent;
-  opacity:0;
-  transform:translateY(8px);
-}
-.produit.is-visible { opacity:1; transform:none; }
-.produit:hover { transform:translateY(-6px);}
-.produit img { width:100%; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.06);}
-.produit h3 { margin-top:10px; font-size:1.05em; color:var(--blue);}
-.produit p, .produit .price { font-weight:700; color:var(--accent); margin:6px 0; }
-.categorie .button {
-  display:block;
-  width:max-content;
-  margin:14px auto 0;
-  padding:10px 18px;
-  border-radius:10px;
-  background:var(--accent);
-  color:white;
-  text-decoration:none;
-  font-weight:600;
-}
-.categorie .button:hover { background:var(--accent-dark); }
-
-/* PRODUITS POPULAIRES */
-.products { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:20px; margin-top:12px;}
-.card {
-  background:var(--card);
-  border-radius:12px;
-  padding:14px;
-  text-align:center;
-  box-shadow:0 4px 18px rgba(0,0,0,0.06);
-  opacity:0;
-  transform:translateY(8px);
-  transition:transform .25s ease, box-shadow .25s ease, opacity .35s ease;
-}
-.card.is-visible { opacity:1; transform:none;}
-.card:hover { transform:translateY(-8px); box-shadow:0 14px 30px rgba(0,0,0,0.09);}
-.card img { width:100%; border-radius:10px; margin-bottom:10px;}
-.price { font-weight:700; color:var(--accent); margin:8px 0; }
-
-/* FOOTER */
-footer { text-align:center; padding:26px 10px; background:var(--blue); color:var(--muted); margin-top:36px;}
-
-/* --- RESPONSIVE --- */
-@media screen and (max-width:900px){
-  .produit { width:200px; }
-  section { margin:30px auto; }
-}
-@media screen and (max-width:600px){
-  header { flex-direction:row; height:50px; padding:8px 12px; }
-  header .logo img { height:30px; }
-  header h1 { font-size:1.3em; flex-grow:1; text-align:center; margin:0; }
-  .header-actions { gap:6px; }
-  .cart-icon { font-size:16px; padding:3px 4px; }
-  #cart-count { font-size:10px; padding:1px 3px; }
-  .whatsapp-button { padding:5px 10px; font-size:0.75em; }
-  .produit { width:46%; }
-  .produits { gap:12px; }
-}
+footer { text-align:center; padding:26px 10px; background:var(--blue); color:var(--muted); margin-top:36px; }
 </style>
 </head>
 <body>
@@ -179,96 +111,38 @@ footer { text-align:center; padding:26px 10px; background:var(--blue); color:var
 </header>
 
 <section>
-  <div class="categorie" data-animate>
+  <div class="categorie">
     <h2>🏋️ Appareils de sport</h2>
-    <div class="produits">
-      <!-- Produit 1 -->
-      <div class="produit">
-        <img src="AB 1.jpg" alt="AB TOMIC">
-        <h3>AB TOMIC</h3>
-        <div class="price">40 000 FCFA</div>
-        <a href="abtomic.html" class="button">Voir produit</a>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev">&#10094;</button>
+      <div class="produits">
+        <div class="produit"><img src="AB 1.jpg" alt="AB TOMIC"><h3>AB TOMIC</h3><div class="price">40 000 FCFA</div><a href="abtomic.html" class="button">Voir produit</a></div>
+        <div class="produit"><img src="images/Appareil de Musculation Multi-Stations1.jpg" alt="Appareil Multi-Stations"><h3>Appareil Multi-Stations</h3><div class="price">1 000 000 FCFA</div><a href="Appareil de Musculation Multi-Stations.html" class="button">Voir produit</a></div>
+        <div class="produit"><img src="images/VP/VP1.webp" alt="Vélo d’appartement pliable"><h3>Vélo d’appartement pliable</h3><div class="price">130 000 FCFA</div><a href="Vélo d’appartement pliable.html" class="button">Voir produit</a></div>
+        <div class="produit"><img src="images/TP/TP1.webp" alt="Tapis de course pliable portative"><h3>Tapis de course pliable portative</h3><div class="price">195 000 FCFA</div><a href="Tapis de course pliable portative.html" class="button">Voir produit</a></div>
       </div>
-
-      <!-- Produit 2 -->
-      <div class="produit">
-        <img src="images/Appareil de Musculation Multi-Stations1.jpg" alt="Appareil Multi-Stations">
-        <h3>Appareil Multi-Stations</h3>
-        <div class="price">1 000 000 FCFA</div>
-        <a href="Appareil de Musculation Multi-Stations.html" class="button">Voir produit</a>
-      </div>
-
-      <!-- Produit 3 -->
-      <div class="produit">
-        <img src="images/VP/VP1.webp" alt="Vélo d’appartement pliable">
-        <h3>Vélo d’appartement pliable</h3>
-        <div class="price">130 000 FCFA</div>
-        <a href="Vélo d’appartement pliable.html" class="button">Voir produit</a>
-      </div>
-
-      <!-- Produit 4 -->
-      <div class="produit">
-        <img src="images/TP/TP1.webp" alt="Tapis de course pliable portative"> 
-        <h3>Tapis de course pliable portative</h3> 
-        <div class="price">195 000 FCFA</div>
-        <a href="Tapis de course pliable portative.html" class="button">Voir produit</a> 
-      </div>
+      <button class="carousel-btn next">&#10095;</button>
+      <div class="carousel-indicators"></div>
     </div>
-
     <a href="Appareils de sport.html" class="button">Voir plus</a>
   </div>
-    <section>
-  <div class="categorie" data-animate>
+
+  <div class="categorie">
     <h2>👕 Maillot Enfant</h2>
-    <div class="produits">
-      <!-- Produit 1 -->
-      <div class="produit">
-        <img src="images/Maillot Enfant/CI ORANGE.jpg" alt="cote d'ivoire ">
-        <h3>cote d'ivoire </h3>
-        <div class="price">10 000 FCFA</div>
-        <a href="maillotenfantcoted'ivoire.html" class="button">Voir produit</a>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev">&#10094;</button>
+      <div class="produits">
+        <div class="produit"><img src="images/Maillot Enfant/CI ORANGE.jpg" alt="Cote d'Ivoire"><h3>Cote d'Ivoire</h3><div class="price">10 000 FCFA</div><a href="maillotenfantcoted'ivoire.html" class="button">Voir produit</a></div>
+        <div class="produit"><img src="images/Maillot Enfant/BARCA.jpg" alt="Barca"><h3>Barca</h3><div class="price">10 000 FCFA</div><a href="barca.html" class="button">Voir produit</a></div>
+        <div class="produit"><img src="images/Maillot Enfant/REAL.jpg" alt="Real"><h3>Real</h3><div class="price">10 000 FCFA</div><a href="real.html" class="button">Voir produit</a></div>
+        <div class="produit"><img src="images/Maillot Enfant/PSG.jpg" alt="PSG"><h3>PSG</h3><div class="price">10 000 FCFA</div><a href="psg.html" class="button">Voir produit</a></div>
       </div>
-
-     <!-- Produit 2 -->
-      <div class="produit">
-        <img src="images/Maillot Enfant/BARCA.jpg" alt="Barca">
-        <h3>Barca</h3>
-        <div class="price">10 000 FCFA</div>
-        <a href="barca.html" class="button">Voir produit</a>
-      </div>
-      
-      <!-- Produit 3 -->
-      <div class="produit">
-        <img src="images/Maillot Enfant/REAL.jpg" alt="Real">
-        <h3>Real</h3>
-        <div class="price">10 000 FCFA</div>
-        <a href="real.html" class="button">Voir produit</a>
-      </div>
-
-      <!-- Produit 4 -->
-      <div class="produit">
-        <img src="images/Maillot Enfant/PSG.jpg" alt="PSG ">
-        <h3>PSG </h3>
-        <div class="price">10 000 FCFA</div>
-        <a href="psg.html" class="button">Voir produit</a>
-      </div>
+      <button class="carousel-btn next">&#10095;</button>
+      <div class="carousel-indicators"></div>
     </div>
-
     <a href="maillotenfant.html" class="button">Voir plus</a>
   </div>
 </section>
-
-<div data-animate>
-  <h2>🔥 Produits populaires</h2>
-  <div class="products">
-    <div class="card" data-nom="AB TOMIC" data-prix="40000">
-      <img src="AB 1.jpg" alt="AB TOMIC">
-      <h3>AB TOMIC</h3>
-      <div class="price">40 000 FCFA</div>
-      <a href="abtomic.html" class="button">Voir produit</a>
-    </div>
-  </div>
-</div>
 
 <footer>
   © 2025 <strong>Ouffstore</strong> — Tous droits réservés<br>
@@ -276,66 +150,56 @@ footer { text-align:center; padding:26px 10px; background:var(--blue); color:var
 </footer>
 
 <script>
-// --- Panier ---
+// Panier
 let panier = JSON.parse(localStorage.getItem('panier')) || [];
-function updateCartCount() {
+function updateCartCount(){
   const el = document.getElementById('cart-count');
   el.textContent = panier.length || 0;
-  el.parentElement.classList.add('cart-bounce');
-  setTimeout(()=> el.parentElement.classList.remove('cart-bounce'),650);
 }
 document.addEventListener('DOMContentLoaded', updateCartCount);
 
-// --- Toast ---
-function showToast(text){
-  let t = document.getElementById('ouff-toast');
-  if(!t){
-    t = document.createElement('div');
-    t.id='ouff-toast';
-    t.style.position='fixed';
-    t.style.left='50%';
-    t.style.bottom='24px';
-    t.style.transform='translateX(-50%)';
-    t.style.background='var(--blue)';
-    t.style.color='#fff';
-    t.style.padding='10px 16px';
-    t.style.borderRadius='8px';
-    t.style.boxShadow='0 6px 20px rgba(0,0,0,0.18)';
-    t.style.zIndex=99999;
-    t.style.opacity='0';
-    t.style.transition='opacity .2s, transform .2s';
-    document.body.appendChild(t);
-  }
-  t.textContent = text;
-  t.style.opacity='1';
-  t.style.transform='translateX(-50%) translateY(0)';
-  clearTimeout(t._t);
-  t._t = setTimeout(()=>{
-    t.style.opacity='0';
-    t.style.transform='translateX(-50%) translateY(8px)';
-  },2000);
-}
+// Carrousel avec indicateurs et auto-scroll
+document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+  const prev = wrapper.querySelector('.prev');
+  const next = wrapper.querySelector('.next');
+  const container = wrapper.querySelector('.produits');
+  const indicatorsContainer = wrapper.querySelector('.carousel-indicators');
+  const items = wrapper.querySelectorAll('.produit');
+  const scrollAmount = 250;
 
-// --- Intersection Observer animation ---
-document.addEventListener('DOMContentLoaded', function(){
-  const animated = Array.from(document.querySelectorAll('[data-animate]'));
-  const observer = new IntersectionObserver((entries, obs)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('is-visible');
-        const children = entry.target.querySelectorAll('.produit, .card');
-        children.forEach((ch,i)=>{
-          ch.style.transition='opacity .45s ease, transform .45s ease';
-          ch.style.transitionDelay=(i*60)+'ms';
-          ch.classList.add('is-visible');
-        });
-        obs.unobserve(entry.target);
-      }
+  // Création des indicateurs
+  items.forEach((_, i) => {
+    const dot = document.createElement('span');
+    if(i===0) dot.classList.add('active');
+    dot.addEventListener('click', ()=>{
+      container.scrollLeft = i * scrollAmount;
+      updateIndicators(i);
     });
-  }, {threshold:0.08});
-  animated.forEach(el=>observer.observe(el));
+    indicatorsContainer.appendChild(dot);
+  });
+
+  function updateIndicators(activeIndex){
+    indicatorsContainer.querySelectorAll('span').forEach((s, i)=>{
+      s.classList.toggle('active', i === activeIndex);
+    });
+  }
+
+  prev.addEventListener('click', ()=>{
+    container.scrollBy({left:-scrollAmount, behavior:'smooth'});
+  });
+  next.addEventListener('click', ()=>{
+    container.scrollBy({left:scrollAmount, behavior:'smooth'});
+  });
+
+  // Auto-scroll
+  let currentIndex = 0;
+  setInterval(()=>{
+    currentIndex++;
+    if(currentIndex >= items.length) currentIndex=0;
+    container.scrollTo({left:currentIndex*scrollAmount, behavior:'smooth'});
+    updateIndicators(currentIndex);
+  }, 3000);
 });
 </script>
-
 </body>
 </html>

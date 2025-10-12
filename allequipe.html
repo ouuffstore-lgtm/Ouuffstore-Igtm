@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maillots Enfant | Ouffstore</title>
+<style>
+body {margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(180deg,#eef3f9 0%,#ffffff 100%);color:#222;}
+header {background:linear-gradient(90deg,#002c5f,#004b91);color:white;display:flex;align-items:center;justify-content:space-between;padding:10px 20px;box-shadow:0 2px 6px rgba(0,0,0,0.2);}
+header img {height:50px;cursor:pointer;}
+header h1 {margin:0;color:#ffb300;flex-grow:1;text-align:center;font-size:1.6em;cursor:pointer;}
+.header-actions {display:flex;align-items:center;gap:12px;}
+.whatsapp-button {background:#25D366;color:white;padding:10px 16px;border-radius:8px;font-weight:bold;text-decoration:none;transition:background 0.3s;}
+.whatsapp-button:hover {background:#1ebe5d;}
+.cart-icon {font-size:22px;color:#ffb300;display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:bold;cursor:pointer;}
+#cart-count {background:#ffb300;color:white;border-radius:50%;padding:2px 6px;font-size:12px;font-weight:700;line-height:1;}
+.filters {display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:20px;}
+.filters select {padding:8px;border-radius:8px;border:1px solid #ccc;}
+.container {max-width:850px;margin:20px auto;background:white;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,0.15);padding:20px;overflow:hidden;}
+.container h2 {text-align:center;color:#002c5f;margin-top:0;font-size:1.5em;}
+.main-image {width:100%;border-radius:10px;margin-bottom:15px;object-fit:cover;}
+.gallery {display:flex;justify-content:flex-start;gap:10px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:5px;}
+.gallery img {width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid #ccc;cursor:pointer;transition:transform .2s,border .2s;flex-shrink:0;}
+.gallery img.selected {border:3px solid #ffb300;transform:scale(1.1);}
+.color-buttons {display:flex;gap:10px;justify-content:center;margin:15px 0 10px;flex-wrap:wrap;}
+.color-buttons button {width:40px;height:40px;border-radius:50%;border:2px solid #ccc;cursor:pointer;transition:transform .2s,border .2s;}
+.color-buttons button.active {border:3px solid #ffb300;transform:scale(1.3);}
+.color-buttons button:hover {transform:scale(1.2);border-color:#002c5f;}
+.description p {margin:6px 0;font-size:0.95em;}
+form {background:#f1f3f6;padding:20px;border-radius:10px;margin-top:20px;}
+form label {display:block;font-weight:600;margin:10px 0 5px;}
+form input, form textarea, form select {width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:1em;box-sizing:border-box;}
+button, .addCartBtn {background:#002c5f;color:white;border:none;padding:12px 18px;border-radius:8px;cursor:pointer;margin-top:15px;width:100%;transition:background .3s;}
+button:hover, .addCartBtn:hover {background:#004b91;}
+.total {font-size:1.1em;font-weight:bold;margin-top:10px;text-align:right;}
+.thank-you {display:none;margin-top:20px;padding:15px;background:#d4edda;color:#155724;border:1px solid #c3e6cb;border-radius:8px;text-align:center;font-weight:bold;}
+hr {margin:40px 0;border:0;border-top:2px solid #eee;}
+/* Mobile Responsive */
+@media(max-width:768px){
+  .gallery img{width:70px;height:70px;}
+  .color-buttons button{width:35px;height:35px;}
+  .container{margin:10px;padding:15px;}
+  header h1{font-size:1.4em;}
+  .description p{font-size:0.9em;}
+  button, .addCartBtn{padding:10px;}
+}
+@media(max-width:480px){
+  .gallery img{width:60px;height:60px;}
+  .color-buttons button{width:30px;height:30px;}
+  .container h2{font-size:1.3em;}
+}
+</style>
+</head>
+<body>
+<header>
+<a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
+<h1 onclick="window.location.href='index.html'">Ouffstore</h1>
+<div class="header-actions">
+<a href="panier.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+<a href="https://wa.me/2250703791959" class="whatsapp-button" target="_blank">WhatsApp</a>
+</div>
+</header>
+
+<div class="filters">
+<select id="filterTeam"><option value="all">Toutes les équipes</option></select>
+<select id="filterColor"><option value="all">Toutes les couleurs</option></select>
+</div>
+
+<div id="products-container"></div>
+
+<script>
+// === Données produits ===
+const products=[
+{nom:"Côte d’Ivoire",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/CI ORANGE.jpg",color:"Orange"},{src:"images/Maillot Enfant/CI BLANC.jpg",color:"Blanc"}]},
+{nom:"Barca",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/BARCA.jpg",color:"Bleu"},{src:"images/Maillot Enfant/BARCA 2.jpg",color:"Marron"}]},
+{nom:"Real",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/REAL.jpg",color:"Blanc"},{src:"images/Maillot Enfant/REAL 3.jpg",color:"Bleu"},{src:"images/Maillot Enfant/REAL 2.jpg",color:"Noir"}]},
+{nom:"PSG",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/PSG.jpg",color:"Bleu"}]},
+{nom:"City",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/CITY.jpg",color:"Bleu"}]},
+{nom:"United",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/UNITED.jpg",color:"Rouge"}]},
+{nom:"Al Nassr",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/AL NASSER.jpg",color:"Blanc"}]},
+{nom:"Arsenal",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/ARSENAL.jpg",color:"Rouge"},{src:"images/Maillot Enfant/ARSENAL 2.jpg",color:"Bleu"}]},
+{nom:"Chelsea",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/CHELSEA.jpg",color:"Bleu"}]},
+{nom:"Inter",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/INTER.jpg",color:"Bleu"}]},
+{nom:"Juventus",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/JUVENTUS.jpg",color:"Noir"}]},
+{nom:"Marseille",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/MARSEILLE.jpg",color:"Blanc"},{src:"images/Maillot Enfant/MARSEILLE 2.jpg",color:"Bleu"}]},
+{nom:"Portugal",prix:10000,livraison:1500,images:[{src:"images/Maillot Enfant/PORTUGAL.jpg",color:"Rouge"},{src:"images/Maillot Enfant/PORTUGAL 2.jpg",color:"Blanc"}]}
+];
+
+const productsContainer=document.getElementById("products-container");
+const numero="2250703791959";
+let panier=JSON.parse(localStorage.getItem('panier'))||[];
+function updateCartCount(){document.getElementById('cart-count').textContent=panier.length||0;}
+updateCartCount();
+
+// === Filtres ===
+const filterTeam=document.getElementById('filterTeam');
+const filterColor=document.getElementById('filterColor');
+
+const allColors=new Set();
+products.forEach(p=>{p.images.forEach(i=>allColors.add(i.color));});
+allColors.forEach(c=>{filterColor.innerHTML+=`<option value="${c}">${c}</option>`;});
+products.forEach(p=>{filterTeam.innerHTML+=`<option value="${p.nom}">${p.nom}</option>`;});
+
+function renderProducts(teamFilter,colorFilter){
+  productsContainer.innerHTML='';
+  products.filter(p=>(teamFilter==='all'||p.nom===teamFilter))
+          .forEach(prod=>{
+    const filteredImages=colorFilter==='all'?prod.images:prod.images.filter(i=>i.color===colorFilter);
+    if(filteredImages.length===0) return;
+    const container=document.createElement('div');container.className='container';
+    container.innerHTML=`
+      <h2>${prod.nom}</h2>
+      <img src="${filteredImages[0].src}" class="main-image" alt="${prod.nom}">
+      <div class="gallery">${filteredImages.map((im,i)=>`<img src="${im.src}" data-color="${im.color}" ${i===0?'class="selected"':''} alt="${im.color}">`).join('')}</div>
+      <div class="color-buttons">${filteredImages.map(im=>`<button type="button" data-color="${im.color}" style="background:${im.color.toLowerCase()};${im.color==="Blanc"?"border:2px solid #ccc;":""}"></button>`).join('')}</div>
+      <div class="description">
+        <p><strong>Description :</strong> Maillot + Short Enfant - ${prod.nom}. Disponible 2 à 13 ans.</p>
+        <p><strong>Prix :</strong> ${prod.prix} FCFA<br><strong>Livraison :</strong> ${prod.livraison} FCFA</p>
+      </div>
+      <form class="commandeForm">
+        <input type="hidden" name="Produit_Commandé" value="${prod.nom}">
+        <label>Nom complet :</label><input type="text" name="Nom" required>
+        <label>Email :</label><input type="email" name="Email" required>
+        <label>Numéro de téléphone :</label><input type="tel" name="Téléphone" placeholder="+2250703791959" required>
+        <label>Adresse de livraison :</label><textarea name="Adresse" rows="3" placeholder="Ex: Cocody, Abidjan" required></textarea>
+        <label>Âge :</label><select name="Âge" required><option value="">Sélectionnez un âge</option>${[...Array(12)].map((_,i)=>`<option value="${i+2} ans">${i+2} ans</option>`).join('')}</select>
+        <label>Couleur :</label><select name="Couleur" required><option value="">Sélectionnez une couleur</option>${filteredImages.map(im=>`<option value="${im.color}">${im.color}</option>`).join('')}</select>
+        <label>Prix du produit (FCFA) :</label><input type="number" name="Prix_Produit" value="${prod.prix}" readonly>
+        <label>Frais de livraison (FCFA) :</label><input type="number" name="Frais_Livraison" value="${prod.livraison}" readonly>
+        <div class="total">Total : <span>${prod.prix+prod.livraison}</span> FCFA</div>
+        <button type="submit">📦 Valider la commande</button>
+      </form>
+      <button class="addCartBtn">🛒 Ajouter au panier</button>
+      <a href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
+      <div class="thank-you">✅ Merci, votre commande a bien été envoyée !</div><hr>`;
+    productsContainer.appendChild(container);
+
+    const mainImage=container.querySelector('.main-image');
+    const galleryImages=container.querySelectorAll('.gallery img');
+    const colorButtons=container.querySelectorAll('.color-buttons button');
+    const form=container.querySelector('.commandeForm');
+    const whatsappLink=container.querySelector('.whatsapp-button');
+    const addCartBtn=container.querySelector('.addCartBtn');
+    const thankYouMessage=container.querySelector('.thank-you');
+
+    function selectColor(couleur){
+      const img=prod.images.find(i=>i.color===couleur); if(img) mainImage.src=img.src;
+      galleryImages.forEach(i=>i.classList.toggle('selected',i.dataset.color===couleur));
+      colorButtons.forEach(b=>b.classList.toggle('active',b.dataset.color===couleur));
+      form.querySelector('select[name="Couleur"]').value=couleur;
+      const total=parseInt(form.querySelector('input[name="Prix_Produit"]').value)+parseInt(form.querySelector('input[name="Frais_Livraison"]').value);
+      whatsappLink.href=`https://wa.me/${numero}?text=${encodeURIComponent(`Je souhaite commander ${prod.nom} (${couleur}, ${form.querySelector('select[name="Âge"]').value||"non précisé"}) pour un total de ${total} FCFA.`)}`;
+    }
+
+    colorButtons.forEach(btn=>btn.addEventListener('click',()=>selectColor(btn.dataset.color)));
+    galleryImages.forEach(img=>img.addEventListener('click',()=>selectColor(img.dataset.color)));
+    form.querySelector('select[name="Couleur"]').addEventListener('change',()=>selectColor(form.querySelector('select[name="Couleur"]').value));
+
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const formData=new FormData(form);
+      fetch('https://formsubmit.co/ajax/ouff300@gmail.com',{method:'POST',body:formData})
+        .then(res=>res.ok?res.json():Promise.reject(res))
+        .then(()=>{thankYouMessage.style.display='block';thankYouMessage.scrollIntoView({behavior:'smooth'});form.reset();})
+        .catch(err=>{alert("Erreur, réessayez."); console.error(err);});
+    });
+
+    addCartBtn.addEventListener('click',()=>{
+      const couleur=form.querySelector('select[name="Couleur"]').value||"non précisée";
+      const age=form.querySelector('select[name="Âge"]').value||"non précisé";
+      panier.push({nom:prod.nom,prix:prod.prix,type:"vetement",couleur,age});
+      localStorage.setItem('panier',JSON.stringify(panier));
+      updateCartCount();
+      let t=document.getElementById('ouff-toast');
+      if(!t){t=document.createElement('div');t.id='ouff-toast';t.style.position='fixed';t.style.left='50%';t.style.bottom='24px';t.style.transform='translateX(-50%)';t.style.background='#002c5f';t.style.color='#fff';t.style.padding='10px 16px';t.style.borderRadius='8px';t.style.zIndex=99999;t.style.opacity='0';t.style.transition='opacity .2s, transform .2s';document.body.appendChild(t);}
+      t.textContent=`${prod.nom} (${couleur}, ${age}) ajouté au panier`;
+      t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';
+      clearTimeout(t._t); t._t=setTimeout(()=>{t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(8px)';},2000);
+    });
+  });
+}
+
+// Initial render
+renderProducts('all','all');
+
+// Événement filtres
+filterTeam.addEventListener('change',()=>renderProducts(filterTeam.value,filterColor.value));
+filterColor.addEventListener('change',()=>renderProducts(filterTeam.value,filterColor.value));
+
+</script>
+</body>
+</html>

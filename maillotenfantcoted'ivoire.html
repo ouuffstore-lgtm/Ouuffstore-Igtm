@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>cote d'ivoire | Ouffstore</title>
+<style>
+:root {
+  --bg:#f5f7fa;
+  --blue:#002147;
+  --accent:#ff9500;
+  --card:#ffffff;
+  --text:#222;
+}
+body {
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* HEADER */
+header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:var(--blue);
+  padding:8px 16px;
+}
+header .logo img {height:45px;}
+header h1 {color:var(--accent); font-size:1.6em; margin:0;}
+.header-actions {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.whatsapp-button {
+  background:var(--accent);
+  color:white;
+  padding:8px 14px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+  font-size:0.9em;
+}
+.cart-icon {
+  font-size:20px;
+  color:var(--accent);
+  text-decoration:none;
+}
+#cart-count {
+  background:var(--accent);
+  color:white;
+  border-radius:50%;
+  padding:2px 6px;
+  font-size:12px;
+  font-weight:700;
+  margin-left:4px;
+}
+
+/* CONTENU PRODUIT */
+.container {
+  max-width:1000px;
+  margin:30px auto;
+  background:var(--card);
+  border-radius:10px;
+  padding:20px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+.gallery {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:center;
+}
+.gallery img {
+  width:160px;
+  height:160px;
+  object-fit:cover;
+  border-radius:8px;
+  cursor:pointer;
+  transition:transform .25s;
+}
+.gallery img:hover {transform:scale(1.05);}
+.main-image {
+  display:block;
+  width:300px;
+  height:300px;
+  object-fit:cover;
+  margin:0 auto 20px;
+  border-radius:10px;
+}
+.price {
+  text-align:center;
+  font-size:1.4em;
+  color:var(--accent);
+  font-weight:700;
+  margin:20px 0;
+}
+
+/* FORMULAIRE */
+form {
+  text-align:center;
+}
+select, button {
+  padding:10px;
+  font-size:1em;
+  border-radius:8px;
+  border:1px solid #ccc;
+  margin:8px 0;
+}
+button {
+  background:var(--accent);
+  color:white;
+  border:none;
+  cursor:pointer;
+  transition:background .2s;
+}
+button:hover {background:#e07d00;}
+.color-options {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:15px;
+}
+.color-circle {
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  cursor:pointer;
+  border:2px solid transparent;
+  transition:border .2s;
+}
+.color-circle.selected {
+  border:2px solid var(--accent);
+}
+footer {
+  text-align:center;
+  padding:20px;
+  background:var(--blue);
+  color:white;
+  margin-top:30px;
+}
+
+@media screen and (max-width:600px){
+  header {flex-wrap:wrap; justify-content:center; gap:8px;}
+  header h1 {font-size:1.3em;}
+  .main-image {width:80%; height:auto;}
+  .gallery img {width:100px; height:100px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><a href="index.html"><img src="LOGO1.jpg" alt="Ouffstore logo"></a></div>
+  <h1>Ouffstore</h1>
+  <div class="header-actions">
+    <a href="panier.html" class="cart-icon">🛒<span id="cart-count">0</span></a>
+    <a href="https://wa.me/2250703791959" target="_blank" class="whatsapp-button">WhatsApp</a>
+  </div>
+</header>
+
+<div class="container">
+  <h2 style="text-align:center;">cote d'ivoire</h2>
+  <img src="images/Maillot Enfant/CI ORANGE.jpg" class="main-image" id="main-image" alt="cote d'ivoire">
+
+  <div class="gallery">
+    <img src="images/Maillot Enfant/CI ORANGE.jpg" alt="Vue Orange">
+    <img src="images/Maillot Enfant/CI BLANC.jpg" alt="Vue blanche">
+  </div>
+
+  <p style="text-align:center;max-width:600px;margin:10px auto;">
+    Ensemble <strong>Maillot + Short </strong> conçu pour le confort et la performance.  
+    Fabriqué en tissu respirant, idéal pour les enfants de 2 à 13 ans.  
+    <br>Livraison disponible dans tout Abidjan à <strong>1 500 FCFA</strong>.
+  </p>
+
+  <div class="price">Prix : <span id="prix-produit">10 000</span> FCFA</div>
+
+  <form id="order-form">
+    <div>
+      <label>Couleur :</label><br>
+      <div class="color-options">
+        <div class="color-circle" data-color="Orange" data-image="images/Maillot Enfant/CI ORANGE.jpg" style="background:red;"></div>
+        <div class="color-circle" data-color="Blanc" data-image="images/Maillot Enfant/CI BLANC.jpg" style="background:white; border:1px solid #ccc;"></div>
+      </div>
+    </div>
+
+    <div>
+      <label for="age">Âge :</label><br>
+      <select id="age">
+        <option value="">Choisir un âge</option>
+        <option>2 ans</option><option>3 ans</option><option>4 ans</option>
+        <option>5 ans</option><option>6 ans</option><option>7 ans</option>
+        <option>8 ans</option><option>9 ans</option><option>10 ans</option>
+        <option>11 ans</option><option>12 ans</option><option>13 ans</option>
+      </select>
+    </div>
+
+    <button type="submit">Ajouter au panier</button>
+  </form>
+</div>
+
+<footer>
+  © 2025 Ouffstore — Tous droits réservés
+</footer>
+
+<script>
+let panier = JSON.parse(localStorage.getItem('panier')) || [];
+
+// --- Compteur panier ---
+function updateCartCount(){
+  document.getElementById('cart-count').textContent = panier.length || 0;
+}
+updateCartCount();
+
+// --- Changement d’image principale ---
+document.querySelectorAll('.gallery img').forEach(img=>{
+  img.addEventListener('click', ()=>{
+    document.getElementById('main-image').src = img.src;
+  });
+});
+
+// --- Sélection de couleur ---
+let selectedColor = '';
+document.querySelectorAll('.color-circle').forEach(c=>{
+  c.addEventListener('click', ()=>{
+    document.querySelectorAll('.color-circle').forEach(x=>x.classList.remove('selected'));
+    c.classList.add('selected');
+    selectedColor = c.dataset.color;
+    document.getElementById('main-image').src = c.dataset.image; // 🔥 change l’image principale
+  });
+});
+
+// --- Soumission du formulaire ---
+document.getElementById('order-form').addEventListener('submit', e=>{
+  e.preventDefault();
+  const age = document.getElementById('age').value;
+  const prix = document.getElementById('prix-produit').textContent;
+  const mainImg = document.getElementById('main-image');
+
+  if(!selectedColor){alert('Veuillez choisir une couleur'); return;}
+  if(!age){alert('Veuillez choisir un âge'); return;}
+
+  const product = {
+    nom: "Maillot + Short Officiel 2025",
+    couleur: selectedColor,
+    age: age,
+    prix: prix,
+    livraison: 1500,
+    image: mainImg.src
+  };
+
+  panier.push(product);
+  localStorage.setItem('panier', JSON.stringify(panier));
+  updateCartCount();
+  alert(`✅ ${product.nom} (${product.couleur}, ${product.age}) ajouté au panier !\n💰 Livraison : 1 500 FCFA`);
+});
+</script>
+
+</body>
+</html>

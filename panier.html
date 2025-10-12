@@ -1,292 +1,176 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Panier | Ouffstore</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #f7f8fa;
-      color: #222;
-    }
-    header {
-      background: #002c5f;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-    }
-    header img { height: 50px; cursor:pointer; }
-    header h1 {
-      margin: 0;
-      color: #ffb300;
-      font-size: 1.8em;
-      flex-grow:1;
-      text-align:center;
-      cursor:pointer;
-    }
-    header .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .cart-icon {
-      font-size: 22px;
-      color: #ff9500;
-      padding: 6px 10px;
-      border-radius: 8px;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      text-decoration:none;
-      font-weight:bold;
-    }
-    #cart-count {
-      background: #ff9500;
-      color: white;
-      border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 12px;
-      font-weight:700;
-      line-height:1;
-    }
-
-    .container {
-      max-width: 850px;
-      margin: 25px auto;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-      padding: 20px;
-    }
-    h2 { color: #002c5f; text-align: center; }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-    th { background: #f1f3f6; }
-
-    .delete-btn {
-      background: #ff4d4d;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .delete-btn:hover { background: #e60000; }
-
-    .total {
-      text-align: right;
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-top: 20px;
-      color: #ff7a00;
-    }
-
-    .whatsapp-button {
-      display: block;
-      background: #25D366;
-      color: white;
-      text-align: center;
-      padding: 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 15px;
-      transition: background 0.3s;
-    }
-    .whatsapp-button:hover { background: #1ebe5d; }
-
-    form {
-      background: #f1f3f6;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-    }
-    form label {
-      display: block;
-      font-weight: 600;
-      margin: 10px 0 5px;
-    }
-    form input, form textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1em;
-    }
-    form button {
-      background: #002c5f;
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      font-size: 1em;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-      margin-top: 15px;
-      width: 100%;
-    }
-    form button:hover { background: #004b91; }
-
-    .thank-you {
-      display: none;
-      margin-top: 20px;
-      padding: 15px;
-      background: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-      border-radius: 8px;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .empty {
-      text-align:center;
-      margin-top:50px;
-      font-size:1.2em;
-      color:#555;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Panier | Ouffstore</title>
+<style>
+body { margin: 0; font-family: 'Poppins', sans-serif; background: #f7f8fa; color: #222; }
+header { background: #002c5f; color: white; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; }
+header img { height: 50px; cursor:pointer; }
+header h1 { margin:0; color:#ffb300; font-size:1.8em; flex-grow:1; text-align:center; cursor:pointer; }
+header .header-actions { display:flex; align-items:center; gap:12px; }
+.cart-icon { font-size:22px; color:#ff9500; padding:6px 10px; border-radius:8px; display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-weight:bold; }
+#cart-count { background:#ff9500; color:white; border-radius:50%; padding:2px 6px; font-size:12px; font-weight:700; line-height:1; }
+.container { max-width:850px; margin:25px auto; background:white; border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,0.15); padding:20px; }
+h2 { color:#002c5f; text-align:center; }
+table { width:100%; border-collapse:collapse; margin-top:20px; }
+th, td { padding:12px; text-align:left; border-bottom:1px solid #ddd; }
+th { background:#f1f3f6; }
+.delete-btn { background:#ff4d4d; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; transition: background 0.3s; }
+.delete-btn:hover { background:#e60000; }
+.total { text-align:right; font-size:1.2em; font-weight:bold; margin-top:20px; color:#ff7a00; }
+.whatsapp-button { display:block; background:#25D366; color:white; text-align:center; padding:12px; border-radius:8px; text-decoration:none; font-weight:bold; margin-top:15px; transition: background 0.3s; }
+.whatsapp-button:hover { background:#1ebe5d; }
+form { background:#f1f3f6; padding:20px; border-radius:10px; margin-top:20px; }
+form label { display:block; font-weight:600; margin:10px 0 5px; }
+form input, form textarea, form select { width:100%; padding:10px; border:1px solid #ccc; border-radius:8px; font-size:1em; }
+form button { background:#002c5f; color:white; border:none; padding:12px 18px; font-size:1em; border-radius:8px; cursor:pointer; transition: background 0.3s; margin-top:15px; width:100%; }
+form button:hover { background:#004b91; }
+.thank-you { display:none; margin-top:20px; padding:15px; background:#d4edda; color:#155724; border:1px solid #c3e6cb; border-radius:8px; text-align:center; font-weight:bold; }
+.empty { text-align:center; margin-top:50px; font-size:1.2em; color:#555; }
+</style>
 </head>
 <body>
-  <header>
-    <a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
-    <h1 onclick="window.location.href='index.html'">Ouffstore</h1>
-    <div class="header-actions">
-      <a href="panier.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
-    </div>
-  </header>
+<header>
+<a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
+<h1 onclick="window.location.href='index.html'">Ouffstore</h1>
+<div class="header-actions">
+<a href="panier.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+</div>
+</header>
 
-  <div class="container">
-    <h2>🛒 Mon Panier</h2>
-    <div id="cartContainer"></div>
+<div class="container">
+<h2>🛒 Mon Panier</h2>
+<div id="cartContainer"></div>
 
-    <form id="commandeForm">
-      <h3>📝 Informations de commande</h3>
-      <label>Nom complet :</label>
-      <input type="text" name="Nom" required>
-      <label>Email :</label>
-      <input type="email" name="Email" required>
-      <label>Numéro de téléphone :</label>
-      <input type="tel" name="Téléphone" placeholder="+2250703791959" required>
-      <label>Adresse de livraison :</label>
-      <textarea name="Adresse" rows="3" placeholder="Ex: Cocody, Abidjan" required></textarea>
-      <div class="total" id="totalForm">Total : 0 FCFA</div>
-      <button type="submit">📦 Valider la commande</button>
-    </form>
+<form id="commandeForm"></form>
 
-    <div class="thank-you" id="thankYouMessage">
-      ✅ Merci, votre commande a bien été envoyée !
-    </div>
+<div class="thank-you" id="thankYouMessage">✅ Merci, votre commande a bien été envoyée !</div>
 
-    <a id="whatsappOrder" href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
-  </div>
+<a id="whatsappOrder" href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
+</div>
 
-  <script>
-    let panier = JSON.parse(localStorage.getItem('panier')) || [];
-    const cartContainer = document.getElementById('cartContainer');
-    const cartCount = document.getElementById('cart-count');
-    const whatsappOrder = document.getElementById('whatsappOrder');
-    const totalForm = document.getElementById('totalForm');
-    const form = document.getElementById('commandeForm');
-    const thankYouMessage = document.getElementById('thankYouMessage');
-    const numero = "2250703791959";
-    const fraisLivraison = 2000;
+<script>
+let panier = JSON.parse(localStorage.getItem('panier')) || [];
+const cartContainer = document.getElementById('cartContainer');
+const cartCount = document.getElementById('cart-count');
+const whatsappOrder = document.getElementById('whatsappOrder');
+const formContainer = document.getElementById('commandeForm');
+const thankYouMessage = document.getElementById('thankYouMessage');
+const fraisLivraison = 2000;
+const numero = "2250703791959";
 
-    function updateCartCount() {
-      cartCount.textContent = panier.length;
-    }
+function updateCartCount(){ cartCount.textContent = panier.length; }
 
-    function renderCart() {
-      if (panier.length === 0) {
-        cartContainer.innerHTML = '<p class="empty">Votre panier est vide 😔</p>';
-        whatsappOrder.style.display = 'none';
-        totalForm.textContent = 'Total : 0 FCFA';
-        return;
+function calculateTotal(){
+  let total = 0;
+  panier.forEach(item=> total += item.prix);
+  return total + fraisLivraison;
+}
+
+function renderCart(){
+  if(panier.length===0){
+    cartContainer.innerHTML = '<p class="empty">Votre panier est vide 😔</p>';
+    whatsappOrder.style.display='none';
+    renderFormulaire();
+    return;
+  }
+  let totalPrix = 0;
+  let html = `<table><tr><th>Produit</th><th>Prix (FCFA)</th><th>Supprimer</th></tr>`;
+  panier.forEach((item,index)=>{
+    html += `<tr>
+      <td>${item.nom}</td>
+      <td>${item.prix.toLocaleString()}</td>
+      <td><button class="delete-btn" onclick="removeItem(${index})">❌</button></td>
+    </tr>`;
+    totalPrix += item.prix;
+  });
+  html += `</table>`;
+  cartContainer.innerHTML = html;
+  renderFormulaire();
+}
+
+function removeItem(index){
+  panier.splice(index,1);
+  localStorage.setItem('panier',JSON.stringify(panier));
+  updateCartCount();
+  renderCart();
+}
+
+function renderFormulaire(){
+  formContainer.innerHTML = `
+    <h3>📝 Informations de commande</h3>
+    <label>Nom complet :</label>
+    <input type="text" name="Nom" required>
+    <label>Email :</label>
+    <input type="email" name="Email" required>
+    <label>Numéro de téléphone :</label>
+    <input type="tel" name="Téléphone" placeholder="+2250703791959" required>
+    <label>Adresse de livraison :</label>
+    <textarea name="Adresse" rows="3" placeholder="Ex: Cocody, Abidjan" required></textarea>
+  `;
+
+  panier.forEach((item,index)=>{
+    if(item.type==='vetement'){
+      formContainer.innerHTML += `<label>Couleur (${item.nom}) :</label>
+        <input type="text" name="Couleur_${index+1}" value="${item.couleur||''}" readonly>`;
+      formContainer.innerHTML += `<label>Âge (${item.nom}) :</label>
+        <input type="text" name="Age_${index+1}" value="${item.age||''}" readonly>`;
+      if(item.taille){
+        formContainer.innerHTML += `<label>Taille (${item.nom}) :</label>
+          <input type="text" name="Taille_${index+1}" value="${item.taille}" readonly>`;
       }
-
-      let totalPrix = 0;
-      let html = `<table>
-        <tr><th>Produit</th><th>Prix (FCFA)</th><th>Supprimer</th></tr>`;
-      panier.forEach((item, index) => {
-        html += `<tr>
-          <td>${item.nom}</td>
-          <td>${item.prix.toLocaleString()}</td>
-          <td><button class="delete-btn" onclick="removeItem(${index})">❌</button></td>
-        </tr>`;
-        totalPrix += item.prix;
-      });
-      html += `</table>`;
-      cartContainer.innerHTML = html;
-
-      const totalAvecLivraison = totalPrix + fraisLivraison;
-      totalForm.textContent = `Total : ${totalAvecLivraison.toLocaleString()} FCFA`;
-
-      // Lien WhatsApp
-      let message = "Je souhaite commander les produits suivants :\n";
-      panier.forEach(item => {
-        message += `- ${item.nom} : ${item.prix.toLocaleString()} FCFA\n`;
-      });
-      message += `Frais de livraison : ${fraisLivraison.toLocaleString()} FCFA\n`;
-      message += `Total : ${totalAvecLivraison.toLocaleString()} FCFA`;
-      whatsappOrder.href = `https://wa.me/${numero}?text=${encodeURIComponent(message)}`;
-      whatsappOrder.style.display = 'block';
     }
+  });
 
-    function removeItem(index) {
-      panier.splice(index,1);
-      localStorage.setItem('panier', JSON.stringify(panier));
-      updateCartCount();
-      renderCart();
+  formContainer.innerHTML += `<div class="total" id="totalForm">Total : ${calculateTotal().toLocaleString()} FCFA</div>
+    <button type="submit">📦 Valider la commande</button>`;
+
+  // Mise à jour WhatsApp
+  let message = "Je souhaite commander les produits suivants :\n";
+  panier.forEach(item=>{
+    message += `- ${item.nom}`;
+    if(item.type==='vetement'){
+      message += ` (Couleur: ${item.couleur||'-'} / Age: ${item.age||'-'} / Taille: ${item.taille||'-'})`;
     }
+    message += ` : ${item.prix.toLocaleString()} FCFA\n`;
+  });
+  message += `Frais de livraison : ${fraisLivraison.toLocaleString()} FCFA\nTotal : ${calculateTotal().toLocaleString()} FCFA`;
+  whatsappOrder.href = `https://wa.me/${numero}?text=${encodeURIComponent(message)}`;
+  whatsappOrder.style.display='block';
+}
 
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      if(panier.length === 0){
-        alert("Votre panier est vide !");
-        return;
-      }
-      const formData = new FormData(form);
-      panier.forEach((item, i) => formData.append(`Produit ${i+1}`, item.nom));
-      formData.append('Total', totalForm.textContent.replace('Total : ', ''));
+formContainer.addEventListener('submit',function(e){
+  e.preventDefault();
+  if(panier.length===0){ alert("Votre panier est vide !"); return; }
+  const formData = new FormData(formContainer);
+  panier.forEach((item,i)=> formData.append(`Produit ${i+1}`,item.nom));
+  formData.append('Total', calculateTotal());
+  fetch('https://formsubmit.co/ajax/ouff300@gmail.com',{
+    method:'POST',
+    body:formData
+  })
+  .then(r=>r.ok?r.json():Promise.reject(r))
+  .then(d=>{
+    thankYouMessage.style.display='block';
+    formContainer.reset();
+    panier=[];
+    localStorage.setItem('panier',JSON.stringify(panier));
+    updateCartCount();
+    renderCart();
+    window.scrollTo({top:0,behavior:'smooth'});
+  })
+  .catch(err=>{
+    alert("Une erreur est survenue, veuillez réessayer.");
+    console.error(err);
+  });
+});
 
-      fetch('https://formsubmit.co/ajax/ouff300@gmail.com', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.ok ? response.json() : Promise.reject(response))
-      .then(data => {
-        thankYouMessage.style.display = 'block';
-        form.reset();
-        panier = [];
-        localStorage.setItem('panier', JSON.stringify(panier));
-        updateCartCount();
-        renderCart();
-        window.scrollTo({top:0, behavior:'smooth'});
-      })
-      .catch(err => {
-        alert("Une erreur est survenue, veuillez réessayer.");
-        console.error(err);
-      });
-    });
-
-    document.addEventListener('DOMContentLoaded', function(){
-      updateCartCount();
-      renderCart();
-    });
-  </script>
+document.addEventListener('DOMContentLoaded',()=>{
+  updateCartCount();
+  renderCart();
+});
+</script>
 </body>
 </html>

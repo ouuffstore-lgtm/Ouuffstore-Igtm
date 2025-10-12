@@ -54,9 +54,11 @@ header h1 {
 .main-image {width:100%; border-radius:10px; margin-bottom:15px;}
 .gallery {
   display:flex;
-  overflow-x:auto;
+  justify-content:center; /* centre les miniatures */
   gap:10px;
+  overflow-x:auto;
   padding-bottom:5px;
+  scroll-behavior:smooth;
 }
 .gallery img {
   width:80px;
@@ -72,7 +74,7 @@ header h1 {
   display:flex;
   gap:10px;
   justify-content:center;
-  margin:10px 0;
+  margin:15px 0 10px; /* espace supérieur ajouté pour séparer de la galerie */
 }
 .color-buttons button {
   width:40px; height:40px; border-radius:50%; border:2px solid #ccc; cursor:pointer;
@@ -205,6 +207,8 @@ galleryImages.forEach(img=>{img.classList.toggle('selected',img.dataset.color===
 colorButtons.forEach(btn=>{btn.classList.toggle('active',btn.dataset.color===couleur)});
 couleurSelect.value=couleur;
 updateWhatsAppLink();
+const selectedImg=Array.from(galleryImages).find(img=>img.dataset.color===couleur);
+if(selectedImg) selectedImg.scrollIntoView({behavior:'smooth', inline:'center'});
 }
 
 colorButtons.forEach(btn=>{btn.addEventListener('click',()=>selectColor(btn.dataset.color))});
@@ -220,7 +224,6 @@ fetch('https://formsubmit.co/ajax/ouff300@gmail.com',{method:'POST',body:formDat
 .then(response=>response.ok?response.json():Promise.reject(response))
 .then(data=>{thankYouMessage.style.display='block';thankYouMessage.scrollIntoView({behavior:'smooth'});form.reset();updateTotal();})
 .catch(err=>{alert("Une erreur est survenue, veuillez réessayer.");console.error(err);});
-
 });
 
 let panier=JSON.parse(localStorage.getItem('panier'))||[];

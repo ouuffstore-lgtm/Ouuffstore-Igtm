@@ -21,98 +21,33 @@ header {
   box-shadow:0 2px 6px rgba(0,0,0,0.2);
 }
 header img {height:50px; cursor:pointer;}
-header h1 {
-  margin:0;
-  color:#ffb300;
-  flex-grow:1;
-  text-align:center;
-  font-size:1.6em;
-  cursor:pointer;
-}
-.header-actions {display:flex; align-items:center; gap:12px;}
+header h1 {margin:0;color:#ffb300;flex-grow:1;text-align:center;font-size:1.6em;cursor:pointer;}
+.header-actions {display:flex;align-items:center;gap:12px;}
 .whatsapp-button {
-  background:#25D366;
-  color:white;
-  padding:10px 16px;
-  border-radius:8px;
-  font-weight:bold;
-  text-decoration:none;
-  transition:background 0.3s;
+  background:#25D366;color:white;padding:10px 16px;border-radius:8px;font-weight:bold;text-decoration:none;transition:background 0.3s;
 }
 .whatsapp-button:hover {background:#1ebe5d;}
-.cart-icon {font-size:22px; color:#ffb300; display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-weight:bold; cursor:pointer;}
+.cart-icon {font-size:22px;color:#ffb300;display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:bold;cursor:pointer;}
 #cart-count {background:#ffb300;color:white;border-radius:50%;padding:2px 6px;font-size:12px;font-weight:700;line-height:1;}
-.container {
-  max-width:850px;
-  margin:20px auto;
-  background:white;
-  border-radius:12px;
-  box-shadow:0 3px 10px rgba(0,0,0,0.15);
-  padding:20px;
-}
-.container h2 {text-align:center; color:#002c5f; margin-top:0;}
-.main-image {width:100%; border-radius:10px; margin-bottom:15px;}
-.gallery {
-  display:flex;
-  justify-content:center; /* centre les miniatures */
-  gap:10px;
-  overflow-x:auto;
-  padding-bottom:5px;
-  scroll-behavior:smooth;
-}
-.gallery img {
-  width:80px;
-  height:80px;
-  object-fit:cover;
-  border-radius:8px;
-  border:2px solid #ccc;
-  cursor:pointer;
-  transition:transform .2s, border .2s;
-}
-.gallery img.selected {border:3px solid #ffb300; transform:scale(1.1);}
-.color-buttons {
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  margin:15px 0 10px; /* espace supérieur ajouté pour séparer de la galerie */
-}
-.color-buttons button {
-  width:40px; height:40px; border-radius:50%; border:2px solid #ccc; cursor:pointer;
-  transition: transform .2s, border .2s;
-}
-.color-buttons button.active {border:3px solid #ffb300; transform:scale(1.3);}
-.color-buttons button:hover {transform:scale(1.2); border-color:#002c5f;}
+.container {max-width:850px;margin:20px auto;background:white;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,0.15);padding:20px;}
+.container h2 {text-align:center;color:#002c5f;margin-top:0;}
+.main-image {width:100%;border-radius:10px;margin-bottom:15px;}
+.gallery {display:flex;justify-content:center;gap:10px;overflow-x:auto;padding-bottom:5px;scroll-behavior:smooth;}
+.gallery img {width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid #ccc;cursor:pointer;transition:transform .2s,border .2s;}
+.gallery img.selected {border:3px solid #ffb300;transform:scale(1.1);}
+.color-buttons {display:flex;gap:10px;justify-content:center;margin:15px 0 10px;}
+.color-buttons button {width:40px;height:40px;border-radius:50%;border:2px solid #ccc;cursor:pointer;transition:transform .2s,border .2s;}
+.color-buttons button.active {border:3px solid #ffb300;transform:scale(1.3);}
+.color-buttons button:hover {transform:scale(1.2);border-color:#002c5f;}
 .description p {margin:6px 0;}
-form {
-  background:#f1f3f6;
-  padding:20px;
-  border-radius:10px;
-  margin-top:20px;
-}
-form label {display:block; font-weight:600; margin:10px 0 5px;}
-form input, form textarea, form select {
-  width:100%; padding:10px; border:1px solid #ccc; border-radius:8px; font-size:1em;
-}
-button, #addCartBtn {background:#002c5f; color:white; border:none; padding:12px 18px; border-radius:8px; cursor:pointer; margin-top:15px; width:100%; transition:background .3s;}
+form {background:#f1f3f6;padding:20px;border-radius:10px;margin-top:20px;}
+form label {display:block;font-weight:600;margin:10px 0 5px;}
+form input, form textarea, form select {width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:1em;}
+button, #addCartBtn {background:#002c5f;color:white;border:none;padding:12px 18px;border-radius:8px;cursor:pointer;margin-top:15px;width:100%;transition:background .3s;}
 button:hover, #addCartBtn:hover {background:#004b91;}
-.total {font-size:1.1em; font-weight:bold; margin-top:10px; text-align:right;}
-.thank-you {
-  display:none;
-  margin-top:20px;
-  padding:15px;
-  background:#d4edda;
-  color:#155724;
-  border:1px solid #c3e6cb;
-  border-radius:8px;
-  text-align:center;
-  font-weight:bold;
-}
-@media(max-width:600px){
-  .gallery img{width:60px; height:60px;}
-  .color-buttons button{width:35px; height:35px;}
-  .container{margin:10px; padding:15px;}
-  header h1{font-size:1.4em;}
-}
+.total {font-size:1.1em;font-weight:bold;margin-top:10px;text-align:right;}
+.thank-you {display:none;margin-top:20px;padding:15px;background:#d4edda;color:#155724;border:1px solid #c3e6cb;border-radius:8px;text-align:center;font-weight:bold;}
+@media(max-width:600px){.gallery img{width:60px;height:60px;}.color-buttons button{width:35px;height:35px;}.container{margin:10px;padding:15px;}header h1{font-size:1.4em;}}
 </style>
 </head>
 <body>
@@ -188,71 +123,88 @@ const totalEl=document.getElementById('total');
 const produitNom=document.getElementById('produitNom').value;
 const numero="2250703791959";
 const whatsappLink=document.getElementById('whatsappLink');
+const form=document.getElementById('commandeForm');
+const thankYouMessage=document.getElementById('thankYouMessage');
 
 function updateTotal(){totalEl.textContent=parseInt(prixInput.value)+parseInt(livraisonInput.value);}
 updateTotal();
 
 function updateWhatsAppLink(){
-const total=parseInt(prixInput.value)+parseInt(livraisonInput.value);
-const couleur=couleurSelect.value||"non précisée";
-whatsappLink.href=`https://wa.me/${numero}?text=${encodeURIComponent(
-`Je souhaite commander ${produitNom} (${couleur}) pour un total de ${total} FCFA (produit : ${prixInput.value} + livraison : ${livraisonInput.value}).`
-)}`;
+  const total=parseInt(prixInput.value)+parseInt(livraisonInput.value);
+  const couleur=couleurSelect.value||"non précisée";
+  const age=form.querySelector('select[name="Âge"]').value||"non précisé";
+  whatsappLink.href=`https://wa.me/${numero}?text=${encodeURIComponent(
+    `Je souhaite commander ${produitNom} (${couleur}, ${age}) pour un total de ${total} FCFA (produit : ${prixInput.value} + livraison : ${livraisonInput.value}).`
+  )}`;
 }
 updateWhatsAppLink();
 
 function selectColor(couleur){
-mainImage.src=`images/Maillot Enfant/CI ${couleur.toUpperCase()}.jpg`;
-galleryImages.forEach(img=>{img.classList.toggle('selected',img.dataset.color===couleur)});
-colorButtons.forEach(btn=>{btn.classList.toggle('active',btn.dataset.color===couleur)});
-couleurSelect.value=couleur;
-updateWhatsAppLink();
-const selectedImg=Array.from(galleryImages).find(img=>img.dataset.color===couleur);
-if(selectedImg) selectedImg.scrollIntoView({behavior:'smooth', inline:'center'});
+  mainImage.src=`images/Maillot Enfant/CI ${couleur.toUpperCase()}.jpg`;
+  galleryImages.forEach(img=>{img.classList.toggle('selected',img.dataset.color===couleur)});
+  colorButtons.forEach(btn=>{btn.classList.toggle('active',btn.dataset.color===couleur)});
+  couleurSelect.value=couleur;
+  updateWhatsAppLink();
+  const selectedImg=Array.from(galleryImages).find(img=>img.dataset.color===couleur);
+  if(selectedImg) selectedImg.scrollIntoView({behavior:'smooth', inline:'center'});
 }
 
 colorButtons.forEach(btn=>{btn.addEventListener('click',()=>selectColor(btn.dataset.color))});
 couleurSelect.addEventListener('change',()=>{if(couleurSelect.value) selectColor(couleurSelect.value)});
 galleryImages.forEach(img=>{img.addEventListener('click',()=>selectColor(img.dataset.color))});
 
-const form=document.getElementById('commandeForm');
-const thankYouMessage=document.getElementById('thankYouMessage');
 form.addEventListener('submit',function(e){
-e.preventDefault();
-const formData=new FormData(form);
-fetch('https://formsubmit.co/ajax/ouff300@gmail.com',{method:'POST',body:formData})
-.then(response=>response.ok?response.json():Promise.reject(response))
-.then(data=>{thankYouMessage.style.display='block';thankYouMessage.scrollIntoView({behavior:'smooth'});form.reset();updateTotal();})
-.catch(err=>{alert("Une erreur est survenue, veuillez réessayer.");console.error(err);});
+  e.preventDefault();
+  const formData=new FormData(form);
+  fetch('https://formsubmit.co/ajax/ouff300@gmail.com',{method:'POST',body:formData})
+  .then(response=>response.ok?response.json():Promise.reject(response))
+  .then(data=>{thankYouMessage.style.display='block';thankYouMessage.scrollIntoView({behavior:'smooth'});form.reset();updateTotal();})
+  .catch(err=>{alert("Une erreur est survenue, veuillez réessayer.");console.error(err);});
 });
 
+// --- Panier réactif ---
 let panier=JSON.parse(localStorage.getItem('panier'))||[];
 const cartCount=document.getElementById('cart-count');
 function updateCartCount(){cartCount.textContent=panier.length||0;}
 document.addEventListener('DOMContentLoaded',updateCartCount);
 
-const addCartBtn=document.getElementById('addCartBtn');
 addCartBtn.addEventListener('click',()=>{
-panier.push({nom:produitNom,prix:parseInt(prixInput.value)});
-localStorage.setItem('panier',JSON.stringify(panier));
-updateCartCount();
-let t=document.getElementById('ouff-toast');
-if(!t){t=document.createElement('div');t.id='ouff-toast';
-t.style.position='fixed';t.style.left='50%';t.style.bottom='24px';
-t.style.transform='translateX(-50%)';
-t.style.background='#002c5f';
-t.style.color='#fff';
-t.style.padding='10px 16px';
-t.style.borderRadius='8px';
-t.style.zIndex=99999;
-t.style.opacity='0';
-t.style.transition='opacity .2s, transform .2s';
-document.body.appendChild(t);}
-t.textContent=`${produitNom} ajouté au panier`;
-t.style.opacity='1';
-t.style.transform='translateX(-50%) translateY(0)';
-clearTimeout(t._t);
-t._t=setTimeout(()=>{t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(8px)';},2000);
+  const couleur=couleurSelect.value||"non précisée";
+  const age=form.querySelector('select[name="Âge"]').value||"non précisé";
+
+  panier.push({
+    nom: produitNom,
+    prix: parseInt(prixInput.value),
+    type: "vetement",
+    couleur: couleur,
+    age: age
+  });
+
+  localStorage.setItem('panier', JSON.stringify(panier));
+  updateCartCount();
+
+  let t=document.getElementById('ouff-toast');
+  if(!t){
+    t=document.createElement('div');
+    t.id='ouff-toast';
+    t.style.position='fixed';
+    t.style.left='50%';
+    t.style.bottom='24px';
+    t.style.transform='translateX(-50%)';
+    t.style.background='#002c5f';
+    t.style.color='#fff';
+    t.style.padding='10px 16px';
+    t.style.borderRadius='8px';
+    t.style.zIndex=99999;
+    t.style.opacity='0';
+    t.style.transition='opacity .2s, transform .2s';
+    document.body.appendChild(t);
+  }
+  t.textContent=`${produitNom} (${couleur}, ${age}) ajouté au panier`;
+  t.style.opacity='1';
+  t.style.transform='translateX(-50%) translateY(0)';
+  clearTimeout(t._t);
+  t._t=setTimeout(()=>{t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(8px)';},2000);
 });
 </script>
 </body>

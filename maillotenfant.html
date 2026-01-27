@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-M4LCJVND');</script>
-<!-- End Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-M4LCJVND');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>👕 Maillot Enfant | Ouffstore</title>
   <style>
+    :root {
+      --blue: #002c5f;
+      --accent: #ff9500;
+      --bg: #f5f7fa;
+    }
     body {
-      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
-      background-color: #f5f7fa;
+      background-color: var(--bg);
       color: #222;
-      line-height: 1.6;
     }
 
-    /* ----- HEADER OFFICIEL ----- */
+    /* ----- HEADER ----- */
     header {
       background: linear-gradient(90deg, #002c5f, #004b91);
       color: white;
@@ -28,239 +30,137 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       align-items: center;
       justify-content: space-between;
       padding: 10px 20px;
-      position: relative;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
-    header img { height: 50px; cursor:pointer; }
-    header h1 {
-      margin: 0;
-      color: #ffb300;
-      text-align: center;
-      flex-grow: 1;
-      font-size: 1.8em;
-      cursor:pointer;
-    }
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .whatsapp-button {
-      background: #25D366;
-      color: white;
-      text-align: center;
-      padding: 10px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .whatsapp-button:hover { background: #1ebe5d; }
+    header img { height: 45px; cursor:pointer; }
+    header h1 { margin: 0; color: #ffb300; flex-grow: 1; text-align: center; font-size: 1.6em; cursor:pointer; }
+    
     .cart-icon {
-      font-size: 22px;
-      color: #ffb300;
-      padding: 6px 10px;
-      border-radius: 8px;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      text-decoration:none;
-      font-weight:bold;
-      cursor:pointer;
+      font-size: 22px; color: #ffb300; text-decoration:none;
+      position: relative; font-weight: bold;
     }
     #cart-count {
-      background: #ffb300;
-      color: white;
-      border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 12px;
-      font-weight:700;
-      line-height:1;
+      background: #ff4d4d; color: white; border-radius: 50%;
+      padding: 2px 6px; font-size: 11px; position: absolute; top: -5px; right: -12px;
     }
 
     /* ----- SECTION PRODUITS ----- */
-    section { max-width: 1300px; margin: 40px auto; padding: 0 20px; }
-    h2 { text-align:center; color:#002c5f; margin-bottom:25px; font-size:1.8em; }
+    section { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
+    h2 { text-align:center; color: var(--blue); margin-bottom:25px; }
 
     .produits {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
     }
-    @media screen and (max-width: 1024px) { .produits { grid-template-columns: repeat(3, 1fr); } }
-    @media screen and (max-width: 600px) { .produits { grid-template-columns: repeat(2, 1fr); gap: 15px; } }
 
     .produit {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
       text-align: center;
-      padding: 10px;
-      transition: transform 0.2s;
-      overflow: hidden;
+      padding: 12px;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
     }
     .produit:hover { transform: translateY(-5px); }
-    .produit img {
+
+    .img-container {
       width: 100%;
       aspect-ratio: 1/1;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-    .produit h3 { margin: 10px 0 5px; color:#002c5f; font-size:1em; }
-    .produit p { font-weight: bold; color: #ff9500; margin: 5px 0; font-size:0.95em; }
-    .produit a.button, .produit button.add-cart {
-      display: inline-block;
-      margin-top: 5px;
-      background: #ff9500;
-      color: white;
-      padding: 8px 15px;
+      overflow: hidden;
       border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9em;
-      transition: 0.3s;
-      cursor: pointer;
-      border: none;
+      margin-bottom: 10px;
+      background: #f9f9f9;
     }
-    .produit a.button:hover, .produit button.add-cart:hover { background: #e07d00; transform: scale(1.05); }
+    .produit img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ----- FOOTER ----- */
-    footer {
-      text-align:center;
-      padding:30px 10px;
-      background:#002c5f;
-      color:#d8e0ff;
-      font-size:0.9em;
-      margin-top:50px;
+    .produit h3 { margin: 8px 0; color: var(--blue); font-size: 0.95em; height: 2.4em; overflow: hidden; }
+    .produit p { font-weight: bold; color: var(--accent); margin: 5px 0; font-size: 1.1em; }
+    
+    .btn-view {
+      display: block; text-decoration: none; color: #666;
+      font-size: 0.8em; margin-bottom: 8px;
     }
-    footer a { color:#ffb300; font-weight:600; }
+    .btn-view:hover { color: var(--blue); text-decoration: underline; }
+
+    .add-cart {
+      background: var(--blue); color: white; border: none;
+      padding: 10px; border-radius: 8px; font-weight: 600;
+      cursor: pointer; transition: 0.3s; width: 100%;
+    }
+    .add-cart:hover { background: var(--accent); }
+    .add-cart.added { background: #28a745 !important; }
+
+    footer {
+      text-align:center; padding:30px; background: var(--blue);
+      color: white; margin-top:50px; font-size: 0.9em;
+    }
+
+    @media (max-width: 600px) {
+      .produits { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      header h1 { font-size: 1.2em; }
+    }
   </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M4LCJVND"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-  <!-- HEADER -->
   <header>
-    <a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
+    <a href="index.html"><img src="LOGO1.jpg" alt="Logo"></a>
     <h1 onclick="window.location.href='index.html'">Ouffstore</h1>
-    <div class="header-actions">
-      <a href="panier.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
-      <a href="https://wa.me/2250703791959" class="whatsapp-button" target="_blank">WhatsApp</a>
-    </div>
+    <a href="panier.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
   </header>
 
-  <!-- SECTION PRODUITS -->
   <section>
-    <h2>👕 Maillot Enfant</h2>
+    <h2>👕 Maillots Enfants</h2>
     <div class="produits">
 
-      <!-- Tous les produits -->
       <div class="produit">
-        <img src="images/Maillot Enfant/CI ORANGE.jpg" alt="cote d'ivoire ">
-        <h3>cote d'ivoire </h3>
+        <div class="img-container"><img src="images/Maillot Enfant/CI ORANGE.jpg" alt="CI"></div>
+        <h3>Côte d'Ivoire (Orange)</h3>
         <p>10 000 FCFA</p>
-        <a href="maillotenfantcoted'ivoire.html" class="button">Voir produit</a>
+        <a href="maillotenfantcoted'ivoire.html" class="btn-view">Détails</a>
+        <button class="add-cart" data-nom="Maillot CI Enfant" data-prix="10000" data-img="images/Maillot Enfant/CI ORANGE.jpg">➕ Ajouter</button>
       </div>
 
       <div class="produit">
-        <img src="images/Maillot Enfant/BARCA.jpg" alt="Barca">
-        <h3>Barca</h3>
+        <div class="img-container"><img src="images/Maillot Enfant/BARCA.jpg" alt="Barca"></div>
+        <h3>Maillot FC Barcelone</h3>
         <p>10 000 FCFA</p>
-        <a href="barca.html" class="button">Voir produit</a>
+        <a href="barca.html" class="btn-view">Détails</a>
+        <button class="add-cart" data-nom="Maillot Barca Enfant" data-prix="10000" data-img="images/Maillot Enfant/BARCA.jpg">➕ Ajouter</button>
       </div>
 
       <div class="produit">
-        <img src="images/Maillot Enfant/REAL.jpg" alt="Real">
-        <h3>Real</h3>
+        <div class="img-container"><img src="images/Maillot Enfant/REAL.jpg" alt="Real"></div>
+        <h3>Maillot Real Madrid</h3>
         <p>10 000 FCFA</p>
-        <a href="real.html" class="button">Voir produit</a>
-      </div>
-      
-      <div class="produit">
-        <img src="images/Maillot Enfant/PSG.jpg" alt="PSG ">
-        <h3>PSG </h3>
-        <p>10 000 FCFA</p>
-        <a href="psg.html" class="button">Voir produit</a>
+        <a href="real.html" class="btn-view">Détails</a>
+        <button class="add-cart" data-nom="Maillot Real Enfant" data-prix="10000" data-img="images/Maillot Enfant/REAL.jpg">➕ Ajouter</button>
       </div>
 
       <div class="produit">
-        <img src="images/Maillot Enfant/CITY.jpg" alt="City">
-        <h3>City</h3>
+        <div class="img-container"><img src="images/Maillot Enfant/PSG.jpg" alt="PSG"></div>
+        <h3>Maillot Paris SG</h3>
         <p>10 000 FCFA</p>
-        <a href="city.html" class="button">Voir produit</a>
+        <a href="psg.html" class="btn-view">Détails</a>
+        <button class="add-cart" data-nom="Maillot PSG Enfant" data-prix="10000" data-img="images/Maillot Enfant/PSG.jpg">➕ Ajouter</button>
       </div>
 
       <div class="produit">
-        <img src="images/Maillot Enfant/UNITED.jpg" alt="United">
-        <h3>United</h3>
+        <div class="img-container"><img src="images/Maillot Enfant/AL NASSER.jpg" alt="Al Nassr"></div>
+        <h3>Maillot Al Nassr</h3>
         <p>10 000 FCFA</p>
-        <a href="united.html" class="button">Voir produit</a>
+        <a href="alnasser.html" class="btn-view">Détails</a>
+        <button class="add-cart" data-nom="Maillot Al Nassr Enfant" data-prix="10000" data-img="images/Maillot Enfant/AL NASSER.jpg">➕ Ajouter</button>
       </div>
 
-      <div class="produit">
-        <img src="images/Maillot Enfant/AL NASSER.jpg" alt="Al Nassr">
-        <h3>Al Nassr</h3>
-        <p>10 000 FCFA</p>
-        <a href="alnasser.html" class="button">Voir produit</a>
       </div>
-
-      <div class="produit">
-        <img src="images/Maillot Enfant/ARSENAL.jpg" alt="Arsenal">
-        <h3>Arsenal</h3>
-        <p>10 000 FCFA</p>
-        <a href="arsenal.html" class="button">Voir produit</a>
-      </div>
-
-      <div class="produit">
-        <img src="images/Maillot Enfant/CHELSEA.jpg" alt="Chelsea">
-        <h3>Chelsea</h3>
-        <p>10 000 FCFA</p>
-        <a href="chelsea.html" class="button">Voir produit</a>
-      </div>
-
-      <div class="produit">
-        <img src="images/Maillot Enfant/INTER.jpg" alt="Inter">
-        <h3>Inter</h3>
-        <p>10 000 FCFA</p>
-       <a href="inter.html" class="button">Voir produit</a>
-      </div>
-
-      <div class="produit">
-        <img src="images/Maillot Enfant/JUVENTUS.jpg" alt="Juventus">
-        <h3>Juventus</h3>
-        <p>10 000 FCFA</p>
-        <a href="juventus.html" class="button">Voir produit</a>
-      </div>
-
-      <div class="produit">
-        <img src="images/Maillot Enfant/MARSEILLE.jpg" alt="Marseille">
-        <h3>Marseille</h3>
-        <p>10 000 FCFA</p>
-        <a href="marseille.html" class="button">Voir produit</a>
-      </div>
-
-      <div class="produit">
-        <img src="images/Maillot Enfant/PORTUGAL.jpg" alt="Portugal">
-        <h3>Portugal</h3>
-        <p>10 000 FCFA</p>
-        <a href="portugal.html" class="button">Voir produit</a>
-      </div>
-
-      <div class="produit">
-        <img src="images/Maillot Enfant/CI ORANGE.jpg" alt="Toute les Equiupes ">
-        <h3>Toute les Equiupes </h3>
-        <p>10 000 FCFA</p>
-        <a href="allequipe.html" class="button">Voir produit</a>
-      </div>
-
-    </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     © 2025 <strong>Ouffstore</strong> — Tous droits réservés<br>
     Abidjan, Côte d’Ivoire
@@ -271,46 +171,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const cartCount = document.getElementById('cart-count');
 
     function updateCartCount() {
-      cartCount.textContent = panier.length || 0;
-    }
-
-    function showToast(text) {
-      let t = document.getElementById('ouff-toast');
-      if(!t){
-        t = document.createElement('div');
-        t.id = 'ouff-toast';
-        t.style.position = 'fixed';
-        t.style.left = '50%';
-        t.style.bottom = '24px';
-        t.style.transform = 'translateX(-50%)';
-        t.style.background = '#002c5f';
-        t.style.color = '#fff';
-        t.style.padding = '10px 16px';
-        t.style.borderRadius = '8px';
-        t.style.boxShadow = '0 6px 20px rgba(0,0,0,0.18)';
-        t.style.zIndex = 99999;
-        t.style.opacity = '0';
-        t.style.transition = 'opacity .2s, transform .2s';
-        document.body.appendChild(t);
-      }
-      t.textContent = text;
-      t.style.opacity = '1';
-      t.style.transform = 'translateX(-50%) translateY(0)';
-      clearTimeout(t._t);
-      t._t = setTimeout(()=> {
-        t.style.opacity = '0';
-        t.style.transform = 'translateX(-50%) translateY(8px)';
-      }, 2000);
+        const total = panier.reduce((sum, item) => sum + (item.quantite || 1), 0);
+        cartCount.textContent = total;
+        cartCount.style.display = total > 0 ? 'block' : 'none';
     }
 
     document.querySelectorAll('.add-cart').forEach(btn => {
       btn.addEventListener('click', () => {
         const nom = btn.getAttribute('data-nom');
         const prix = parseInt(btn.getAttribute('data-prix'));
-        panier.push({ nom, prix });
+        const image = btn.getAttribute('data-img');
+
+        const existingIndex = panier.findIndex(item => item.nom === nom);
+        
+        if (existingIndex > -1) {
+            panier[existingIndex].quantite = (panier[existingIndex].quantite || 1) + 1;
+        } else {
+            panier.push({ nom, prix, image, quantite: 1, type: 'vetement' });
+        }
+
         localStorage.setItem('panier', JSON.stringify(panier));
         updateCartCount();
-        showToast(`${nom} ajouté au panier`);
+        
+        // Animation du bouton
+        btn.textContent = "✅ Ajouté";
+        btn.classList.add('added');
+        setTimeout(() => {
+            btn.textContent = "➕ Ajouter";
+            btn.classList.remove('added');
+        }, 800);
       });
     });
 

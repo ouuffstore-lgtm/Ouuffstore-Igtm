@@ -1,159 +1,264 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-M4LCJVND');</script>
-<!-- End Google Tag Manager -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Panier | Ouffstore</title>
-<style>
-body {margin:0;font-family:'Poppins',sans-serif;background:#f7f8fa;color:#222;}
-header {background:#002c5f;color:white;display:flex;align-items:center;justify-content:space-between;padding:10px 20px;}
-header img {height:50px;cursor:pointer;}
-header h1 {margin:0;color:#ffb300;flex-grow:1;text-align:center;font-size:1.8em;cursor:pointer;}
-.header-actions {display:flex;align-items:center;gap:12px;}
-.cart-icon {font-size:22px;color:#ff9500;display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:bold;}
-#cart-count {background:#ff9500;color:white;border-radius:50%;padding:2px 6px;font-size:12px;font-weight:700;line-height:1;}
-.container {max-width:850px;margin:25px auto;background:white;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,0.15);padding:20px;}
-h2 {color:#002c5f;text-align:center;}
-table {width:100%;border-collapse:collapse;margin-top:20px;}
-th, td {padding:12px;text-align:left;border-bottom:1px solid #ddd;}
-th {background:#f1f3f6;}
-.delete-btn {background:#ff4d4d;color:white;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;transition:background 0.3s;}
-.delete-btn:hover {background:#e60000;}
-.total {text-align:right;font-size:1.2em;font-weight:bold;margin-top:20px;color:#ff7a00;}
-.whatsapp-button {display:block;background:#25D366;color:white;text-align:center;padding:12px;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:15px;transition:background 0.3s;}
-.whatsapp-button:hover {background:#1ebe5d;}
-form {background:#f1f3f6;padding:20px;border-radius:10px;margin-top:20px;}
-form label {display:block;font-weight:600;margin:10px 0 5px;}
-form input, form textarea {width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:1em;}
-form button {background:#002c5f;color:white;border:none;padding:12px 18px;font-size:1em;border-radius:8px;cursor:pointer;transition:background 0.3s;margin-top:15px;width:100%;}
-form button:hover {background:#004b91;}
-.thank-you {display:none;margin-top:20px;padding:15px;background:#d4edda;color:#155724;border:1px solid #c3e6cb;border-radius:8px;text-align:center;font-weight:bold;}
-.empty {text-align:center;margin-top:50px;font-size:1.2em;color:#555;}
-</style>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-M4LCJVND');</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mon Panier | Ouffstore</title>
+  <style>
+    :root {
+      --blue: #002c5f;
+      --accent: #ff9500;
+      --red: #ff4d4d;
+      --bg: #f7f8fa;
+    }
+    body {margin:0; font-family:'Poppins', sans-serif; background:var(--bg); color:#222;}
+    
+    /* Header */
+    header {
+      background: var(--blue);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header img { height: 45px; cursor: pointer; }
+    header h1 { margin: 0; color: var(--accent); font-size: 1.5em; cursor: pointer; }
+    
+    .container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
+    .card { background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 20px; margin-bottom: 20px; }
+    
+    h2 { color: var(--blue); border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
+
+    /* Table de produits responsive */
+    .cart-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    .cart-table th { background: #f8f9fa; padding: 12px; text-align: left; color: var(--blue); }
+    .cart-table td { padding: 15px 12px; border-bottom: 1px solid #eee; }
+    
+    .product-info { display: flex; align-items: center; gap: 10px; }
+    .product-img { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; background: #eee; }
+    
+    .qty-btn { background: #eee; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold; }
+    .qty-btn:hover { background: #ddd; }
+
+    .delete-btn { background: none; border: none; color: var(--red); cursor: pointer; font-size: 1.2em; transition: 0.2s; }
+    .delete-btn:hover { transform: scale(1.2); }
+
+    /* Résumé & Formulaire */
+    .summary { text-align: right; padding: 20px; background: #fffdf5; border-radius: 10px; border: 1px solid #ffeeba; }
+    .total-line { font-size: 1.1em; margin: 5px 0; }
+    .grand-total { font-size: 1.4em; font-weight: 800; color: var(--blue); margin-top: 10px; }
+
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+    form h3 { grid-column: 1 / -1; margin-bottom: 5px; color: var(--blue); }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-weight: 600; margin-bottom: 5px; font-size: 0.9em; }
+    input, textarea { padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; }
+    
+    .btn-submit { 
+      grid-column: 1 / -1; 
+      background: var(--blue); color: white; border: none; padding: 15px; 
+      font-size: 1.1em; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s;
+    }
+    .btn-submit:hover { background: #001a3a; }
+
+    .whatsapp-button {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: #25D366; color: white; text-decoration: none;
+      padding: 15px; border-radius: 8px; font-weight: bold; margin-top: 10px; text-align: center;
+    }
+
+    .empty-cart { text-align: center; padding: 50px; }
+    .empty-cart a { color: var(--blue); font-weight: bold; }
+
+    @media (max-width: 600px) {
+      form { grid-template-columns: 1fr; }
+      .cart-table th:nth-child(2), .cart-table td:nth-child(2) { display: none; } /* Cache les détails sur petit mobile */
+    }
+  </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M4LCJVND"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-<header>
-<a href="index.html"><img src="LOGO1.jpg" alt="Logo Ouffstore"></a>
-<h1 onclick="window.location.href='index.html'">Ouffstore</h1>
-<div class="header-actions">
-<a href="panier.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
-</div>
-</header>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M4LCJVND" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<div class="container">
-<h2>🛒 Mon Panier</h2>
-<div id="cartContainer"></div>
+  <header>
+    <img src="LOGO1.jpg" alt="Logo" onclick="window.location.href='index.html'">
+    <h1 onclick="window.location.href='index.html'">Ouffstore</h1>
+    <div style="width:45px"></div> </header>
 
-<form id="commandeForm">
-<h3>📝 Informations de commande</h3>
-<label>Nom complet :</label>
-<input type="text" name="Nom" required>
-<label>Email :</label>
-<input type="email" name="Email" required>
-<label>Numéro de téléphone :</label>
-<input type="tel" name="Téléphone" placeholder="+2250703791959" required>
-<label>Adresse de livraison :</label>
-<textarea name="Adresse" rows="3" placeholder="Ex: Cocody, Abidjan" required></textarea>
-<div class="total" id="totalForm">Total : 0 FCFA</div>
-<button type="submit">📦 Valider la commande</button>
-</form>
+  <div class="container">
+    <div class="card">
+      <h2>🛒 Mon Panier</h2>
+      <div id="cartContainer">
+        </div>
+    </div>
 
-<div class="thank-you" id="thankYouMessage">
-✅ Merci, votre commande a bien été envoyée !
-</div>
+    <div id="orderSection" style="display:none;">
+      <div class="card summary">
+        <div class="total-line">Sous-total: <span id="subtotal">0</span> FCFA</div>
+        <div class="total-line">Livraison: <span id="delivery">1 500</span> FCFA</div>
+        <div class="grand-total">Total à payer: <span id="finalTotal">0</span> FCFA</div>
+      </div>
 
-<a id="whatsappOrder" href="#" class="whatsapp-button" target="_blank">💬 Commander via WhatsApp</a>
-</div>
+      <div class="card">
+        <form id="commandeForm">
+          <h3>📝 Vos coordonnées</h3>
+          <div class="form-group">
+            <label>Nom complet</label>
+            <input type="text" name="Nom" placeholder="Ex: Jean Koffi" required>
+          </div>
+          <div class="form-group">
+            <label>Téléphone</label>
+            <input type="tel" name="Téléphone" placeholder="07 00 00 00 00" required>
+          </div>
+          <div class="form-group full">
+            <label>Adresse de livraison précise</label>
+            <textarea name="Adresse" rows="2" placeholder="Commune, quartier, repères..." required></textarea>
+          </div>
+          <input type="hidden" name="Produits" id="hiddenProducts">
+          <input type="hidden" name="TotalFinal" id="hiddenTotal">
+          
+          <button type="submit" class="btn-submit">📦 Valider ma commande par Email</button>
+          
+          <a id="whatsappOrder" href="#" class="whatsapp-button" target="_blank">
+            <span>💬 Commander via WhatsApp</span>
+          </a>
+        </form>
+      </div>
+    </div>
+    
+    <div id="thankYouMessage" class="card" style="display:none; text-align:center; border: 2px solid #28a745;">
+        <h2 style="color:#28a745; border:none;">✅ Commande Reçue !</h2>
+        <p>Merci pour votre confiance. Nous vous contacterons très prochainement.</p>
+        <a href="index.html" class="btn-submit" style="text-decoration:none; display:inline-block;">Retour à la boutique</a>
+    </div>
+  </div>
 
 <script>
 let panier = JSON.parse(localStorage.getItem('panier')) || [];
-const cartContainer = document.getElementById('cartContainer');
-const cartCount = document.getElementById('cart-count');
-const whatsappOrder = document.getElementById('whatsappOrder');
-const totalForm = document.getElementById('totalForm');
-const form = document.getElementById('commandeForm');
-const thankYouMessage = document.getElementById('thankYouMessage');
-const fraisLivraison = 1500; // fixe ou adapter par produit
+const FRAIS_LIVRAISON = 1500;
 
-function updateCartCount(){cartCount.textContent=panier.length;}
-function renderCart(){
-  if(panier.length===0){
-    cartContainer.innerHTML='<p class="empty">Votre panier est vide 😔</p>';
-    whatsappOrder.style.display='none';
-    totalForm.textContent='Total : 0 FCFA';
-    return;
-  }
+function renderCart() {
+    const container = document.getElementById('cartContainer');
+    const orderSection = document.getElementById('orderSection');
+    
+    if (panier.length === 0) {
+        container.innerHTML = `
+            <div class="empty-cart">
+                <p>Votre panier est vide 😔</p>
+                <a href="index.html">Voir les produits</a>
+            </div>`;
+        orderSection.style.display = 'none';
+        return;
+    }
 
-  let totalPrix = 0;
-  let html = `<table><tr><th>Produit</th><th>Détails</th><th>Prix (FCFA)</th><th>Supprimer</th></tr>`;
-  panier.forEach((item,index)=>{
-    let details = '';
-    if(item.type==='vetement'){details=`Couleur: ${item.couleur}, Âge: ${item.age}`;}
-    html += `<tr>
-      <td>${item.nom}</td>
-      <td>${details}</td>
-      <td>${item.prix.toLocaleString()}</td>
-      <td><button class="delete-btn" onclick="removeItem(${index})">❌</button></td>
-    </tr>`;
-    totalPrix += item.prix;
-  });
-  html += '</table>';
-  cartContainer.innerHTML = html;
+    orderSection.style.display = 'block';
+    let html = `
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Détails</th>
+                <th>Prix</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>`;
 
-  const totalAvecLivraison = totalPrix + fraisLivraison;
-  totalForm.textContent = `Total : ${totalAvecLivraison.toLocaleString()} FCFA`;
+    let subtotal = 0;
+    panier.forEach((item, index) => {
+        const itemTotal = (item.prix || 0) * (item.quantite || 1);
+        subtotal += itemTotal;
+        
+        html += `
+        <tr>
+            <td>
+                <div class="product-info">
+                    <img src="${item.image || 'LOGO1.jpg'}" class="product-img" alt="prod">
+                    <strong>${item.nom}</strong>
+                </div>
+            </td>
+            <td style="font-size:0.85em; color:#666;">
+                ${item.type === 'vetement' ? `Taille/Âge: ${item.age}` : 'Article sport'}
+            </td>
+            <td>${itemTotal.toLocaleString()} FCFA</td>
+            <td>
+                <button class="delete-btn" onclick="removeItem(${index})">🗑️</button>
+            </td>
+        </tr>`;
+    });
 
-  // Lien WhatsApp
-  let message = "Je souhaite commander les produits suivants :\n";
-  panier.forEach(item=>{
-    let details='';
-    if(item.type==='vetement'){details=` (${item.couleur}, ${item.age})`;}
-    message += `- ${item.nom}${details} : ${item.prix.toLocaleString()} FCFA\n`;
-  });
-  message += `Frais de livraison : ${fraisLivraison.toLocaleString()} FCFA\nTotal : ${totalAvecLivraison.toLocaleString()} FCFA`;
-  whatsappOrder.href=`https://wa.me/2250703791959?text=${encodeURIComponent(message)}`;
-  whatsappOrder.style.display='block';
+    html += `</tbody></table>`;
+    container.innerHTML = html;
+
+    // Mise à jour des prix
+    document.getElementById('subtotal').textContent = subtotal.toLocaleString();
+    document.getElementById('finalTotal').textContent = (subtotal + FRAIS_LIVRAISON).toLocaleString();
+    
+    updateWhatsAppLink(subtotal + FRAIS_LIVRAISON);
 }
 
-function removeItem(index){
-  panier.splice(index,1);
-  localStorage.setItem('panier',JSON.stringify(panier));
-  updateCartCount();
-  renderCart();
+function updateWhatsAppLink(total) {
+    let message = "Bonjour Ouffstore ! Je souhaite commander :\n\n";
+    panier.forEach(item => {
+        message += `• ${item.nom} x${item.quantite || 1} (${item.prix.toLocaleString()} FCFA)\n`;
+    });
+    message += `\n📍 Livraison : ${FRAIS_LIVRAISON.toLocaleString()} FCFA`;
+    message += `\n💰 *TOTAL : ${total.toLocaleString()} FCFA*`;
+    
+    document.getElementById('whatsappOrder').href = `https://wa.me/2250703791959?text=${encodeURIComponent(message)}`;
 }
 
-form.addEventListener('submit',function(e){
-  e.preventDefault();
-  if(panier.length===0){alert("Votre panier est vide !"); return;}
-  const formData = new FormData(form);
-  panier.forEach((item,i)=>formData.append(`Produit ${i+1}`, item.nom));
-  formData.append('Total', totalForm.textContent.replace('Total : ',''));
-  fetch('https://formsubmit.co/ajax/ouff300@gmail.com',{method:'POST',body:formData})
-  .then(response=>response.ok?response.json():Promise.reject(response))
-  .then(data=>{
-    thankYouMessage.style.display='block';
-    form.reset();
-    panier=[];
-    localStorage.setItem('panier',JSON.stringify(panier));
-    updateCartCount();
+function removeItem(index) {
+    panier.splice(index, 1);
+    localStorage.setItem('panier', JSON.stringify(panier));
     renderCart();
-    window.scrollTo({top:0,behavior:'smooth'});
-  })
-  .catch(err=>{alert("Une erreur est survenue, veuillez réessayer.");console.error(err);});
+}
+
+// Envoi du formulaire via FormSubmit
+document.getElementById('commandeForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const btn = e.target.querySelector('button');
+    btn.textContent = "Envoi en cours...";
+    btn.disabled = true;
+
+    // Préparation des données cachées pour l'email
+    let listeProduits = panier.map(i => `${i.nom} (x${i.quantite || 1})`).join(', ');
+    document.getElementById('hiddenProducts').value = listeProduits;
+    document.getElementById('hiddenTotal').value = document.getElementById('finalTotal').textContent + " FCFA";
+
+    const formData = new FormData(this);
+
+    fetch('https://formsubmit.co/ajax/ouff300@gmail.com', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.ok ? res.json() : Promise.reject())
+    .then(() => {
+        panier = [];
+        localStorage.setItem('panier', JSON.stringify(panier));
+        document.getElementById('orderSection').style.display = 'none';
+        document.getElementById('cartContainer').style.display = 'none';
+        document.querySelector('h2').style.display = 'none';
+        document.getElementById('thankYouMessage').style.display = 'block';
+    })
+    .catch(() => {
+        alert("Erreur lors de l'envoi. Essayez via WhatsApp !");
+        btn.disabled = false;
+        btn.textContent = "📦 Valider ma commande";
+    });
 });
 
-document.addEventListener('DOMContentLoaded',function(){updateCartCount(); renderCart();});
+document.addEventListener('DOMContentLoaded', renderCart);
 </script>
 </body>
 </html>
